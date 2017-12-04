@@ -4,6 +4,7 @@ class CreateCities < ActiveRecord::Migration[5.0]
       t.string :name
       t.integer :population
       t.float :area
+      t.integer :insee_id
       t.float :latitude
       t.float :longitude
 
