@@ -1,0 +1,16 @@
+<%= simple_form_for(@query) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :address %>
+    <%= f.input :activity %>
+    <%= f.input :radius_search %>
+    <%= f.input :radius_catchment_area %>
+    <%= f.input :latitude %>
+    <%= f.input :longitude %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

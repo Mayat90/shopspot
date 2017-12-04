@@ -1,7 +1,7 @@
 class CreateQueries < ActiveRecord::Migration[5.0]
   def change
     create_table :queries do |t|
-      t.string :adress
+      t.string :address
       t.string :activity
       t.integer :radius_search
       t.integer :radius_catchment_area
