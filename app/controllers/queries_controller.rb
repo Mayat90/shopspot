@@ -10,16 +10,15 @@ class QueriesController < ApplicationController
     session['radius_search'] == params["radius_search"] if params["radius_search"]
     session['radius_catchment'] == params["radius_catchment"] if params["radius_catchment"]
 
-    hash_request = {}
-    hash_request[:type] = session['type']
-    hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
-    hash_request[:radius] = session['radius_search']
 
+
+    hash_request = {type: session['type'], radius_search: session['radius_search']}
+    hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
     @concurrents = Concurrents.find(hash_request)
 
     @markers = Gmaps4rails.build_markers(@concurrents) do |concurrent, marker|
-      marker.lat concurrent[:geometry][:location][:lat]
-      marker.lng concurrent[:geometry][:location][:lng]
+      marker.lat concurrent["geometry"]["location"]["lat"]
+      marker.lng concurrent["geometry"]["location"]["lng"]
         # marker.infowindow content_info_window(user)
         # marker.infowindow render_to_string(partial: "/shared/info_window", locals: { user: user})
     end
@@ -45,16 +44,22 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
+    session['address']= @query[:address]
+    session['type']= @query[:activity]
+    session['search_coordinates'] = Geocoder.coordinates(session['address'])
+    session['radius_search'] =@query[:radius_search]
+    session['radius_catchment'] =@query[:radius_catchment_area]
 
-    respond_to do |format|
-      if @query.save
-        format.html { redirect_to @query, notice: 'Query was successfully created.' }
-        format.json { render :show, status: :created, location: @query }
-      else
-        format.html { render :new }
-        format.json { render json: @query.errors, status: :unprocessable_entity }
-      end
-    end
+redirect_to queries_path
+    # respond_to do |format|
+    #   if @query.save
+    #     format.html { redirect_to @query, notice: 'Query was successfully created.' }
+    #     format.json { render :show, status: :created, location: @query }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @query.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /queries/1
