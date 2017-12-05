@@ -1,0 +1,43 @@
+<div class="container">
+  <div>
+    number of entyties : <%= @tiles.count %>
+  </div>
+  <% @tiles.each do |tile| %>
+    <div style="border: 1px solid black;">
+      lat : <%= tile.lat %> - long : <%= tile.long %><br/>
+
+      Polygone :<br/>
+      <%= tile.poly[0] %><br/>
+      <%= tile.poly[1] %><br/>
+      <%= tile.poly[2] %><br/>
+      <%= tile.poly[3] %><br/>
+
+      Population :
+      <%= tile.population.round(2) %><br/>
+      Surface :
+      <%= tile.surface %><br/>
+      Population m2
+      <%= tile.population_m2.round(2) %><br/>
+      65 ans et + (% habitants)
+      <%= tile.res65.round(2) %><br/>
+      65 ans et + (habitants / km&sup2;)
+      <%= tile.res65_m2.round(2) %><br/>
+      25 ans et - (% habitants)
+      <%= tile.res25.round(2) %><br/>
+      25 ans et - (habitants / km&sup2;)
+      <%= tile.res25_m2.round(2) %><br/>
+      15 ans et - (% habitants)
+      <%= tile.res15.round(2) %><br/>
+      15 ans et - (habitants / km&sup2;)
+      <%= tile.res15_m2.round(2) %><br/>
+      Revenus (&euro;)
+      <%= tile.revenus.round(2) %><br/>
+      Bas revenus (% ménages)
+      <%= tile.basrevenus.round(2) %><br/>
+      Bas revenus (ménages / km&sup2;)
+      <%= tile.basrevenus_m2 %><br/>
+
+    </div>
+
+  <% end %>
+</div>
