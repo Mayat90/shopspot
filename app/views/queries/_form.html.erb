@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :address, label: 'Address' %>
-    <%= f.input :activity, label: 'What kind of business ?', placeholder: 'bakery, jewelery, etc.' %>
+    <%= f.input :activity, label: 'Activity', placeholder: 'Enter the business' %>
     <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000'%>
     <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200' %>
   </div>
@@ -13,7 +13,7 @@
   </div>
 
   <%= content_for(:after_js) do %>
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDANjx3bosEtIyzJaoWs50Wnt6nt_1rmxU"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDvsCOEZHqj_OgjPLBUXCR_rLS5PpNRI58"></script>
 <% end %>
 
 <% end %>
