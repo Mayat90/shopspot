@@ -2,10 +2,10 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :address, label: 'Address' %>
-    <%= f.input :activity, label: 'What kind of business ?', placeholder: 'bakery, jewelery, etc.' %>
-    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000'%>
-    <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200' %>
+    <%= f.input :address, label: 'Address', input_html: {value: "1 charlemagne, lyon"} %>
+    <%= f.input :activity, label: 'What kind of business ?', placeholder: 'bakery, jewelery, etc.',  input_html: {value: "boulangerie"} %>
+    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000',  input_html: {value: "1000"}%>
+    <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200',  input_html: {value:  "500" }%>
   </div>
 
   <div class="form-actions">

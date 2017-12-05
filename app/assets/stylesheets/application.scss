@@ -13,3 +13,12 @@
 @import "layouts/index";
 @import "components/index";
 @import "pages/index";
+
+.myflex {
+  display:flex;
+  justify-content: space-between;
+}
+
+.mygrow {
+  flex-grow: 1;
+}
