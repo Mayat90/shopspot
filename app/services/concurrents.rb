@@ -9,7 +9,6 @@ class Concurrents
     type = hash[:type]
     location = "#{hash[:location][:latitude]},#{hash[:location][:longitude]}"
     radius = hash[:radius_search]
-
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{type}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}"
     result_search = RestClient.get(url)
     results = JSON.parse(result_search)
