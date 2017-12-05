@@ -2,10 +2,12 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+
     <%= f.input :address, label: 'Address', input_html: {value: "1 charlemagne, lyon"} %>
-    <%= f.input :activity, label: 'What kind of business ?', placeholder: 'bakery, jewelery, etc.',  input_html: {value: "boulangerie"} %>
-    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000',  input_html: {value: "1000"}%>
-    <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200',  input_html: {value:  "500" }%>
+    <%= f.input :activity, label: 'Activity', placeholder: 'Enter the business', input_html: {value: "boulangerie"} %>
+    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000',  input_html: {value: "1000"} %>
+    <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200',  input_html: {value:  "500" } %>
+
   </div>
 
   <div class="form-actions">
@@ -13,7 +15,7 @@
   </div>
 
   <%= content_for(:after_js) do %>
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDANjx3bosEtIyzJaoWs50Wnt6nt_1rmxU"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDvsCOEZHqj_OgjPLBUXCR_rLS5PpNRI58"></script>
 <% end %>
 
 <% end %>

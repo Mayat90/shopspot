@@ -18,6 +18,7 @@ gem 'uglifier'
 gem 'geocoder'
 gem "coffee-rails"
 gem "gmaps4rails"
+gem 'ratyrate'
 gem 'rest-client'
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
