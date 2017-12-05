@@ -1,16 +1,19 @@
-<%= simple_form_for(@query) do |f| %>
+<%= simple_form_for(@query, :method => :post, :url => queries_path ) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :address %>
-    <%= f.input :activity %>
-    <%= f.input :radius_search %>
-    <%= f.input :radius_catchment_area %>
-    <%= f.input :latitude %>
-    <%= f.input :longitude %>
+    <%= f.input :address, label: 'Address' %>
+    <%= f.input :activity, label: 'What kind of business ?', placeholder: 'bakery, jewelery, etc.' %>
+    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000'%>
+    <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200' %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.button :submit, "Go!" %>
   </div>
+
+  <%= content_for(:after_js) do %>
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDANjx3bosEtIyzJaoWs50Wnt6nt_1rmxU"></script>
+<% end %>
+
 <% end %>
