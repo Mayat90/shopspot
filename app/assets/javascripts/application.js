@@ -1,8 +1,6 @@
-//= require tether
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require mdb
 //= require bootstrap-sprockets
 //= require underscore
 //= require gmaps/google
