@@ -1,21 +1,74 @@
+
+<%= form_for @query do |f| %>
+  <%= f.text_field :address %>
+  <%= f.submit "Create" %>
+<% end %>
+
+================================
+
 <%= simple_form_for(@query, :method => :post, :url => queries_path ) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
 
-    <%= f.input :address, label: 'Address', input_html: {value: "1 charlemagne, lyon"} %>
-    <%= f.input :activity, label: 'Activity', placeholder: 'Enter the business', input_html: {value: "boulangerie"} %>
-    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000',  input_html: {value: "1000"} %>
-    <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200',  input_html: {value:  "500" } %>
-
+    <%= f.input :address, label: 'Address', input_html: {value: "1 charlemagne, lyon", id: 'form3'} %>
+    <%= f.input :activity, label: 'Activity', class: "form-control",placeholder: 'Enter the business', input_html: {id: 'form2', value: "boulangerie"} %>
+ 
+    <%= f.input :radius_search, class: 'form-control', label: 'Radius search in meters', placeholder: '1000',  input_html: {id: 'form32', value: "1000"} %>
+    <%= f.input :radius_catchment_area, class: "form-control", label: 'Catchment in meters', placeholder: '200',  input_html: {id: 'form8', value:  "500" } %>
+    <%= f.button :submit, "Go!"  %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Go!" %>
-  </div>
+<% end %>
 
   <%= content_for(:after_js) do %>
   <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDvsCOEZHqj_OgjPLBUXCR_rLS5PpNRI58"></script>
-<% end %>
+  <% end %>
 
-<% end %>
+
+
+
+<hr>
+<hr>
+<hr>
+<hr>
+
+<form>
+
+    <p class="h5 text-center mb-4">Write to us</p>
+
+    <div class="md-form">
+        <i class="fa fa-user prefix grey-text"></i>
+        <input type="text" id="form3" class="form-control">
+        <label for="form3">Your name</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-envelope prefix grey-text"></i>
+        <input type="text" id="form2" class="form-control">
+        <label for="form2">Your email</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-tag prefix grey-text"></i>
+        <input type="text" id="form32" class="form-control">
+        <label for="form34">Subject</label>
+    </div>
+
+    <div class="md-form">
+        <i class="fa fa-pencil prefix grey-text"></i>
+        <textarea type="text" id="form8" class="md-textarea" style="height: 100px"></textarea>
+        <label for="form8">Your message</label>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-unique">Send <i class="fa fa-paper-plane-o ml-1"></i></button>
+    </div>
+
+</form>
+
+
+<hr>
+<hr>
+<hr>
+<hr>
+
