@@ -1,5 +1,5 @@
 class QueriesController < ApplicationController
-  before_action :set_query, only: [:show, :edit, :update, :destroy]
+  before_action :set_query, only: [ :show, :edit, :update, :destroy]
 
   # GET /queries
   # GET /queries.json
@@ -57,7 +57,8 @@ class QueriesController < ApplicationController
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
     session['radius_search'] =@query[:radius_search]
     session['radius_catchment'] =@query[:radius_catchment_area]
-
+    @query.save
+    session['query'] = @query
 redirect_to queries_path
     # respond_to do |format|
     #   if @query.save
