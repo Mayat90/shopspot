@@ -1,10 +1,13 @@
 <%= render 'shared/banner' %>
 
   <div class="container">
-  <%= render 'form', query: @query %>
-
-  <%= link_to 'Back', queries_path %>
-
-  <%= render 'formtest' %>
-
+    <div class="myflex">
+      <div class="mygrow">
+        <h3>Find the best place</h3>
+        <p>Get analytics and choose wisely the best place</p>
+      </div>
+      <div class="homepageform">
+        <%= render 'form', query: @query %>
+      </div>
+    </div>
   </div>
