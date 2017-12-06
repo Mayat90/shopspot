@@ -2,7 +2,7 @@ function onPlaceChanged() {
   var place = this.getPlace();
   var components = getAddressComponents(place);
 
-  var flatAddress = document.getElementById('query_address');
+  var flatAddress = document.getElementById('form3');
   flatAddress.blur();
   flatAddress.value = components.address;
 
@@ -50,7 +50,7 @@ function getAddressComponents(place) {
   }
 
   return {
-    address: street_number === null ? route : (street_number + ' ' + route),
+    address: street_number === null ? route : (street_number + ' ' + route + ', ' + zip_code + ' ' + city),
     zip_code: zip_code,
     city: city,
     country_code: country_code
@@ -58,7 +58,7 @@ function getAddressComponents(place) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-  var flatAddress = document.getElementById('query_address');
+  var flatAddress = document.getElementById('form3');
 
   if (flatAddress) {
     var autocomplete = new google.maps.places.Autocomplete(flatAddress, { types: ['geocode'] });

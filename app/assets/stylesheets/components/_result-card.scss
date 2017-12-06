@@ -1,0 +1,53 @@
+.result-card {
+  height: 300px;
+  color: #444;
+  position: relative;
+  background: #FAFAFA;
+  margin: 10px;
+  border: 1px solid #EEE;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1)
+}
+
+.result-card-address {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+
+.result-card-pertinence {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+} 
+
+.see-more {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+
+.result-card-info {
+  position: absolute;
+  top: 25px;
+  left: 10px;
+}
+
+.result-card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 2;
+  opacity: 0;
+}
+
+.result-card-link:hover {
+  opacity: 0,1;
+}
+
+.comp {
+  left: 190px;
+}
