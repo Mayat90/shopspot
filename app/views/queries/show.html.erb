@@ -1,34 +1,78 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @query.address %>
-</p>
+<div class="container">
+  <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="card">
+          <div class="card-content">
+            <div class="card-header-blue">
+              <h3 class="card-heading"><%= @query.address %></h3>
+            </div>
+                <div class="card-body">
+                  <p>
+                    <strong>Activity:</strong>
+                    <%= @query.activity %>
+                  </p>
 
-<p>
-  <strong>Activity:</strong>
-  <%= @query.activity %>
-</p>
+                  <p>
+                    <strong>Radius search:</strong>
+                    <%= @query.radius_search %>
+                  </p>
 
-<p>
-  <strong>Radius search:</strong>
-  <%= @query.radius_search %>
-</p>
+                  <p>
+                    <strong>Radius catchment area:</strong>
+                    <%= @query.radius_catchment_area %>
+                  </p>
 
-<p>
-  <strong>Radius catchment area:</strong>
-  <%= @query.radius_catchment_area %>
-</p>
+                  <p>
+                    <strong>Latitude:</strong>
+                    <%= @query.latitude %>
+                  </p>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @query.latitude %>
-</p>
+                  <p>
+                    <strong>Longitude:</strong>
+                    <%= @query.longitude %>
+                  </p>
 
-<p>
-  <strong>Longitude:</strong>
-  <%= @query.longitude %>
-</p>
+                  <p>
+                    <strong>Population:</strong>
+                    <%= %>
+                  </p>
 
-<%= link_to 'Edit', edit_query_path(@query) %> |
+                  <p>
+                    <strong>Revenues:</strong>
+                    <%=  %>
+                  </p>
+
+                  <p>
+                    <strong>Over 65yo:</strong>
+                    <%=  %>
+                  </p>
+
+                  <p>
+                    <strong>Under 25yo:</strong>
+                    <%=  %>
+                  </p>
+                </div>
+          </div>
+        </div>
+        <div class="buttons-next-action"
+          <p>Take action and realize your dream? Contact right here</p>
+          <a class='btn btn-primary btn-lg btn-show' href='#'>View competition</a>
+            </br>
+          <p>Not enough potential customers? Surronding cities comparator right here</p>
+          <a class='btn btn-primary btn-lg btn-show' href='#'>Cities analytics</a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+          <div class="img-map">
+            <%= static_map_for(@query) %>
+          <p><%= @query.address %></p>
+          </div>
+      <div style="text-align: center"><%= button_to 'Download Pdf', query_path(@query, format: :pdf) %> </div>
+      </div>
+
+  </div>
+</div>
+
 <%= link_to 'Back', queries_path %>
