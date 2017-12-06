@@ -37,6 +37,7 @@ class QueriesController < ApplicationController
         # à mettre en forme avec Javascript tag pour garder css
         end
      end
+
   end
 
   # GET /queries/new
@@ -57,7 +58,8 @@ class QueriesController < ApplicationController
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
     session['radius_search'] =@query[:radius_search]
     session['radius_catchment'] =@query[:radius_catchment_area]
-
+    @query.save
+    session['query_id'] = @query.id
 redirect_to queries_path
     # respond_to do |format|
     #   if @query.save
