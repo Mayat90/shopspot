@@ -29,6 +29,14 @@ class QueriesController < ApplicationController
   # GET /queries/1
   # GET /queries/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Your market studys",
+          template: "queries/show.html.erb"
+        # à mettre en forme avec Javascript tag pour garder css
+        end
+     end
   end
 
   # GET /queries/new

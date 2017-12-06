@@ -23,6 +23,8 @@ gem 'rest-client'
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 group :development, :test do
   gem 'pry-byebug'
