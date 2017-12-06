@@ -7,6 +7,8 @@ gem 'pg'
 gem 'puma'
 gem 'rails', '5.0.6'
 gem 'redis'
+gem 'mdbootstrap-rails'
+
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
@@ -23,6 +25,8 @@ gem 'rest-client'
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 group :development, :test do
   gem 'pry-byebug'
