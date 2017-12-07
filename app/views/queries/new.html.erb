@@ -1,13 +1,20 @@
+<div id="homepage-top">
 <%= render 'shared/banner' %>
 
-  <div class="container">
-    <div class="myflex">
-      <div class="mygrow">
-        <p>ShopSpot helps you to find the best place for your activity</p>
-        <p>Indicate your reference zone and w</p>
-      </div>
-      <div class="homepageform">
-        <%= render 'form', query: @query %>
-      </div>
+</div>
+<div class="container">
+  <div id="homepage-bottom">
+    <div class="exp1">
+      <p>ShopSpot helps you to find the best place for your activity</p>
     </div>
-  </div>
+    <div class="exp2">
+      <p>Indicate your reference zone and your catchment area</p>
+    </div>
+    <div class="exp3">
+      <p>Get analytics about each zone and choose wisely your future shop spot</p>
+    </div>
+    <div id="homepage-form">
+      <h1>Get started</h1>
+      <%= render 'form', query: @query %>
+    </div>
+</div>

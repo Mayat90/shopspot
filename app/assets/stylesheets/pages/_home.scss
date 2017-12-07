@@ -1,1 +1,25 @@
 // Specific CSS for your home-page
+#homepage-top {
+  height: 100vh;
+}
+
+#homepage-bottom {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+.exp1 {
+  background: #FAFAFA;
+  margin: 20px;
+}
+
+.exp2 {
+  background: #FAFAFA;
+  margin: 20px;
+}
+
+.exp3 {
+  background: #FAFAFA;
+  margin: 20px;
+}
