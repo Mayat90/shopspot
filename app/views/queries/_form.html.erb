@@ -2,7 +2,6 @@
 <%= simple_form_for(@query, :method => :post, :url => queries_path ) do |f| %>
   <%= f.error_notification %>
 
-
     <%= f.input :address, label: 'Address', input_html: {value: "1 charlemagne, lyon", id: 'form3'} %>
     <%= f.input :activity, label: 'Activity', class: "form-control",placeholder: 'Enter the business', input_html: {id: 'form2', value: "boulangerie"} %>
     <%= f.input :radius_search, class: 'form-control', label: 'Radius search in meters', placeholder: '1000',  input_html: {id: 'form32', value: "1000"} %>
