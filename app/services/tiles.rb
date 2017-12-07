@@ -32,29 +32,130 @@ class Tiles
     @basrevenus_m2 = data["men_basr"] / data["surf"] #Bas revenus (ménages / km&sup2;)
   end
 
-  def self.find(lat1, long1, lat2, long2, zoom)
+  def self.perform(center, zoom)
+    radius = convertZoomToRadius(zoom)
+    zoom = 14
+    zoom = 11 if radius > 3000
+    zoom = 10 if radius > 5000
+    zoom = 9 if radius > 10000
+    zoom = 8 if radius > 20000
+    zoom = 7 if radius > 40000
+    zoom = 6 if radius > 90000
+
+    delta = convertradiustolatlon(radius)
+    cometiesXYs = findCometiesXYs(center, delta, zoom)
+
+    polyjson = []
+    polyjson << {
+          paths: [
+            {lat: center[0]+delta[:dlat], lng: center[1]-delta[:dlon]},
+            {lat: center[0]-delta[:dlat], lng: center[1]-delta[:dlon]},
+            {lat: center[0]-delta[:dlat], lng: center[1]+delta[:dlon]},
+            {lat: center[0]+delta[:dlat], lng: center[1]+delta[:dlon]}
+        ],
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 3,
+          fillColor: '#FF0000',
+          fillOpacity: 0.2
+        }.to_json
+
+
+    tiles = []
+
+    (cometiesXYs[:xtile_start]..cometiesXYs[:xtile_end]).each do |x|
+      (cometiesXYs[:ytile_start]..cometiesXYs[:ytile_end]).each do |y|
+        result = load_tiles(x, y, zoom)
+        p "cometies : #{x} - #{y}"
+        if result
+          result.each do |tile|
+            til = Tiles.new(tile)
+            color = "##{setcolor(til.population_m2)}00"
+            tiles << til
+            polygone = {
+              paths: [],
+              strokeColor: '#00f',
+              strokeOpacity: 0.8,
+              strokeWeight: 3,
+              fillColor: color,
+              fillOpacity: 1
+            }
+            til.poly.each do |pol|
+              polygone[:paths] << {lat: pol[1], lng: pol[0] }
+            end
+            polyjson << polygone.to_json
+          end
+        end
+      end
+    end
+
+
+        return {tiles: tiles, poly: polyjson}
+  end
+
+private
+
+  def self.convertZoomToRadius(zoom)
+  @zoomscale = [
+    1128.497220,
+    2256.994440,
+    4513.988880,
+    9027.977761,
+    18055.955520,
+    36111.911040,
+    72223.822090,
+    144447.644200,
+    288895.288400 * 1.5,
+    577790.576700,
+    1155581.153000,
+    2311162.307000 * 1.5,
+    4622324.614000,
+    9244649.227000,
+    18489298.450000,
+    36978596.910000,
+    73957193.820000,
+    147914387.600000,
+    295828775.300000,
+    591657550.500000,
+    591657550.500000
+  ]
+  @zoomscale.reverse!
+  radius = (@zoomscale[zoom]/100).round
+
+  return radius
+  end
+
+  def self.setcolor(popu)
+
+    pop = (popu * 16 / 30000).round
+    pop = 16 - pop
+    pop = 0 if pop < 0
+    pops = pop.to_i.to_s(16)
+    return pops
+  end
+
+  def self.findCometiesXYs (center, delta, zoom)
+    zoom = 14 if zoom > 14
+d = 2
+    lat1 = center[0]+(delta[:dlat] * d)
+    long1 = center[1]-(delta[:dlon] * d)
+    lat2 = center[0]-(delta[:dlat] * d)
+    long2 = center[1]+(delta[:dlon] * d)
+
     tab1 = deg2num(lat1, long1, zoom)
     tab2 = deg2num(lat2, long1, zoom)
     tab3 = deg2num(lat1, long2, zoom)
     tab4 = deg2num(lat2, long2, zoom)
 
-    data = find_extrem(tab1, tab2, tab3, tab4)
-    tiles = []
-
-    (data[:xtile_start]..data[:xtile_end]).each do |x|
-      (data[:ytile_start]..data[:ytile_end]).each do |y|
-        result = load_tiles(x, y, zoom)
-        if result
-          result.each do |tile|
-            tiles << Tiles.new(tile)
-          end
-        end
-      end
-    end
-    return tiles
+    find_extrem(tab1, tab2, tab3, tab4)
   end
 
-private
+  def self.convertradiustolatlon(radius)
+    dlat = 1.0 * radius / 110574 # Latitude: 1 deg = 110.574 km
+    dlon = 1.0 * radius / 111320 / 0.70716781 # Longitude: 1 deg = 111.320*cos(latitude) km
+    return {dlat: dlat, dlon: dlon}
+
+  end
 
   def self.deg2num (lat_deg, lon_deg, zoom)
     pi = Math::PI

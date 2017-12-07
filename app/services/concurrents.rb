@@ -36,17 +36,17 @@ class Concurrents
        array << result
     end
   end
-  if results_2.nil? == false
-    results_2["results"].each do |result|
-       array << result
-    end
-  end
-  if results_3.nil? == false
-    results_3["results"].each do |result|
-       array << result
-    end
-  end
+  # if results_2.nil? == false
+  #   results_2["results"].each do |result|
+  #      array << result
+  #   end
+  # end
+  # if results_3.nil? == false
+  #   results_3["results"].each do |result|
+  #      array << result
+  #   end
+  # end
 
-    return array
+  #   return array
   end
 end
