@@ -77,7 +77,8 @@ class Tiles
               strokeWeight: 0,
               fillColor: color,
               fillOpacity: 0.3,
-              population: til.population
+              population: til.population,
+
             }
             til.poly.each do |pol|
               polygone[:paths] << {lat: pol[1], lng: pol[0] }
