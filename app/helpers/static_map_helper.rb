@@ -6,7 +6,8 @@ module StaticMapHelper
       zoom: 16,
       size: "400x600",
       # :markers => [location.lat, location.lng].join(","),
-      sensor: true
+      sensor: true,
+      key: ENV['GOOGLE_API_BROWSER_KEY']
       }#.merge(options)
 
 

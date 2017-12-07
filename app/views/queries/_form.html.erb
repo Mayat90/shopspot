@@ -1,11 +1,13 @@
 <%= simple_form_for(@query, :method => :post, :url => queries_path ) do |f| %>
   <%= f.error_notification %>
+
     <%= f.input :address, label: 'Address', input_html: {value: "1 charlemagne, lyon", id: 'form3'} %>
     <%= f.input :activity, label: 'Activity', class: "form-control",placeholder: 'Enter the business', input_html: {id: 'form2', value: "boulangerie"} %>
     <%= f.input :radius_search, class: 'form-control', label: 'Radius search in meters', placeholder: '1000',  input_html: {id: 'form32', value: "1000"} %>
     <%= f.input :radius_catchment_area, class: "form-control", label: 'Catchment in meters', placeholder: '200',  input_html: {id: 'form8', value:  "500" } %>
     <%= f.button :button, "Find my personnalized results", class: "btn btn-primary btn-form-homepage"  %>
   <% end %>
+
 
   <%= content_for(:after_js) do %>
   <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDvsCOEZHqj_OgjPLBUXCR_rLS5PpNRI58"></script>

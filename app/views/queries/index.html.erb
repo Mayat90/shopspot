@@ -1,24 +1,132 @@
 <%= render 'shared/navbar' %>
 <div class="myflex">
   <div class="mygrow">
-  
+
+
+    <div id="datashow">test</div>
+
     <%= render 'shared/result_card' %>
+
   </div>
   <div id="map" style="width: 50%; height: 600px;"></div>
-    <% content_for(:after_js) do %>
-      <%= javascript_tag do %>
-        var handler = Gmaps.build('Google');
-        handler.buildMap({ internal: { id: 'map' } }, function() {
-          markers = handler.addMarkers(<%= raw @markers.to_json %>);
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-          if (markers.length == 0) {
-            handler.getMap().setZoom(2);
-          } else if (markers.length == 1) {
-            handler.getMap().setZoom(14);
-          }
-        });
-      <% end %>
-    <% end %>
   </div>
 </div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    var zoom = <%= @zoom %>;
+    var map;
+    var search_icon = 'http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png';
+    var concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
+    var search = {lat: <%= session["search_coordinates"][0] %>, lng: <%= session["search_coordinates"][1] %>};
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: zoom,
+        center: search
+      });
+      // marker search
+        var marker = new google.maps.Marker({
+        position: search,
+        icon: search_icon,
+        animation: google.maps.Animation.DROP,
+        map: map
+      });
+    }
+    var metersPerPixel = Math.cos(<%= session["search_coordinates"][0] %> * Math.PI/180) * 2 * Math.PI * 6378137 / (256 * Math.pow(2, zoom));
+
+    var search_radius = <%= session['radius_catchment'] %> /metersPerPixel;
+console.log(search_radius);
+<% p @zoomscale %>
+
+    function addconcurrents() {
+    var points = [];
+      <% @markers.each do |marker| %>
+      points.push(new google.maps.LatLng(<%= marker[:lat] %>, <%= marker[:lng] %>));
+        var marker = new google.maps.Marker({
+          position: {lat: <%= marker[:lat] %>, lng: <%= marker[:lng] %>},
+          map: map,
+          icon: concurrence_icon,
+        });
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: points,
+          radius: search_radius,
+          opacity: 0.05
+        });
+        heatmap.setMap(map);
+      <% end %>
+    }
+
+      function toggleHeatmap() {
+        heatmap.setMap(heatmap.getMap() ? null : map);
+      }
+
+      function changeGradient() {
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+      }
+
+
+
+    function addpopulation() {
+      <% @density.each do |item| %>
+        var coords = [
+        <% item.poly.each do |pol| %>
+          {lat:  <%= pol[1] %>, lng: <%= pol[0] %>},
+        <% end %>];
+<% pop = (item.population/1000)*255
+  pop = 255 if pop > 255
+  pop = 255 - pop
+  op = pop/255
+  pop = pop.to_i.to_s(16) %>
+
+
+        var poly = new google.maps.Polygon({
+          paths: coords,
+          strokeColor: '#00f',
+          strokeOpacity: 0.3,
+          strokeWeight: 1,
+          fillColor: '#00<%= pop %>',
+          filltemp: '#ffffff',
+          fillOpacity: 0.7,
+          population: <%= item.population %>,
+          res65: <%= item.res65.round %>,
+          res25: <%= item.res25.round %>,
+          map: map
+        });
+
+
+        poly.addListener('mouseover', function (event) {
+          var mydiv= document.getElementById('datashow');
+          str = "Population : " + this.population + "<br/>";
+          str += "+ de 65 ans : " + this.res65 + "<br/>";
+          str += "- de 25 ans : " + this.res25 + "<br/>";
+          mydiv.innerHTML = str;
+
+          //Once you have the id here, you can trigger the color change
+        });
+
+      <% end %>
+    }
+
+    initMap();
+    addpopulation();
+    addconcurrents();
+  <% end %>
+<% end %>
