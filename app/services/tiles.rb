@@ -27,7 +27,7 @@ class Tiles
     @res25_m2 = (1-data["ind_age6"] / data["ind_r"])*data["ind_r"] / data["surf"] #25 ans et - (habitants / km&sup2;)
     @res15 = ((+data["ind_age1"])+ (+data["ind_age2"])+(+data["ind_age3"])+(+data["ind_age4"]))/(+data["ind_c"])*100 #15 ans et - (% habitants)
     @res15_m2 = ((+data["ind_age1"])+ (+data["ind_age2"])+(+data["ind_age3"])+(+data["ind_age4"]))/(+data["surf"]) #15 ans et - (habitants / km&sup2;)
-    @revenus = data["ind_srf"] / data["ind_c"] #Revenus (&euro;)
+    @revenus = data["ind_srf"] / data["ind_c"] if data["ind_srf"] != "NA" #Revenus (&euro;)
     @basrevenus = data["men_basr"] / data["men"]*100 #Bas revenus (% ménages)
     @basrevenus_m2 = data["men_basr"] / data["surf"] #Bas revenus (ménages / km&sup2;)
   end
