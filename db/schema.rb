@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204141911) do
+ActiveRecord::Schema.define(version: 20171207172529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,21 @@ ActiveRecord::Schema.define(version: 20171204141911) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "competitors", force: :cascade do |t|
+    t.text     "location"
+    t.string   "type"
+    t.string   "place_id"
+    t.float    "rating"
+    t.integer  "number_rating"
+    t.text     "opening_hours"
+    t.string   "phone_number"
+    t.string   "address"
+    t.integer  "query_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["query_id"], name: "index_competitors_on_query_id", using: :btree
+  end
+
   create_table "queries", force: :cascade do |t|
     t.string   "address"
     t.string   "activity"
@@ -37,4 +52,5 @@ ActiveRecord::Schema.define(version: 20171204141911) do
     t.datetime "updated_at",            null: false
   end
 
+  add_foreign_key "competitors", "queries"
 end

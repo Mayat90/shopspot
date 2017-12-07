@@ -1,5 +1,5 @@
 class QueriesController < ApplicationController
-  before_action :set_query, only: [:show, :edit, :update, :destroy]
+  before_action :set_query, only: [ :show, :edit, :update, :destroy]
 
   # GET /queries
   # GET /queries.json
@@ -37,11 +37,11 @@ class QueriesController < ApplicationController
 
     hash_request = {type: session['type'], radius_search: session['radius_search']}
     hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
-    @concurrents = Concurrents.find(hash_request)
+    @competitors = Competitor.find(hash_request)
 
-    @markers = Gmaps4rails.build_markers(@concurrents) do |concurrent, marker|
-      marker.lat concurrent["geometry"]["location"]["lat"]
-      marker.lng concurrent["geometry"]["location"]["lng"]
+    @markers = Gmaps4rails.build_markers(@competitors) do |competitor, marker|
+      marker.lat competitor.location["lat"]
+      marker.lng competitor.location["lng"]
         # marker.infowindow content_info_window(user)
         # marker.infowindow render_to_string(partial: "/shared/info_window", locals: { user: user})
     end
@@ -89,6 +89,7 @@ end
     session['radius_search'] =@query[:radius_search]
     session['radius_catchment'] =@query[:radius_catchment_area]
     @query.save
+
     session['query_id'] = @query.id
 redirect_to queries_path
     # respond_to do |format|

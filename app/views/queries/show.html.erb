@@ -58,7 +58,8 @@
         </div>
         <div class="buttons-next-action"
           <p>Take action and realize your dream? Contact right here</p>
-          <a class='btn btn-primary btn-lg .btn-show' href='#'>View competition</a>
+          <a class='btn btn-primary btn-lg .btn-show' href='/competition'>View competition</a>
+          <%= link_to 'View competition', query_competitors_path(@query), class: 'btn btn-primary' %>
         </div>
         <div class="buttons-next-action"
           <p>Not enough potential customers? Surronding cities comparator right here</p>
@@ -70,7 +71,7 @@
             <%= static_map_for(@query) %>
           <p><%= @query.address %></p>
           </div>
-      <div style="text-align: center"><%= button_to 'Download Pdf', query_path(@query, format: :pdf) %> </div>
+      <div style="text-align: center"><%= link_to 'Download Pdf', query_path(@query, format: :pdf), class: 'btn btn-primary' %> </div>
       </div>
 
   </div>
