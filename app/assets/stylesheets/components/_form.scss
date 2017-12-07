@@ -1,23 +1,21 @@
-.query-form {
-  width: 300px;
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
+#home-form {
   background: #FAFAFA;
-  margin-top: 50px;
+  width: 250px;
+  margin: 20px auto;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
   border-radius: 3px;
   box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  align-items: center;
+  justify-content: space-around;
 }
 
-.form-control-aaaa {
-  border-bottom: 0;
+#container-form {
+  margin: 40px;
+  width: 150px;
 }
 
-.control-label {
-  font-size: 17px;
-  font-weight: lighter;
-}
-
-#new-query {
-  padding: 20px;
+.new_query {
+  padding: 10px;
 }
