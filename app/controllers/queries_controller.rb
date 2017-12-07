@@ -4,7 +4,7 @@ class QueriesController < ApplicationController
   # GET /queries
   # GET /queries.json
   def index
-
+p params
 
     session['address']= params["address"] if params["address"]
     session['type']= params["type"] if params["type"]
@@ -26,11 +26,19 @@ class QueriesController < ApplicationController
     end
         # marker de la recherche
         # @markers << {lat: @search_address[0], lng: @search_address[1], infowindow: "Your Search </br>#{session['address']}"}
+    p session['search_coordinates']
+    @zoom = 14
+    @polygones = Tiles.perform(session['search_coordinates'], @zoom)[:poly]
 
-@zoom = 10
-@polygones = Tiles.perform(session['search_coordinates'], @zoom)[:poly]
+  end
 
-end
+  def population
+    lat = params["lat"].to_f
+    long = params["long"].to_f
+    zoom = params["zoom"].to_i
+    @polygones = Tiles.perform([lat, long ], zoom)[:poly]
+
+  end
 
   # GET /queries/1
   # GET /queries/1.json

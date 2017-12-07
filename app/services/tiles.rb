@@ -46,19 +46,20 @@ class Tiles
     cometiesXYs = findCometiesXYs(center, delta, zoom)
 
     polyjson = []
-    polyjson << {
-          paths: [
-            {lat: center[0]+delta[:dlat], lng: center[1]-delta[:dlon]},
-            {lat: center[0]-delta[:dlat], lng: center[1]-delta[:dlon]},
-            {lat: center[0]-delta[:dlat], lng: center[1]+delta[:dlon]},
-            {lat: center[0]+delta[:dlat], lng: center[1]+delta[:dlon]}
-        ],
-          strokeColor: '#FF0000',
-          strokeOpacity: 0.8,
-          strokeWeight: 3,
-          fillColor: '#FF0000',
-          fillOpacity: 0.2
-        }.to_json
+    # polyjson << {
+    #       paths: [
+    #         {lat: center[0]+delta[:dlat], lng: center[1]-delta[:dlon]},
+    #         {lat: center[0]-delta[:dlat], lng: center[1]-delta[:dlon]},
+    #         {lat: center[0]-delta[:dlat], lng: center[1]+delta[:dlon]},
+    #         {lat: center[0]+delta[:dlat], lng: center[1]+delta[:dlon]}
+    #     ],
+    #       strokeColor: '#FF0000',
+    #       strokeOpacity: 0.8,
+    #       strokeWeight: 1,
+    #       fillColor: '#FF0000',
+    #       fillOpacity: 0.2,
+    #       id: "coucou"
+    #     }.to_json
 
 
     tiles = []
@@ -66,19 +67,17 @@ class Tiles
     (cometiesXYs[:xtile_start]..cometiesXYs[:xtile_end]).each do |x|
       (cometiesXYs[:ytile_start]..cometiesXYs[:ytile_end]).each do |y|
         result = load_tiles(x, y, zoom)
-        p "cometies : #{x} - #{y}"
         if result
           result.each do |tile|
             til = Tiles.new(tile)
-            color = "##{setcolor(til.population_m2)}00"
+            color = "#0000#{setcolor(til.population)}"
             tiles << til
             polygone = {
               paths: [],
-              strokeColor: '#00f',
-              strokeOpacity: 0.8,
-              strokeWeight: 3,
+              strokeWeight: 0,
               fillColor: color,
-              fillOpacity: 1
+              fillOpacity: 0.3,
+              population: til.population
             }
             til.poly.each do |pol|
               polygone[:paths] << {lat: pol[1], lng: pol[0] }
@@ -105,8 +104,8 @@ private
     36111.911040,
     72223.822090,
     144447.644200,
-    288895.288400 * 1.5,
-    577790.576700,
+    288895.288400 * 1.6,
+    577790.576700 * 1.5,
     1155581.153000,
     2311162.307000 * 1.5,
     4622324.614000,
@@ -127,10 +126,14 @@ private
 
   def self.setcolor(popu)
 
-    pop = (popu * 16 / 30000).round
-    pop = 16 - pop
+    pop = (popu * 255 / 1000).round
+    p pop
     pop = 0 if pop < 0
+    pop = 255 if pop > 255
     pops = pop.to_i.to_s(16)
+    pops = "ff" if pops.length > 2
+    pops = "0" + pops if pops.length < 2
+
     return pops
   end
 
