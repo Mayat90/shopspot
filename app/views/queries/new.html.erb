@@ -1,20 +1,68 @@
 <div id="homepage-top">
-<%= render 'shared/banner' %>
-
+  <h1>The best place for your business</h1>  
+  <h3>ShopSpot</h3>
 </div>
-<div class="container">
-  <div id="homepage-bottom">
-    <div class="exp1">
-      <p>ShopSpot helps you to find the best place for your activity</p>
+
+<div id="homepage-middle" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://cdn.vox-cdn.com/thumbor/3job2Q0siUze1rXAHq4aXEYdX0M=/339x0:1238x599/1200x800/filters:focal(339x0:1238x599)/cdn.vox-cdn.com/uploads/chorus_image/image/45205974/uber_SafeCities_BlogHeader.0.0.png');">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6" style="height: 80vh;">
+        <div id="homepage-expl">
+          <h3>ShopSpot helps you to find the best place to start your activity. </br> Get maps and analytics about people and competition around you.</h3>
+          <a href="#" class="btn btn-primary" id="btn-sign-up">Sign up for free</a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6" style="height: 80vh;">
+        <div id="home-form">
+          <div id="container-form">
+            <div id="getstarted">
+              <h3>Get started</h3>
+            </div>
+            <%= render 'form' %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="exp2">
-      <p>Indicate your reference zone and your catchment area</p>
+  </div>
+</div>
+
+<div id="homepage-bottom">
+  <h1>How it works</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <div class="exp">
+          <div class="exp-photo">
+            <%= image_tag("exp-shop.png", style: 'width:100%;height:auto;' )%>
+          </div>
+          <div class="card-description">
+            <h4><b>Your project</b></h4> 
+            <p>Indicate your activity and the zone where you want to start your business</p>
+          </div>
+        </div>
+      </div> 
+      <div class="col-xs-12 col-sm-4">
+        <div class="exp">
+          <div class="exp-photo">
+            <%= image_tag("exp-map.png", style: 'height:100%;width:auto;') %>
+          </div>          
+          <div class="card-description">
+            <h4><b>Map</b></h4> 
+            <p>See where are your competitors and the best zones for you</p>
+          </div>
+        </div>
+      </div>  
+      <div class="col-xs-12 col-sm-4">
+        <div class="exp">
+          <div class="exp-photo">
+            <%= image_tag("analytics.png", style: 'height:100%;width:auto;') %>
+          </div>
+          <div class="card-description">
+            <h4><b>Analytics</b></h4> 
+            <p>Get all analytics about population, competitors and compare different zones</p>
+          </div> 
+        </div>
+      </div>  
     </div>
-    <div class="exp3">
-      <p>Get analytics about each zone and choose wisely your future shop spot</p>
-    </div>
-    <div id="homepage-form">
-      <h1>Get started</h1>
-      <%= render 'form', query: @query %>
-    </div>
+  </div>
 </div>
