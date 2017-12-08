@@ -4,4 +4,6 @@
 //= require bootstrap-sprockets
 //= require underscore
 //= require gmaps/google
+//= require materialize
+//= require materialize-sprockets
 //= require_tree .

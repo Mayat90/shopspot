@@ -1,0 +1,8 @@
+delpoly();
+<% p "2222222222222222222222222222222222222222222222222222222222222222" %>
+      <% @polygones.each do |zone| %>
+        poly = new google.maps.Polygon(<%= raw zone %>);
+        poly.setMap(map);
+        addListenersOnPolygon(poly);
+        polya.push(poly);
+      <% end %>

@@ -5,28 +5,6 @@ class QueriesController < ApplicationController
   # GET /queries.json
   def index
 
-  @zoomscale = {
-    z20: 1128.497220,
-    z19: 2256.994440,
-    z18: 4513.988880,
-    z17: 9027.977761,
-    z16: 18055.955520,
-    z15: 36111.911040,
-    z14: 72223.822090,
-    z13: 144447.644200,
-    z12: 288895.288400,
-    z11: 577790.576700,
-    z10: 1155581.153000,
-    z9: 2311162.307000,
-    z8: 4622324.614000,
-    z7: 9244649.227000,
-    z6: 18489298.450000,
-    z5: 36978596.910000,
-    z4: 73957193.820000,
-    z3: 147914387.600000,
-    z2: 295828775.300000,
-    z1: 591657550.500000
-  }
     session['address']= params["address"] if params["address"]
     session['type']= params["type"] if params["type"]
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
@@ -46,14 +24,18 @@ class QueriesController < ApplicationController
     end
         # marker de la recherche
         # @markers << {lat: @search_address[0], lng: @search_address[1], infowindow: "Your Search </br>#{session['address']}"}
-@lat = session['search_coordinates'][0]
-@lon = session['search_coordinates'][1]
-@d = 0.01
-@zoom = 13
+    @zoom = 14
+    @polygones = Tiles.perform(session['search_coordinates'], @zoom)[:poly]
 
-@density = Tiles.find(@lat -@d, @lon - @d, @lat +@d, @lon +@d, @zoom)
-p @density.count
-end
+  end
+
+  def population
+    lat = params["lat"].to_f
+    long = params["long"].to_f
+    zoom = params["zoom"].to_i
+    @polygones = Tiles.perform([lat, long ], zoom)[:poly]
+
+  end
 
   # GET /queries/1
   # GET /queries/1.json
@@ -87,8 +69,10 @@ end
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
     session['radius_search'] = @query[:radius_search]
     session['radius_catchment'] = @query[:radius_catchment_area]
+    resultats_insee = Tiles.calculate(session['search_coordinates'], session['radius_catchment'])
+    p resultats_insee
     @query.save
-redirect_to queries_path
+    redirect_to queries_path
     # respond_to do |format|
     #   if @query.save
     #     format.html { redirect_to @query, notice: 'Query was successfully created.' }
