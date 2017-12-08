@@ -1,5 +1,5 @@
 class QueriesController < ApplicationController
-  before_action :set_query, only: [ :show, :edit, :update, :destroy]
+  before_action :set_query, only: [:show, :edit, :update, :destroy]
 
   # GET /queries
   # GET /queries.json
@@ -12,14 +12,13 @@ class QueriesController < ApplicationController
     session['radius_catchment'] == params["radius_catchment"] if params["radius_catchment"]
 
 
-
-    hash_request = {type: session['type'], radius_search: session['radius_search']}
+    hash_request = {type: session['type'], radius_search: session['radius_search'], query_id: Query.last.id}
     hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
-    @concurrents = Concurrents.find(hash_request)
+    @competitors = Competitor.find(hash_request)
 
-    @markers = Gmaps4rails.build_markers(@concurrents) do |concurrent, marker|
-      marker.lat concurrent["geometry"]["location"]["lat"]
-      marker.lng concurrent["geometry"]["location"]["lng"]
+    @markers = Gmaps4rails.build_markers(@competitors) do |competitor, marker|
+      marker.lat competitor.location["lat"]
+      marker.lng competitor.location["lng"]
         # marker.infowindow content_info_window(user)
         # marker.infowindow render_to_string(partial: "/shared/info_window", locals: { user: user})
     end
@@ -65,17 +64,15 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
-    session['address']= @query[:address]
+    session['address'] = @query[:address]
     session['type']= @query[:activity]
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
-    session['radius_search'] =@query[:radius_search]
-    session['radius_catchment'] =@query[:radius_catchment_area]
+    session['radius_search'] = @query[:radius_search]
+    session['radius_catchment'] = @query[:radius_catchment_area]
     resultats_insee = Tiles.calculate(session['search_coordinates'], session['radius_catchment'])
     p resultats_insee
     @query.save
-
-    session['query_id'] = @query.id
-redirect_to queries_path
+    redirect_to queries_path
     # respond_to do |format|
     #   if @query.save
     #     format.html { redirect_to @query, notice: 'Query was successfully created.' }
