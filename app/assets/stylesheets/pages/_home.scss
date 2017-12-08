@@ -11,7 +11,7 @@
   }
   h3 {
     font-size: 30px;
-    font-weight: lighter;
+    font-weight: 400;
     color: #333;
   }
 }
@@ -21,7 +21,8 @@
   display: flex;
   justify-content: space-around;
   h3 {
-    font-weight: lighter
+    font-weight: 300;
+    font-size: 25px;
   }
 }
 
@@ -30,6 +31,7 @@
 }
 
 #homepage-bottom {
+  font-family: Raleway;
   background: #F4F4F4;
   text-align: center;
   h1 {

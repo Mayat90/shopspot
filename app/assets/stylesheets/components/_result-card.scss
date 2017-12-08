@@ -7,8 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  // border: 1px solid #EEE;
-  // box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1)
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 .rccontent {
@@ -22,7 +21,7 @@
     font-size: 15px;
     font-weight: bold;
     color: #555;
-    margin: 5px;
+    margin-bottom: 12px;
   }
   p {
     font-size: 15px;
@@ -36,6 +35,9 @@
 .rctitle {
   text-align: center;
   line-height: 120%;
+  p {
+  font-size: 17px;
+  }
 }
 
 .rcpop {
@@ -52,6 +54,7 @@
   align-items: flex-end;
   p {
     font-size: 13px;
+    font-height: 300;
     color: #333;
   }
 }
@@ -77,10 +80,13 @@
 #rclinks {
   position: absolute;
   bottom: 10px;
+  right: 10px;
   color: #FAFAFA;
   // border-top: 1px solid rgba(0,0,0,0.3);
   a {
     text-decoration: none;
+    color: $blue;
+    font-size: 15px;
   }
 }
 
