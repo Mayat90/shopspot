@@ -31,8 +31,11 @@
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
+
+
     var map;
     var polya =[];
+    var markers =[];
     var search_icon = 'http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png';
     var concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
     var search = {lat: <%= session["search_coordinates"][0] %>, lng: <%= session["search_coordinates"][1] %>};
@@ -69,6 +72,18 @@
         animation: google.maps.Animation.DROP,
         map: map
       });
+      var searchcircle = new google.maps.Circle({
+        strokeColor: '#0f5',
+        strokeOpacity: 0.8,
+        strokeWeight: 4,
+        fillColor: '#FF0000',
+        fillOpacity: 0,
+        map: map,
+        center: search,
+        radius: <%= session['radius_catchment'] %>
+      });
+
+
     }
 
     function delpoly() {
