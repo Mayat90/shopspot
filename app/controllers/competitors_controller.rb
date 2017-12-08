@@ -4,7 +4,7 @@ class CompetitorsController < ApplicationController
   def index
     @competitors = Competitor.where(query_id: @query)
     find_details(@competitors)
-    @competitors = Competitor.where(query_id: @query)
+    @competitors = Competitor.where(query_id: @query).order(:rating).first(5)
   end
 
   def find_details(competitors)
