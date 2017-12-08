@@ -13,12 +13,14 @@ class CompetitorsController < ApplicationController
     result_search = RestClient.get(url)
     results = JSON.parse(result_search)
     # binding.pry
-      competitor.phone_number = result["result"]["formatted_phone_number"]
-      competitor.address = result["result"]["formatted_address"]
-      competitor.opening_hours = result["result"]["weekday_text"]
-      competitor.rating = result["result"]["rating"]
-      competitor.number_rating = result["result"]["reviews"].count
-      competitor.update
+      competitor.phone_number = results["result"]["formatted_phone_number"]
+      competitor.address = results["result"]["formatted_address"]
+      competitor.opening_hours = results["result"]["weekday_text"]
+      competitor.rating = results["result"]["rating"]
+      if results["result"]["reviews"].nil? == false
+        competitor.number_rating = results["result"]["reviews"].count
+      end
+      competitor.save
     end
   end
 
