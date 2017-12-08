@@ -13,7 +13,6 @@ class CompetitorsController < ApplicationController
     result_search = RestClient.get(url)
     results = JSON.parse(result_search)
     # binding.pry
-      results.each do |result|
         competitor.phone_number = result["result"]["formatted_phone_number"]
         competitor.address = result["result"]["formatted_address"]
         competitor.opening_hours = result["result"]["weekday_text"]
