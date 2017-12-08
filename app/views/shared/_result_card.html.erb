@@ -1,24 +1,43 @@
 <div class="rcframe">
   <div class="rccontent">
     <div class="rctitle">
+      <%= image_tag("five-stars.png", height: '10') %>
       <p>63 rue de Marseille</p>
-      <p> XXXXX</p>
+    </div>
     <div class="rcresults">
       <div class="rcpop">
-        <h3>Population</h3>
-        <p>Population : 1000 </p>
-        <p>Population/m2 : 0,1</p>
-        <p>Average age : 44,5 yo</p>
+        <h3></i>Inhabitants</h3>
+        <p><i class="fa fa-users" aria-hidden="true"></i>
+Population : 1000 </p>
+        <p><i class="fa fa-user-circle-o" aria-hidden="true"></i>
+Density : 1,5/m2</p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i>
+Middle age : 44</p>
+        <div id="rcpopgraph">
+          <div id="rcpopgraph1">
+            <p>25 -</p>
+          </div>
+          <div id="rcpopgraph2">
+            <p>25-65</p>
+          </div>
+          <div id="rcpopgraph3">
+             <p>65 +</p>
+          </div>
+        </div>
       </div>
       <div class="rccomp">
         <h3>Competitors</h3>
-        <p>Competitors : 13</p>
-        <p>Average rating : 4,5</p>
+        <p><i class="fa fa-briefcase" aria-hidden="true"></i>
+Competitors : 13</p>
+        <p><i class="fa fa-star" aria-hidden="true"></i>
+Average rating : 4,5</p>
       </div>
     </div>
-    <div class="rclinks">
-      <a class="result-card-link" href="queries/<%= session['query_id']%>" >See more</a>
-      <p>See</p>      
+    <div id="rclinks">
+      <a href="#">New search |</a>
+      <a href="queries/<%= session['query_id']%>" >See more</a>
     </div>
   </div>
 </div>
+
+<!-- class="result-card-link"  -->
