@@ -77,7 +77,10 @@ class Tiles
               strokeWeight: 0,
               fillColor: color,
               fillOpacity: 0.3,
-              population: til.population,
+              population: til.population.round,
+              revenus: til.revenus.round,
+              res65: til.res65.round,
+              res25: til.res25.round
 
             }
             til.poly.each do |pol|
@@ -104,9 +107,9 @@ private
     18055.955520,
     36111.911040,
     72223.822090,
-    144447.644200,
+    144447.644200 * 1.5,
     288895.288400 * 1.6,
-    577790.576700 * 1.5,
+    577790.576700 * 1.7,
     1155581.153000,
     2311162.307000 * 1.5,
     4622324.614000,
