@@ -12,6 +12,7 @@ class Competitor < ApplicationRecord
     type = hash[:type]
     location = "#{hash[:location][:latitude]},#{hash[:location][:longitude]}"
     radius = hash[:radius_search]
+    query_id = hash[:query_id]
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=#{location}&radius=#{radius}&type=#{type}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}"
     result_search = RestClient.get(url)
     results = JSON.parse(result_search)
@@ -34,9 +35,10 @@ class Competitor < ApplicationRecord
   if results.nil? == false
     results["results"].each do |result|
        competitor = Competitor.new
+       competitor.query_id = query_id
        competitor.location = result["geometry"]["location"]
        competitor.place_id = result["place_id"]
-       competitor.type = hash[:type]
+       competitor.activity = hash[:type]
        competitor.save
        competitors << competitor
     end
@@ -44,9 +46,10 @@ class Competitor < ApplicationRecord
   if results_2.nil? == false
     results_2["results"].each do |result|
        competitor = Competitor.new
+       competitor.query_id = query_id
        competitor.location = result["geometry"]["location"]
        competitor.place_id = result["place_id"]
-       competitor.type = hash[:type]
+       competitor.activity = hash[:type]
        competitor.save
        competitors << competitor
     end
@@ -54,9 +57,10 @@ class Competitor < ApplicationRecord
   if results_3.nil? == false
     results_3["results"].each do |result|
        competitor = Competitor.new
+       competitor.query_id = query_id
        competitor.location = result["geometry"]["location"]
        competitor.place_id = result["place_id"]
-       competitor.type = hash[:type]
+       competitor.activity = hash[:type]
        competitor.save
        competitors << competitor
     end

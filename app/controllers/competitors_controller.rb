@@ -2,9 +2,9 @@ class CompetitorsController < ApplicationController
   before_action :set_query, only: [:index]
 
   def index
-    @competitors = Competitor.where(query_id: @query.id)
+    @competitors = Competitor.where(query_id: @query)
     find_details(@competitors)
-    @competitors = Competitor.where(query_id: @query.id)
+    @competitors = Competitor.where(query_id: @query)
   end
 
   def find_details(competitors)

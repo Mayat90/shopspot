@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207172529) do
+ActiveRecord::Schema.define(version: 20171208104316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20171207172529) do
 
   create_table "competitors", force: :cascade do |t|
     t.text     "location"
-    t.string   "type"
+    t.string   "activity"
     t.string   "place_id"
     t.float    "rating"
     t.integer  "number_rating"

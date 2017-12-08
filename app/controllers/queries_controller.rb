@@ -1,5 +1,5 @@
 class QueriesController < ApplicationController
-  before_action :set_query, only: [ :show, :edit, :update, :destroy]
+  before_action :set_query, only: [:show, :edit, :update, :destroy]
 
   # GET /queries
   # GET /queries.json
@@ -34,8 +34,7 @@ class QueriesController < ApplicationController
     session['radius_catchment'] == params["radius_catchment"] if params["radius_catchment"]
 
 
-
-    hash_request = {type: session['type'], radius_search: session['radius_search']}
+    hash_request = {type: session['type'], radius_search: session['radius_search'], query_id: Query.last.id}
     hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
     @competitors = Competitor.find(hash_request)
 
@@ -83,14 +82,12 @@ end
   # POST /queries.json
   def create
     @query = Query.new(query_params)
-    session['address']= @query[:address]
+    session['address'] = @query[:address]
     session['type']= @query[:activity]
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
-    session['radius_search'] =@query[:radius_search]
-    session['radius_catchment'] =@query[:radius_catchment_area]
+    session['radius_search'] = @query[:radius_search]
+    session['radius_catchment'] = @query[:radius_catchment_area]
     @query.save
-
-    session['query_id'] = @query.id
 redirect_to queries_path
     # respond_to do |format|
     #   if @query.save
