@@ -73,6 +73,7 @@ class QueriesController < ApplicationController
     p resultats_insee
     @query.save
     redirect_to queries_path
+    session['query_id'] = @query.id
     # respond_to do |format|
     #   if @query.save
     #     format.html { redirect_to @query, notice: 'Query was successfully created.' }
