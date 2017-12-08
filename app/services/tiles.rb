@@ -2,7 +2,7 @@ require 'json'
 require 'open-uri'
 
 class Tiles
-  attr_accessor :lat, :long, :poly, :population, :population_m2, :surface
+  attr_accessor :lat, :long, :poly, :population, :population_m2, :surface, :center
   attr_accessor :personnes_seules, :personnes_seules_m2
   attr_accessor :res5_menages, :res5_menages_m2, :res65, :res65_m2, :res25, :res25_m2, :res15, :res15_m2
   attr_accessor :revenus, :basrevenus, :basrevenus_m2
@@ -13,8 +13,9 @@ class Tiles
     @poly = tile["geometry"]["coordinates"][0]
     a = @poly[0]
     b = @poly[2]
-    @long = (a[0] + b[0])/2
-    @lat = (a[1] + b[1])/2
+    @center = [(a[1] + b[1])/2, (a[0] + b[0])/2]
+    # @long = (a[0] + b[0])/2
+    # @lat = (a[1] + b[1])/2
 
     data = tile["properties"]
 
@@ -30,6 +31,53 @@ class Tiles
     @revenus = data["ind_srf"] / data["ind_c"] if data["ind_srf"] != "NA" #Revenus (&euro;)
     @basrevenus = data["men_basr"] / data["men"]*100 #Bas revenus (% ménages)
     @basrevenus_m2 = data["men_basr"] / data["surf"] #Bas revenus (ménages / km&sup2;)
+  end
+
+  def self.calculate(center, radius)
+    zoom = 14
+    zoom = 11 if radius > 3125
+    zoom = 10 if radius > 6250
+    zoom = 9 if radius > 12500
+    zoom = 8 if radius > 25000
+    zoom = 7 if radius > 50000
+    zoom = 6 if radius > 100000
+    delta = convertradiustolatlon(radius)
+    cometiesXYs = findCometiesXYs(center, delta, zoom)
+
+population = 0
+res65 = 0
+res25 = 0
+revenus = []
+i = 0
+    (cometiesXYs[:xtile_start]..cometiesXYs[:xtile_end]).each do |x|
+      (cometiesXYs[:ytile_start]..cometiesXYs[:ytile_end]).each do |y|
+        result = load_tiles(x, y, zoom)
+        if result
+          result.each do |tile|
+            til = Tiles.new(tile)
+            distance = distance(center, til.center)
+            if distance < radius
+              population += til.population
+              res65 += til.population * til.res65 / 100
+              res25 += til.population * til.res25 / 100
+              revenus << til.revenus
+              i+=1
+            end
+          end
+        end
+      end
+    end
+
+
+p "sur #{i} donnes de l'insee"
+    revenus = revenus.inject{ |sum, el| sum + el } / revenus.size
+    # res2565 = (population - res25 - res65 ) / population
+    res25 = (res25 / population * 100).round
+    res65 = (res65 / population * 100).round
+    res2565 = 100 - res25 - res65
+
+    return {population: population.round, revenus: revenus.round,
+     res25: res25, res2565: res2565, res65: res65}
   end
 
   def self.perform(center, zoom)
@@ -131,7 +179,6 @@ private
   def self.setcolor(popu)
 
     pop = (popu * 255 / 1000).round
-    p pop
     pop = 0 if pop < 0
     pop = 255 if pop > 255
     pops = pop.to_i.to_s(16)
@@ -207,5 +254,20 @@ d = 2
       return data["features"]
     end
   end
+  def self.distance (loc1, loc2)
+    rad_per_deg = Math::PI/180  # PI / 180
+    rkm = 6371                  # Earth radius in kilometers
+    rm = rkm * 1000             # Radius in meters
 
+    dlat_rad = (loc2[0]-loc1[0]) * rad_per_deg  # Delta, converted to rad
+    dlon_rad = (loc2[1]-loc1[1]) * rad_per_deg
+
+    lat1_rad, lon1_rad = loc1.map {|i| i * rad_per_deg }
+    lat2_rad, lon2_rad = loc2.map {|i| i * rad_per_deg }
+
+    a = Math.sin(dlat_rad/2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin(dlon_rad/2)**2
+    c = 2 * Math::atan2(Math::sqrt(a), Math::sqrt(1-a))
+
+    rm * c # Delta in meters
+  end
 end
