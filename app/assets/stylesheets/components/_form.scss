@@ -1,7 +1,40 @@
-.query-form {
+#home-form {
+  background: #FAFAFA;
   width: 300px;
-  margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 20px auto;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  align-items: center;
+  justify-content: space-around;
 }
 
+#container-form {
+  margin: 40px;
+  width: 250px;
+  h3 {
+    font-size: 30px;
+  }
+}
+
+.new_query {
+}
+
+.btn-form-homepage {
+background: #FAFAFA;
+}
+
+#getstarted {
+  text-align: center;
+}
+
+#form3, #form2, #form32, #form8 {
+  font-size: 15px;
+  color: #999;
+}
+
+.control-label {
+  font-size: 12px;
+}
