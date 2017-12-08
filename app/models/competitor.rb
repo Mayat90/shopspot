@@ -1,6 +1,5 @@
 require 'json'
 require 'open-uri'
-require 'pry'
 require 'rest-client'
 
 class Competitor < ApplicationRecord
