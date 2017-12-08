@@ -37,6 +37,7 @@ class Competitor < ApplicationRecord
        competitor.query_id = query_id
        competitor.location = result["geometry"]["location"]
        competitor.place_id = result["place_id"]
+       competitor.name = result["name"]
        competitor.activity = hash[:type]
        competitor.save
        competitors << competitor
@@ -48,6 +49,7 @@ class Competitor < ApplicationRecord
        competitor.query_id = query_id
        competitor.location = result["geometry"]["location"]
        competitor.place_id = result["place_id"]
+       competitor.name = result["name"]
        competitor.activity = hash[:type]
        competitor.save
        competitors << competitor
@@ -58,6 +60,7 @@ class Competitor < ApplicationRecord
        competitor = Competitor.new
        competitor.query_id = query_id
        competitor.location = result["geometry"]["location"]
+       competitor.name = result["name"]
        competitor.place_id = result["place_id"]
        competitor.activity = hash[:type]
        competitor.save
