@@ -4,8 +4,9 @@
   position: relative;
   background: #FAFAFA;
   margin: 10px;
-  border: 1px solid #EEE;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1)
+  display: flex;
+  // border: 1px solid #EEE;
+  // box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1)
 }
 
 .result-card-address {
