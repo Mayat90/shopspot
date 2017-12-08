@@ -4,22 +4,21 @@
       <p>63 rue de Marseille</p>
       <p> XXXXX</p>
     <div class="rcresults">
-      <div class="result-card-info pop">
+      <div class="rcpop">
         <h3>Population</h3>
         <p>Population : 1000 </p>
         <p>Population/m2 : 0,1</p>
         <p>Average age : 44,5 yo</p>
       </div>
-      <div class="result-card-info comp">
+      <div class="rccomp">
         <h3>Competitors</h3>
         <p>Competitors : 13</p>
         <p>Average rating : 4,5</p>
       </div>
     </div>
-    <div class="btn btn-primary btn-show">
-      <p>See more</p>
+    <div class="rclinks">
+      <a class="result-card-link" href="queries/<%= session['query_id']%>" >See more</a>
+      <p>See</p>      
     </div>
-
-    <a class="result-card-link" href="queries/<%= session['query_id']%>" ></a>
   </div>
 </div>
