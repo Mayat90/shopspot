@@ -7,7 +7,7 @@
 
       <%= render 'shared/result_card' %>
 
-    </div>
+  </div>
     <div style="width: 60%; height: 600px; position: relative;">
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
         <div id="infos-button"  onclick="openinf()">
@@ -27,7 +27,6 @@
       <div id="map" style="width: 100%; height: 600px;"></div>
     </div>
 
-  </div>
 </div>
 
 <% content_for(:after_js) do %>
@@ -51,6 +50,8 @@
       document.getElementById('rev').innerHTML = polygon.revenus;
       document.getElementById('res65').innerHTML = polygon.res65;
       document.getElementById('res25').innerHTML = polygon.res25;
+          console.log('test');
+
       });
     }
 

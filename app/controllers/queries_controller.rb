@@ -4,7 +4,6 @@ class QueriesController < ApplicationController
   # GET /queries
   # GET /queries.json
   def index
-p params
 
     session['address']= params["address"] if params["address"]
     session['type']= params["type"] if params["type"]
@@ -26,7 +25,6 @@ p params
     end
         # marker de la recherche
         # @markers << {lat: @search_address[0], lng: @search_address[1], infowindow: "Your Search </br>#{session['address']}"}
-    p session['search_coordinates']
     @zoom = 14
     @polygones = Tiles.perform(session['search_coordinates'], @zoom)[:poly]
 
@@ -72,6 +70,8 @@ p params
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
     session['radius_search'] =@query[:radius_search]
     session['radius_catchment'] =@query[:radius_catchment_area]
+    resultats_insee = Tiles.calculate(session['search_coordinates'], session['radius_catchment'])
+    p resultats_insee
     @query.save
 
     session['query_id'] = @query.id
