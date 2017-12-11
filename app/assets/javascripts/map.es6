@@ -12,14 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mapDomElement) {
     zoom = parseInt(mapDomElement.getAttribute('data-zoom'));
     radiusCatchment = parseInt(mapDomElement.getAttribute('data-radius'));
+    radiusSearch = parseInt(mapDomElement.getAttribute('data-radiussearch'));
     search = {
       lat: parseFloat(mapDomElement.getAttribute('data-lat')),
       lng: parseFloat(mapDomElement.getAttribute('data-long'))
     };
 
     initMap();
-    // addconcurrents();
-    // addpopulation();
   }
 
 
@@ -320,6 +319,16 @@ var mapStyle = [
       center: search,
       radius: radiusCatchment
     });
+    var catchcircle = new google.maps.Circle({
+      strokeColor: '#05F',
+      strokeOpacity: 0.8,
+      strokeWeight: 4,
+      fillColor: '#FFFF00',
+      fillOpacity: 0,
+      map: map,
+      center: search,
+      radius: radiusSearch
+    });
     addcompetitors(map)
   }
 
@@ -353,6 +362,12 @@ var mapStyle = [
     addpopulation();
   });
 
+  $("#sliderp").on("input", function(){
+    polya.forEach((poly) => {
+      poly.setOptions({'fillOpacity': this.value /100})
+    });
+  });
+
 });
 
 function openinf() {
@@ -361,4 +376,12 @@ function openinf() {
 
 function closeinf() {
   document.getElementById('show-content').classList.add("infohide");
+}
+
+function openset() {
+  document.getElementById('show-setting').classList.remove("infohide");
+}
+
+function closeset() {
+  document.getElementById('show-setting').classList.add("infohide");
 }
