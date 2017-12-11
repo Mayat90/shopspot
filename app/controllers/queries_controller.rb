@@ -4,7 +4,6 @@ class QueriesController < ApplicationController
   # GET /queries
   # GET /queries.json
   def index
-
     session['address']= params["address"] if params["address"]
     session['type']= params["type"] if params["type"]
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
@@ -64,13 +63,13 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
-    session['address'] = @query[:address]
-    session['type']= @query[:activity]
+    session['address'] = @query.address
+    session['type']= @query.activity
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
-    session['radius_search'] = @query[:radius_search]
-    session['radius_catchment'] = @query[:radius_catchment_area]
+    session['radius_search'] = @query.radius_search
+    session['radius_catchment'] = @query.radius_catchment_area
     resultats_insee = Tiles.calculate(session['search_coordinates'], session['radius_catchment'])
-    p resultats_insee
+    @query.analytics = resultats_insee
     @query.save
     redirect_to queries_path
     session['query_id'] = @query.id
