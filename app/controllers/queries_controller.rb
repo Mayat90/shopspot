@@ -15,26 +15,7 @@ class QueriesController < ApplicationController
     hash_request = {type: session['type'], radius_search: session['radius_search'], query_id: Query.last.id}
     hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
     @competitors = Competitor.find(hash_request)
-
-    @markers = Gmaps4rails.build_markers(@competitors) do |competitor, marker|
-      marker.lat competitor.location["lat"]
-      marker.lng competitor.location["lng"]
-        # marker.infowindow content_info_window(user)
-        # marker.infowindow render_to_string(partial: "/shared/info_window", locals: { user: user})
-    end
-        # marker de la recherche
-        # @markers << {lat: @search_address[0], lng: @search_address[1], infowindow: "Your Search </br>#{session['address']}"}
-    @zoom = 14
-    @polygones = Tiles.perform(session['search_coordinates'], @zoom)[:poly]
-
-  end
-
-  def population
-    lat = params["lat"].to_f
-    long = params["long"].to_f
-    zoom = params["zoom"].to_i
-    @polygones = Tiles.perform([lat, long ], zoom)[:poly]
-
+    p @competitors
   end
 
   # GET /queries/1

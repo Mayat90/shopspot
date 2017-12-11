@@ -21,6 +21,9 @@ gem "coffee-rails"
 gem "gmaps4rails"
 gem 'ratyrate'
 gem 'rest-client'
+gem 'sprockets', '>= 3.0.0'
+gem 'sprockets-es6'
+
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
