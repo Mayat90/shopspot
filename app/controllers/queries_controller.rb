@@ -10,7 +10,6 @@ class QueriesController < ApplicationController
     session['radius_search'] == params["radius_search"] if params["radius_search"]
     session['radius_catchment'] == params["radius_catchment"] if params["radius_catchment"]
 
-
     hash_request = {type: session['type'], radius_search: session['radius_search'], query_id: Query.last.id}
     hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
 
@@ -31,8 +30,6 @@ class QueriesController < ApplicationController
     end
         # marker de la recherche
         # @markers << {lat: @search_address[0], lng: @search_address[1], infowindow: "Your Search </br>#{session['address']}"}
-    @zoom = 14
-    @polygones = Tiles.perform(session['search_coordinates'], @zoom)[:poly]
     @query = Query.last
 
   end
