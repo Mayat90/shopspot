@@ -32,6 +32,7 @@ class QueriesController < ApplicationController
         # @markers << {lat: @search_address[0], lng: @search_address[1], infowindow: "Your Search </br>#{session['address']}"}
     @zoom = 14
     @polygones = Tiles.perform(session['search_coordinates'], @zoom)[:poly]
+    @query = Query.last
 
   end
 

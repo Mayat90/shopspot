@@ -46,35 +46,54 @@
 }
 
 #rcpopgraph {
-  display: flex;
-  margin-bottom: 5px;
-  width: 130px;
+  margin-top: 20px;
+  width: 150px;
   height: 70px;
   text-align: center;
-  align-items: flex-end;
-  p {
+    p {
     font-size: 13px;
     font-height: 300;
     color: #333;
   }
 }
 
-#rcpopgraph1 {
-  height: 40px;
+#rcpopgraphhead {
+  display: flex;
+  height: 20%;
+  justify-content: space-between;
+  text-align: center;
+}
+
+#rcpopgraphres {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: flex-end;
+  height: 60%;
+}
+
+#rcpopgraphbot {
+  display: flex;
+  height: 20%;
+  justify-content: space-between;
+  text-align: center;
+}
+
+#rcpopgraphres1, #rcpopgraphres3 {
   width: 30%;
   background: #CCC;
 }
 
-#rcpopgraph2 {
-  height: 60px;
+#rcpopgraphres2 {
   width: 40%;
   background: #EEE;
 }
 
-#rcpopgraph3 {
-  height: 20px;
+#rcpopgraphhead1, #rcpopgraphhead3 {
   width: 30%;
-  background: #AAA;
+}
+
+#rcpopgraphhead2 {
+  width: 40%;
 }
 
 #rclinks {
