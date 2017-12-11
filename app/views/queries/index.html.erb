@@ -1,7 +1,4 @@
 <%= render 'shared/navbar' %>
-<div style="display: none;">
-  <%= link_to "add pop", "/queries/10/43/2", method: :get, remote: true, id: "ajax"%>
-</div>
 <div class="myflex">
   <div class="mygrow">
 
@@ -11,6 +8,21 @@
   </div>
     <div style="width: 75%; height: 600px; position: relative;">
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
+        <div id="setting-button"  onclick="openset()">
+          <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
+        </div>
+        <div id="show-setting" class="infohide">
+          <p style="text-align:right; margin:0" ><i id="setting-close" onclick="closeset()" class="fa fa-close"></i></p>
+          <h3>Settings : </h3>
+          <div id="setting-current">
+<div id="slidecontainer">
+  <input type="range" min="0" max="100" oninput="heatmap.set('opacity', (this.value/100));" value="50">
+  <input type="range" min="0" max="100" id="sliderp" value="35">
+</div>
+          </div>
+        </div>
+
+
         <div id="infos-button"  onclick="openinf()">
           <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
         </div>
@@ -25,125 +37,75 @@
           </div>
         </div>
       </div>
-      <div id="map" style="width: 100%; height: 600px;"></div>
+      <div id="map"
+        style="width: 100%; height: 600px;"
+        data-lat="<%= session["search_coordinates"][0] %>"
+        data-long="<%= session["search_coordinates"][1] %>"
+        data-zoom="14"
+        data-radius="<%= session['radius_catchment'] %>"
+        data-radiussearch="<%= session['radius_search'] %>"
+      ></div>
     </div>
 
   </div>
 </div>
-
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
 
 
-    var map;
-    var polya =[];
-    var markers =[];
-    var search_icon = 'http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png';
-    var concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
-    var search = {lat: <%= session["search_coordinates"][0] %>, lng: <%= session["search_coordinates"][1] %>};
-    function openinf() {
-      document.getElementById('show-content').classList.remove("infohide");
-    }
-    function closeinf() {
-      document.getElementById('show-content').classList.add("infohide");
 
+    let heatmap = null;
+    function metersPerPixel(map) {
+      return (Math.cos(<%= session["search_coordinates"][0] %> * Math.PI/180) * 2 * Math.PI * 6378137 / (256 * Math.pow(2, map.getZoom())));
+    }
+    function changeRadius(radius) {
+      heatmap.set('radius', radius * 1.3);
     }
 
-    var addListenersOnPolygon = function(polygon) {
-      google.maps.event.addListener(polygon, 'mouseover', function (event) {
-      document.getElementById('pop').innerHTML = polygon.population;
-      document.getElementById('rev').innerHTML = polygon.revenus;
-      document.getElementById('res65').innerHTML = polygon.res65;
-      document.getElementById('res25').innerHTML = polygon.res25;
-          console.log('test');
-
-      });
-    }
-
-    function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        zoom: <%= @zoom %>,
-        center: search,
-        mapTypeId: 'satellite',
-        streetViewControl: false,
-      });
-      // marker search
-        var marker = new google.maps.Marker({
-        position: search,
-        icon: search_icon,
-        animation: google.maps.Animation.DROP,
-        map: map
-      });
-      var searchcircle = new google.maps.Circle({
-        strokeColor: '#0f5',
-        strokeOpacity: 0.8,
-        strokeWeight: 4,
-        fillColor: '#FF0000',
-        fillOpacity: 0,
-        map: map,
-        center: search,
-        radius: <%= session['radius_catchment'] %>
-      });
-
-
-    }
-
-    function delpoly() {
-      for (var i = 0; i < polya.length; i++) {
-       if(polya[i].id != 123) //Or whatever that you require
-         {
-           //change its color
-           polya[i].setMap(null);
-         }
+      function changeGradient() {
+        var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)',
+          'rgba(255, 0, 0, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
       }
-      poly.setMap(null);
-    }
 
-    function addconcurrents() {
-    var points = [];
-      <% @markers.each do |marker| %>
-      points.push(new google.maps.LatLng(<%= marker[:lat] %>, <%= marker[:lng] %>));
+    function addcompetitors(map) {
+      let markers = [];
+      let points = [];
+      let bounds = new google.maps.LatLngBounds();
+      <% @competitors.each do |competitor| %>
         var marker = new google.maps.Marker({
-          position: {lat: <%= marker[:lat] %>, lng: <%= marker[:lng] %>},
+          position: {lat:<%= competitor.location["lat"].to_f%>, lng:<%= competitor.location["lng"].to_f %>},
           map: map,
-          icon: concurrence_icon,
+          title: 'Hello World!'
         });
-
+        markers.push(marker);
+        points.push(new google.maps.LatLng(<%= competitor.location["lat"].to_f%>, <%= competitor.location["lng"].to_f %>))
+        bounds.extend( marker.getPosition() );
       <% end %>
+      map.fitBounds(bounds);
+
+    var radius = Math.floor(<%= session['radius_catchment'] %> / metersPerPixel(map));
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: points,
+          radius: radius,
+          radiusCatch: <%= session['radius_catchment'] %>,
+          map: map
+        });
+        changeGradient();
+      map.addListener('zoom_changed', function() {
+        var radius = Math.floor(heatmap.radiusCatch / metersPerPixel(map));
+        changeRadius(radius);
+      });
+
     }
-
-    function updatepop() {
-      var NewMapCenter = map.getCenter();
-      a = document.getElementById('ajax');
-      url = "/queries/" + map.getZoom() +"/" + NewMapCenter.lat() + "/" + NewMapCenter.lng();
-      a.href = url;
-      console.log("zoom :" + map.getZoom());
-      a.click();
-    }
-
-    function addpopulation() {
-      <% @polygones.each do |zone| %>
-        poly = new google.maps.Polygon(<%= raw zone %>);
-        poly.setMap(map);
-        addListenersOnPolygon(poly);
-        polya.push(poly);
-      <% end %>
-    }
-
-    initMap();
-<!--     addconcurrents();
-    addpopulation();
- -->
-
-    google.maps.event.addDomListener(map, 'center_changed', function() {
-        updatepop();
-    });
-    google.maps.event.addDomListener(map, 'zoom_changed', function() {
-      if (map.getZoom() < 15 && map.getZoom() > 5) {
-        updatepop();
-      }
-    });
-
 
   <% end %>
 <% end %>
