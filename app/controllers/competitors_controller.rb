@@ -20,6 +20,7 @@ class CompetitorsController < ApplicationController
         competitor.number_rating = results["result"]["reviews"].count
       end
       competitor.save
+
     end
   end
 

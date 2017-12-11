@@ -56,11 +56,11 @@
                 </div>
           </div>
         </div>
-        <div class="buttons-next-action"
+        <div class="buttons-next-action">
           <p>Take action and realize your dream? Contact right here</p>
           <%= link_to 'View competition', query_competitors_path(@query), class: 'btn btn-primary', id:'btn-show' %>
         </div>
-        <div class="buttons-next-action"
+        <div class="buttons-next-action">
           <p>Not enough potential customers? Surronding cities comparator right here</p>
           <a class='btn btn-primary' id='btn-show' href='#'>Cities analytics</a>
         </div>
@@ -72,7 +72,9 @@
           </div>
       <div style="text-align: center"><%= link_to 'Download Pdf', query_path(@query, format: :pdf), class: 'btn btn-primary', id:'btn-show' %> </div>
       </div>
-
+          <div class="">
+            <%= street_view(session['search_coordinates']) %>
+          </div>
   </div>
 </div>
 
