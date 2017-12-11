@@ -76,6 +76,7 @@ class QueriesController < ApplicationController
     session['radius_catchment'] = @query.radius_catchment_area
     resultats_insee = Tiles.calculate(session['search_coordinates'], session['radius_catchment'])
     @query.analytics = resultats_insee
+    p resultats_insee
     @query.save
     redirect_to queries_path
     session['query_id'] = @query.id

@@ -8,6 +8,21 @@
   </div>
     <div style="width: 60%; height: 600px; position: relative;">
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
+        <div id="setting-button"  onclick="openset()">
+          <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
+        </div>
+        <div id="show-setting" class="infohide">
+          <p style="text-align:right; margin:0" ><i id="setting-close" onclick="closeset()" class="fa fa-close"></i></p>
+          <h3>Settings : </h3>
+          <div id="setting-current">
+<div id="slidecontainer">
+  <input type="range" min="0" max="100" oninput="heatmap.set('opacity', (this.value/100));" value="50">
+  <input type="range" min="0" max="100" id="sliderp" value="35">
+</div>
+          </div>
+        </div>
+
+
         <div id="infos-button"  onclick="openinf()">
           <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
         </div>
@@ -28,6 +43,7 @@
         data-long="<%= session["search_coordinates"][1] %>"
         data-zoom="14"
         data-radius="<%= session['radius_catchment'] %>"
+        data-radiussearch="<%= session['radius_search'] %>"
       ></div>
     </div>
 
@@ -35,6 +51,9 @@
 </div>
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
+
+
+
     let heatmap = null;
     function metersPerPixel(map) {
       return (Math.cos(<%= session["search_coordinates"][0] %> * Math.PI/180) * 2 * Math.PI * 6378137 / (256 * Math.pow(2, map.getZoom())));
@@ -57,7 +76,6 @@
         heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
       }
 
-
     function addcompetitors(map) {
       let markers = [];
       let points = [];
@@ -74,10 +92,7 @@
       <% end %>
       map.fitBounds(bounds);
 
-
-
     var radius = Math.floor(<%= session['radius_catchment'] %> / metersPerPixel(map));
-
         heatmap = new google.maps.visualization.HeatmapLayer({
           data: points,
           radius: radius,
@@ -86,11 +101,10 @@
         });
         changeGradient();
       map.addListener('zoom_changed', function() {
-
         var radius = Math.floor(heatmap.radiusCatch / metersPerPixel(map));
         changeRadius(radius);
-        console.log(radius);
       });
+
     }
 
   <% end %>
