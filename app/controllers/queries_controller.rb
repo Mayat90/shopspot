@@ -13,6 +13,7 @@ class QueriesController < ApplicationController
 
     hash_request = {type: session['type'], radius_search: session['radius_search'], query_id: Query.last.id}
     hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
+
     @competitors_search = Competitor.find(hash_request)
     @competitors = []
     @competitors_search.each do |competitor|
