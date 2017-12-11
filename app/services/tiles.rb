@@ -31,6 +31,9 @@ class Tiles
     @revenus = data["ind_srf"] / data["ind_c"] if data["ind_srf"] != "NA" #Revenus (&euro;)
     @basrevenus = data["men_basr"] / data["men"]*100 #Bas revenus (% ménages)
     @basrevenus_m2 = data["men_basr"] / data["surf"] #Bas revenus (ménages / km&sup2;)
+    # @menloc= (1-data["men_prop"]/(data["men"]))*100 #Locataires (% ménages)
+    # @pocc5 =data["men_occ5"]/data["men*100"] #Résidants + de 5 ans (% ménages)
+
   end
 
   def self.calculate(center, radius)
@@ -49,6 +52,8 @@ population = 0
 res65 = 0
 res25 = 0
 revenus = []
+menloc = 0
+pocc5 = 0
 i = 0
     (cometiesXYs[:xtile_start]..cometiesXYs[:xtile_end]).each do |x|
       (cometiesXYs[:ytile_start]..cometiesXYs[:ytile_end]).each do |y|
@@ -61,6 +66,8 @@ i = 0
               population += til.population
               res65 += til.population * til.res65 / 100
               res25 += til.population * til.res25 / 100
+              # menloc += til.population * til.menloc / 100
+              # pocc5 += til.population * til.pocc5 / 100
               revenus << til.revenus
               i+=1
             end
@@ -71,6 +78,8 @@ i = 0
     revenus = revenus.inject{ |sum, el| sum + el } / revenus.size
     res25 = (res25 / population * 100).round
     res65 = (res65 / population * 100).round
+    menloc = (menloc / population * 100).round
+    pocc5 = (pocc5 / population * 100).round
     res2565 = 100 - res25 - res65
 
     return {population: population.round, revenus: revenus.round,

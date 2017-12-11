@@ -20,14 +20,8 @@ class CompetitorsController < ApplicationController
         competitor.number_rating = results["result"]["reviews"].count
       end
       competitor.save
-    end
-  end
 
-  def ajax
-    hash_request = {type: session['type'], radius_search: session['radius_search'], query_id: Query.last.id}
-    hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
-    @competitors = Competitor.find(hash_request)
-    render json: @competitors
+    end
   end
 
   private
