@@ -1,9 +1,10 @@
 <%= simple_form_for(@query, :method => :post, :url => queries_path ) do |f| %>
   <%= f.error_notification %>
 
-    <%= f.input :address, label: 'Address', placeholder: '1 rue Charlemagne, Lyon', value: "1 charlemagne, lyon"  %>
-    <%= f.input :activity, label: 'Activity', id: 'form2', placeholder: 'bakery', value: "boulangerie" %>
-    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000', id: 'form32', value: "1000" %>
+    <%= f.input :address, label: 'Address', placeholder: '1 rue Charlemagne, Lyon', value: "1 charlemagne, lyon" %>
+
+    <%= f.input :activity, label: 'Activity', id: 'form2', placeholder: 'bakery', value: "boulangerie", input_html: { class: 'select-dropdown dropdown-trigger' }, wrapper_html: { class: 'select-wrapper' } %>
+    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000', id: 'form32', value: "1000", type: "range" %>
     <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200', id: 'form8', value: "500" %>
     <%= f.button :button, "Find my results", class: 'btn btn-primary', id: 'btn-form-homepage'  %>
 
