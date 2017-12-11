@@ -1,4 +1,5 @@
 class Query < ApplicationRecord
+  serialize :analytics, Hash
   validates :address, presence: true
   validates :activity, presence: true
   validates :radius_search, presence: true

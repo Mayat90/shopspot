@@ -1,30 +1,30 @@
 #home-form {
-  background: #FAFAFA;
-  width: 300px;
-  margin: 20px auto;
-  height: 70vh;
-  display: flex;
-  flex-direction: column;
+  background: #F4F4F4;
   border-radius: 3px;
   box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+#home-form:hover {
+  background: #FAFAFA;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+  transition: all .7s linear;
+}
+
+#homepage-form {
+  display: flex;
   align-items: center;
   justify-content: space-around;
+  height: 100%
 }
 
 #container-form {
-  margin: 40px;
+  margin: 20px;
   width: 250px;
-  h3 {
-    font-size: 30px;
-  }
 }
 
-.new_query {
-  align-items: center;
-}
-
-.btn-form-homepage {
-background: #FAFAFA;
+#btn-form-homepage {
+  background: $blue;
+  width: 100%;
 }
 
 #getstarted {
@@ -38,4 +38,34 @@ background: #FAFAFA;
 
 .control-label {
   font-size: 12px;
+}
+
+.input-field {
+  margin-bottom: 25px;
+}
+
+.input-field label {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+#query_address, #query_activity, #query_radius_search, #query_radius_catchment_area {
+  font-size: 1.5rem;
+}
+
+textarea.materialize-textarea {
+  font-size: 1.5rem !important;
+}
+
+input:focus + label {
+  color: $blue !important;
+}
+
+input:focus {
+    border-bottom: 1px solid $blue !important;
+}
+
+form abbr {
+  text-decoration: none;
+  border-bottom: 0 !important;
 }

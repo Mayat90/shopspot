@@ -4,7 +4,6 @@ class QueriesController < ApplicationController
   # GET /queries
   # GET /queries.json
   def index
-
     session['address']= params["address"] if params["address"]
     session['type']= params["type"] if params["type"]
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
@@ -14,8 +13,36 @@ class QueriesController < ApplicationController
 
     hash_request = {type: session['type'], radius_search: session['radius_search'], query_id: Query.last.id}
     hash_request[:location] = {latitude: session['search_coordinates'][0], longitude: session['search_coordinates'][1]}
-    @competitors = Competitor.find(hash_request)
-    p @competitors
+
+    @competitors_search = Competitor.find(hash_request)
+    @competitors = []
+    @competitors_search.each do |competitor|
+      distance = Tiles.distance((session['search_coordinates']), [competitor.location["lat"], competitor.location["lng"]])
+      if distance <= session['radius_search']
+        @competitors << competitor #competitors dans la search_area
+      end
+    end
+
+    @markers = Gmaps4rails.build_markers(@competitors) do |competitor, marker|
+      marker.lat competitor.location["lat"]
+      marker.lng competitor.location["lng"]
+        # marker.infowindow content_info_window(user)
+        # marker.infowindow render_to_string(partial: "/shared/info_window", locals: { user: user})
+    end
+        # marker de la recherche
+        # @markers << {lat: @search_address[0], lng: @search_address[1], infowindow: "Your Search </br>#{session['address']}"}
+    @zoom = 14
+    @polygones = Tiles.perform(session['search_coordinates'], @zoom)[:poly]
+    @query = Query.last
+
+  end
+
+  def population
+    lat = params["lat"].to_f
+    long = params["long"].to_f
+    zoom = params["zoom"].to_i
+    @polygones = Tiles.perform([lat, long ], zoom)[:poly]
+
   end
 
   # GET /queries/1
@@ -45,13 +72,13 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
-    session['address'] = @query[:address]
-    session['type']= @query[:activity]
+    session['address'] = @query.address
+    session['type']= @query.activity
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
-    session['radius_search'] = @query[:radius_search]
-    session['radius_catchment'] = @query[:radius_catchment_area]
+    session['radius_search'] = @query.radius_search
+    session['radius_catchment'] = @query.radius_catchment_area
     resultats_insee = Tiles.calculate(session['search_coordinates'], session['radius_catchment'])
-    p resultats_insee
+    @query.analytics = resultats_insee
     @query.save
     redirect_to queries_path
     session['query_id'] = @query.id
