@@ -4,6 +4,7 @@ class QueriesController < ApplicationController
   # GET /queries
   # GET /queries.json
   def index
+
     session['address']= params["address"] if params["address"]
     session['type']= params["type"] if params["type"]
     session['search_coordinates'] = Geocoder.coordinates(session['address'])
@@ -15,12 +16,18 @@ class QueriesController < ApplicationController
 
     @competitors_search = Competitor.find(hash_request)
     @competitors = []
+    @mycompetitors =[]
     @competitors_search.each do |competitor|
+      p "**************************************************************"
+      p competitor
       distance = Tiles.distance((session['search_coordinates']), [competitor.location["lat"], competitor.location["lng"]])
       if distance <= session['radius_search']
         @competitors << competitor #competitors dans la search_area
       end
     end
+      p "==================================================================="
+      p @competitors.to_json
+      session['competitors'] = @competitors.to_json
 
     @markers = Gmaps4rails.build_markers(@competitors) do |competitor, marker|
       marker.lat competitor.location["lat"]
@@ -34,13 +41,6 @@ class QueriesController < ApplicationController
 
   end
 
-  def population
-    lat = params["lat"].to_f
-    long = params["long"].to_f
-    zoom = params["zoom"].to_i
-    @polygones = Tiles.perform([lat, long ], zoom)[:poly]
-
-  end
 
   # GET /queries/1
   # GET /queries/1.json
