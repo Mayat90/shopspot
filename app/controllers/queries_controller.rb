@@ -3,6 +3,7 @@ class QueriesController < ApplicationController
   before_action :authenticate_user!, only: :show
 
   def index
+    @queries = []
     if session['address']
       @query = load_session
       @competitors = JSON.parse(@query.competitors_json)
@@ -18,12 +19,8 @@ class QueriesController < ApplicationController
 
     if current_user
       @queries = current_user.queries.reverse
-      # @queries = []
-
-      # @result.each do |query|
-      #   @queries << {query: query, competitors: }
-      # end
-      # # @competitors = JSON.parse(@query.competitors_json)
+    elsif session['address']
+      @queries << @query
     else
       redirect_to root_path
     end
@@ -33,7 +30,6 @@ class QueriesController < ApplicationController
   # GET /queries/1
   # GET /queries/1.json
   def show
-    @query = load_session
     competitors_parse = JSON.parse(@query.competitors_json)
     if competitors_parse.nil? == false
       competitors_parse.each do |competitor_parse|
