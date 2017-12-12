@@ -1,5 +1,6 @@
+<%= render 'shared/flashes' %>
 <div id="homepage-top">
-  <h1>The best place for your business</h1>  
+  <h1>The best place for your business</h1>
   <%= image_tag('logoblack.png', style: 'height:95px;width:auto;') %>
 </div>
 
@@ -9,8 +10,14 @@
       <div class="col-xs-12 col-sm-6" style="height: 80vh;">
         <div id="homepage-expl">
           <h3>ShopSpot helps you to find the best place to start your activity. </br></br> Get maps and analytics about people and competition around you.</h3>
-          <a href="#" class="btn btn-primary" id="btn-sign-up">Sign up for free</a>
-        </div>
+          <% if current_user %>
+            <%= link_to "Last search", queries_path, { :class=>"btn btn-primary", :id=>"btn-sign-up" }  %>
+          <% else %>
+            <%= link_to "sign in", new_user_session_path, { :class=>"btn btn-primary", :id=>"btn-sign-up" }  %>
+            <%= link_to "Sign up for free", new_user_registration_path, { :class=>"btn btn-primary", :id=>"btn-sign-up" }  %>
+          <% end %>
+<!--           <a href="#" class="btn btn-primary" id="btn-sign-up">Sign up for free</a>
+ -->        </div>
       </div>
       <div class="col-xs-12 col-sm-6" style="height: 80vh;">
         <div id="homepage-form">
@@ -38,33 +45,33 @@
             <%= image_tag("exp-shop.png", style: 'width:100%;height:auto;' )%>
           </div>
           <div class="card-description">
-            <h4><b>Your project</b></h4> 
+            <h4><b>Your project</b></h4>
             <p>Indicate your activity and the zone where you want to start your business</p>
           </div>
         </div>
-      </div> 
+      </div>
       <div class="col-xs-12 col-sm-4">
         <div class="exp">
           <div class="exp-photo">
             <%= image_tag("exp-map.png", style: 'height:100%;width:auto;') %>
-          </div>          
+          </div>
           <div class="card-description">
-            <h4><b>Map</b></h4> 
+            <h4><b>Map</b></h4>
             <p>See where are your competitors and the best zones for you</p>
           </div>
         </div>
-      </div>  
+      </div>
       <div class="col-xs-12 col-sm-4">
         <div class="exp">
           <div class="exp-photo">
             <%= image_tag("analytics.png", style: 'height:100%;width:auto;') %>
           </div>
           <div class="card-description">
-            <h4><b>Analytics</b></h4> 
+            <h4><b>Analytics</b></h4>
             <p>Get all analytics about population, competitors and compare different zones</p>
-          </div> 
+          </div>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </div>

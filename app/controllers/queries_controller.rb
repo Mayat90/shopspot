@@ -1,29 +1,32 @@
 class QueriesController < ApplicationController
   before_action :set_query, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: :show
 
-  # GET /queries
-  # GET /queries.json
   def index
-    # session['address']= params["address"] if params["address"]
-    # session['type']= params["type"] if params["type"]
-    # session['search_coordinates'] = Geocoder.coordinates(session['address'])
-    # session['radius_search'] = params["radius_search"] if params["radius_search"]
-    # session['radius_catchment'] = params["radius_catchment"] if params["radius_catchment"]
-
-# session['address'] ? (@query = load_session) : redirect_to new
-
-@query = load_session
-@competitors = JSON.parse(@query.competitors_json)
-    @markers = Gmaps4rails.build_markers(@competitors) do |competitor, marker|
-      marker.lat competitor["lat"]
-      marker.lng competitor["lng"]
-        # marker.infowindow content_info_window(user)
-        # marker.infowindow render_to_string(partial: "/shared/info_window", locals: { user: user})
+    if session['address']
+      @query = load_session
+      @competitors = JSON.parse(@query.competitors_json)
+      if current_user
+        if current_user.queries.count != 0
+          @query.user = current_user
+          @query.save
+          p "session save to db"
+        end
+          session_delete
+      end
     end
-        # marker de la recherche
-        # @markers << {lat: @search_address[0], lng: @search_address[1], infowindow: "Your Search </br>#{session['address']}"}
-    # @query = Query.last
 
+    if current_user
+      @queries = current_user.queries.reverse
+      # @queries = []
+
+      # @result.each do |query|
+      #   @queries << {query: query, competitors: }
+      # end
+      # # @competitors = JSON.parse(@query.competitors_json)
+    else
+      redirect_to root_path
+    end
   end
 
 
@@ -82,8 +85,12 @@ class QueriesController < ApplicationController
     resultats_insee = Tiles.calculate([@query.latitude, @query.longitude], @query.radius_catchment_area)
     @query.analytics = resultats_insee
 
-save_session(@query)
-    # @query.save
+    if current_user
+      @query.user = current_user
+      @query.save
+    else
+      save_session(@query)
+    end
     redirect_to queries_path
   end
 
@@ -148,5 +155,15 @@ save_session(@query)
        query.competitors_json = session['competitors']
        p "session loaded"
        query
+    end
+    def session_delete
+      session.delete('address')
+      session.delete('activity')
+      session.delete('radius_search')
+      session.delete('radius_catchment_area')
+      session.delete('latitude')
+      session.delete('longitude')
+      session.delete('analytics')
+      session.delete('competitors')
     end
 end

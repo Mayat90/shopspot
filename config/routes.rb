@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   resources :queries do
     resources :competitors, only: [:index]
   end

@@ -1,7 +1,12 @@
 <%= render 'shared/navbar' %>
+
 <div class="indexcontent">
   <div class="indexcards">
-    <%= render 'shared/result_card' %>
+      <% @queries.each do |query|
+        @query = query
+        @competitors = JSON.parse(@query.competitors_json) %>
+        <%= render 'shared/result_card' %>
+      <% end %>
     <button class="btn btn-primary" id="btn-newaddress">Compare with new address</button>
   </div>
   <div class="indexmap">
