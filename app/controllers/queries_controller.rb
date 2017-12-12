@@ -75,8 +75,8 @@ class QueriesController < ApplicationController
     @competitors_search = Competitor.find(hash_request)
     @competitors = []
     @competitors_search.each do |competitor|
-      distance = Tiles.distance((loc), [competitor.location["lat"], competitor.location["lng"]])
-      @competitors << {"name" => competitor.name, "place_id" => competitor.place_id, "lat" => competitor.location["lat"], "lng" => competitor.location["lng"]} if distance <= @query.radius_search #competitors dans la search_area
+      distance = Tiles.distance((loc), [competitor["lat"], competitor["lng"]])
+      @competitors << competitor if distance <= @query.radius_search #competitors dans la search_area
     end
     @query.competitors_json = @competitors.to_json
     resultats_insee = Tiles.calculate([@query.latitude, @query.longitude], @query.radius_catchment_area)
@@ -146,7 +146,6 @@ save_session(@query)
        my_hash = JSON.parse(session['analytics'])
        query.analytics = my_hash.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
        query.competitors_json = session['competitors']
-       query.['query_id'] = 0
        p "session loaded"
        query
     end
