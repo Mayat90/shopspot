@@ -1,8 +1,14 @@
 <%= render 'shared/navbar' %>
+<%= render 'shared/flashes' %>
 <div class="myflex">
   <div class="mygrow">
 
-    <%= render 'shared/result_card' %>
+    <% @queries.each do |query|
+      @query = query
+      @competitors = JSON.parse(@query.competitors_json)
+      p @query %>
+      <%= render 'shared/result_card' %>
+    <% end %>
 
 
   </div>
