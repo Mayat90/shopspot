@@ -1,10 +1,8 @@
 <%= render 'shared/navbar' %>
-  <div id="showtop">
+<div id="showcontent">
+  <div id="showleft">    
     <div id=showsearch>
       <%= render 'shared/show_search' %>
-    </div>
-    <div id="showcard">
-      <%= render 'shared/show_card' %>
     </div>
     <div id="showmapframe">
       <div id="showmapcontent">
@@ -12,6 +10,18 @@
       </div>
     </div>
   </div>
+  <div id="showcard">
+    <%= render 'shared/show_card' %>
+  </div>
+  <div id="showright">
+    <div style="text-align: center"><%= link_to 'Download Pdf', query_path(@query, format: :pdf), class: 'btn btn-primary', id:'btn-show' %> </div>
+    <div id="showstreetframe">
+      <div id="showstreetcontent">
+        <%= street_view(session['search_coordinates']) %>
+      </div>
+    </div>
+  </div>
+</div>
 
           <p>Take action and realize your dream? Contact right here</p>
           <%= link_to 'View competition', query_competitors_path(@query), class: 'btn btn-primary', id:'btn-show' %>
@@ -23,10 +33,9 @@
       </div>
       <div class="col-xs-12 col-sm-6">
           
-      <div style="text-align: center"><%= link_to 'Download Pdf', query_path(@query, format: :pdf), class: 'btn btn-primary', id:'btn-show' %> </div>
-      </div>
+
           <div class="">
-            <%= street_view(session['search_coordinates']) %>
+            
           </div>
   </div>
 </div>
