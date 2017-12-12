@@ -349,8 +349,10 @@ var mapStyle = [
       .then((response) => response.json())
       .then((tiles) => {
         delpoly();
+    const opacity = document.getElementById('sliderp').value;
         tiles.forEach((tile) => {
           poly = new google.maps.Polygon(tile);
+          poly.setOptions({'fillOpacity': opacity /100})
           poly.setMap(map);
           addListenersOnPolygon(poly);
           polya.push(poly);

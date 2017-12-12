@@ -1,6 +1,6 @@
 .rcframe {
-  height: 340px;
-  color: #777;
+  height: 420px;
+  color: #555;
   position: relative;
   background: #FAFAFA;
   margin: 10px;
@@ -11,9 +11,8 @@
 }
 
 .rccontent {
-  background: #F9F9F9;
+  background: white;
   position: absolute;
-  padding: 10px;
   line-height: 90%;
   width: 90%;
   height: 90%;
@@ -29,21 +28,17 @@
 }
 
 .rcresults {
-  display: flex;
 }
 
 .rctitle {
   text-align: center;
   line-height: 120%;
+  border-bottom: 1px solid #555;
   p {
   font-size: 17px;
   }
 }
 
-.rcpop {
-  width: 50%;
-
-}
 
 #rcpopgraph {
   margin-top: 20px;
@@ -107,15 +102,6 @@
     color: $blue;
     font-size: 15px;
   }
-}
-
-#rclinks:hover {
-  position: absolute;
-  bottom: 10px;
-}
-
-.rccomp {
-  width: 50%;
 }
 
 .comp {
