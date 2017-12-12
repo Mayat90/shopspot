@@ -57,5 +57,5 @@ class Competitor < ApplicationRecord
     end
     return competitors
   end
-
+end
 

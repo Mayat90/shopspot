@@ -1,12 +1,18 @@
 <%= render 'shared/navbar' %>
-<div class="myflex">
-  <div class="mygrow">
-
+<div class="indexcontent">
+  <div class="indexcards">
     <%= render 'shared/result_card' %>
-
-
+    <button class="btn btn-primary" id="btn-newaddress">Compare with new address</button>
   </div>
-    <div style="width: 75%; height: 600px; position: relative;">
+  <div class="indexmap">
+    <div id="mapcaption" style="height: 100px; position: relative;">
+      <div class="stacked-bar-graph">
+        <span style="width:30%" class="bar-3">Pertinence</span>
+        <span style="width:30%" class="bar-1"> <i class="fa fa-users" aria-hidden="true"></i> Population</span>
+        <span style="width:30%" class="bar-2">Competitors</span>
+      </div>
+    </div>
+    <div style="height: 600px; position: relative;">
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
         <div id="setting-button"  onclick="openset()">
           <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
@@ -15,28 +21,29 @@
           <p style="text-align:right; margin:0" ><i id="setting-close" onclick="closeset()" class="fa fa-close"></i></p>
           <h3>Settings : </h3>
           <div id="setting-current">
-<div id="slidecontainer">
-  <input type="range" min="0" max="100" oninput="heatmap.set('opacity', (this.value/100));" value="50">
-  <input type="range" min="0" max="100" id="sliderp" value="35">
-</div>
+            <div id="slidecontainer">
+              <input type="range" min="0" max="100" oninput="heatmap.set('opacity', (this.value/100));" value="50">
+              <input type="range" min="0" max="100" id="sliderp" value="35">
+            </div>
           </div>
         </div>
-
-
-        <div id="infos-button"  onclick="openinf()">
-          <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
-        </div>
-        <div id="show-content" class="infohide">
-          <p style="text-align:right; margin:0" ><i id="infos-close" onclick="closeinf()" class="fa fa-close"></i></p>
-          <h3>Informations : </h3>
-          <div id="infos-current">
-            <p><b>Population : </b> <span id="pop">--</span> habitants</p>
-            <p><b>Revenus : </b> <span id="rev">--</span> €</p>
-            <p><b>65 ans et plus :</b> <span id="res65">--</span> %</p>
-            <p><b>25 ans et moins :</b> <span id="res25">--</span> %</p>
+          <div id="infos-button"  onclick="openinf()">
+            <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
+          </div>
+          <div id="show-content" class="infohide">
+            <p style="text-align:right; margin:0" ><i id="infos-close" onclick="closeinf()" class="fa fa-close"></i></p>
+            <h3>Informations : </h3>
+            <div id="infos-current">
+              <p><b>Population : </b> <span id="pop">--</span> habitants</p>
+              <p><b>Revenus : </b> <span id="rev">--</span> €</p>
+              <p><b>65 ans et plus :</b> <span id="res65">--</span> %</p>
+              <p><b>25 ans et moins :</b> <span id="res25">--</span> %</p>
+            </div>
           </div>
         </div>
+       
       </div>
+
       <div id="map"
         style="width: 100%; height: 600px;"
         data-lat="<%= @query["latitude"] %>"
@@ -46,7 +53,6 @@
         data-radiussearch="<%= @query['radius_search'] %>"
       ></div>
     </div>
-
   </div>
 </div>
 <% content_for(:after_js) do %>
