@@ -11,9 +11,8 @@
 }
 
 .rccontent {
-  background: #F9F9F9;
+  background: white;
   position: absolute;
-  padding: 10px;
   line-height: 90%;
   width: 90%;
   height: 90%;
@@ -103,10 +102,6 @@
     color: $blue;
     font-size: 15px;
   }
-}
-
-.rccomp {
-  width: 50%;
 }
 
 .comp {
