@@ -3,7 +3,7 @@
   color: #555;
   position: relative;
   background: #FAFAFA;
-  margin: 10px;
+  margin: 0 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,19 +11,15 @@
 }
 
 .rccontent {
-  background: white;
   position: absolute;
   line-height: 90%;
   width: 90%;
   height: 90%;
   h3 {
-    font-size: 15px;
+    font-size: 2rem;
     font-weight: bold;
     color: #555;
     margin-bottom: 12px;
-  }
-  p {
-    font-size: 15px;
   }
 }
 
@@ -35,7 +31,7 @@
   line-height: 120%;
   border-bottom: 1px solid #555;
   p {
-  font-size: 17px;
+  font-size: 2rem;
   }
 }
 
@@ -46,7 +42,6 @@
   height: 70px;
   text-align: center;
     p {
-    font-size: 13px;
     font-height: 300;
     color: #333;
   }
@@ -100,7 +95,7 @@
   a {
     text-decoration: none;
     color: $blue;
-    font-size: 15px;
+    font-size: 2rem;
   }
 }
 

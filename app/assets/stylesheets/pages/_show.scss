@@ -1,28 +1,31 @@
-.buttons-next-action{
-  padding: 20px;
-  margin: 0px, 20px;
-}
-
-#showtop {
-  height: calc(100vh - 70px);
+#showcontent {
   display: flex;
+  height: calc(100vh - 70px);
+  justify-content: space-between;
+  margin: 10px 30px;
 }
 
-#showsearch {
- width: 15%;
+#showleft {
+  width: 400px;
 }
 
 #showcard {
   width: 50%;
 }
 
+#showright {
+  flex-grow: 1;
+}
+.buttons-next-action{
+  padding: 20px;
+  margin: 0px, 20px;
+}
+
 #showmapframe {
-  width: 35%;
   color: #555;
   background: #FAFAFA;
   margin: 10px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
-  height: calc(100vh - 70vh);
 }
 
 #showmapcontent {

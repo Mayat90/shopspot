@@ -4,38 +4,78 @@
       <p><strong>Your results</strong></p>
       <p><%= @query.address %></p> 
     </div>
+
     <div id="scresults">
-      <p><strong>On catchment area</strong></p>
-      <p>Population</p>
-      <p><i class="fa fa-users" aria-hidden="true"></i> Population : <%= @query.analytics[:population] %> </p>
-      <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2) %> /10m2</p>
-      <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <%= (@query.analytics[:res25]*12.5 + @query.analytics[:res2565]*45 + @query.analytics[:res65]*72).fdiv(100).round(1) %> years old</p>
-      <div id="scpopgraph">
-        <div id="rcpopgraphhead">
-          <div id="rcpopgraphhead1"><p><%= @query.analytics[:res25] %> %</p></div>
-          <div id="rcpopgraphhead2"><p><%= @query.analytics[:res2565] %> %</p></div>
-          <div id="rcpopgraphhead3"><p><%= @query.analytics[:res65] %> %</p></div>
+
+      <div id="scresleft">      
+        <h3>On catchment area<h3>
+        <div id="scpopcatchment">
+          <p>Population</p>
+          <p><i class="fa fa-users" aria-hidden="true"></i> Population : <%= @query.analytics[:population] %> </p>
+          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2) %> /10m2</p>
+          <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <%= @query.analytics[:revenus] %>€ / tax-unit</p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <%= (@query.analytics[:res25]*12.5 + @query.analytics[:res2565]*45 + @query.analytics[:res65]*72).fdiv(100).round(1) %> years old</p>
+          <div id="scpopgraph">
+            <div id="rcpopgraphhead">
+              <div id="rcpopgraphhead1"><p><%= @query.analytics[:res25] %> %</p></div>
+              <div id="rcpopgraphhead2"><p><%= @query.analytics[:res2565] %> %</p></div>
+              <div id="rcpopgraphhead3"><p><%= @query.analytics[:res65] %> %</p></div>
+            </div>
+            <div id="rcpopgraphres">
+              <div id="rcpopgraphres1" style='height:<%= @query.analytics[:res25]%>%';></div>
+              <div id="rcpopgraphres2" style='height:<%= @query.analytics[:res2565]%>%';></div>
+              <div id="rcpopgraphres3" style='height:<%= @query.analytics[:res65]%>%';></div>
+            </div>
+            <div id="rcpopgraphbot">
+              <div id="rcpopgraphbot1"><p>25 -</p></div>
+              <div id="rcpopgraphbot2"><p>25 - 65</p></div>
+              <div id="rcpopgraphbot3"><p>65 +</p></div>
+            </div>
+          </div>
         </div>
-        <div id="rcpopgraphres">
-          <div id="rcpopgraphres1" style='height:<%= @query.analytics[:res25]%>%';></div>
-          <div id="rcpopgraphres2" style='height:<%= @query.analytics[:res2565]%>%';></div>
-          <div id="rcpopgraphres3" style='height:<%= @query.analytics[:res65]%>%';></div>
-        </div>
-        <div id="rcpopgraphbot">
-          <div id="rcpopgraphbot1"><p>25 -</p></div>
-          <div id="rcpopgraphbot2"><p>25 - 65</p></div>
-          <div id="rcpopgraphbot3"><p>65 +</p></div>
+        <div id="sccomp">
+          <p>Competitors</p>
+          <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : TOUPDATE </p>
+          <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : TOUPDATE </p>
+          <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : TOUPDATE </p>         
         </div>
       </div>
-      <p>Revenues</p>
-      <p><i class="fa fa-users" aria-hidden="true"></i> Revenues : <%= @query.analytics[:revenus] %>€ / person</p>
-      <p>Competitors</p>
-      <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : 27 </p>
-      <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : 3594 </p>
-      <p><strong>On the city</strong></p>
-      <p>Population</p>
-      
-    </div>
 
+      <div id="scresright">
+        <h3>On city<h3>
+        <div id="scpopcity">
+          <p>Population</p>
+          <p><i class="fa fa-users" aria-hidden="true"></i> Population : TOUPDATE </p>
+          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : TOUPDATE</p>
+          <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <%= @query.analytics[:revenus] %>€ / tax-unit</p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : TOUPDATE</p>
+          <div id="scpopgraph">
+            <div id="rcpopgraphhead">
+              <div id="rcpopgraphhead1"><p>TU %</p></div>
+              <div id="rcpopgraphhead2"><p>TU %</p></div>
+              <div id="rcpopgraphhead3"><p>TU %</p></div>
+            </div>
+            <div id="rcpopgraphres">
+              <div id="rcpopgraphres1" style='height:<%= @query.analytics[:res25]%>%';></div>
+              <div id="rcpopgraphres2" style='height:<%= @query.analytics[:res2565]%>%';></div>
+              <div id="rcpopgraphres3" style='height:<%= @query.analytics[:res65]%>%';></div>
+            </div>
+            <div id="rcpopgraphbot">
+              <div id="rcpopgraphbot1"><p>25 -</p></div>
+              <div id="rcpopgraphbot2"><p>25 - 65</p></div>
+              <div id="rcpopgraphbot3"><p>65 +</p></div>
+            </div>
+          </div>
+        </div>
+        <div id="insee">
+          <p>Insee analytics</p>
+          <p>Gender <i class="fa fa-mars" aria-hidden="true"></i>
+ : TOUPDATE % | <i class="fa fa-venus" aria-hidden="true"></i> TOUPDATE %
+ </p>
+          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : TOUPDATE</p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : TOUPDATE
+        </div>
+      </div> 
+    </div>
   </div>
 </div>
