@@ -4,6 +4,7 @@
 <div class="indexcontent">
   <div class="indexcards">
       <% @queries.each do |query|
+        p query
         @query = query
         @competitors = JSON.parse(@query.competitors_json) %>
         <%= render 'shared/result_card' %>
@@ -67,8 +68,6 @@
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
-
-
 
     let heatmap = null;
     function metersPerPixel(map) {

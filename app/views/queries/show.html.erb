@@ -1,6 +1,6 @@
 <%= render 'shared/navbar' %>
 <div id="showcontent">
-  <div id="showleft">    
+  <div id="showleft">
     <div id=showsearch>
       <%= render 'shared/show_search' %>
     </div>
@@ -31,6 +31,22 @@
         <%= street_view(@query) %>
       </div>
     </div>
+  </div>
+</div>
+          <p>Take action and realize your dream? Contact right here</p>
+          <%= link_to 'View competition', query_competitors_path(@query), class: 'btn btn-primary', id:'btn-show' %>
+        </div>
+        <div class="buttons-next-action">
+          <p>Not enough potential customers? Surronding cities comparator right here</p>
+          <a class='btn btn-primary' id='btn-show' href='#'>Cities analytics</a>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+
+
+          <div class="">
+
+          </div>
   </div>
 </div>
 

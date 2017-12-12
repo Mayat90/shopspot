@@ -3,6 +3,7 @@ class QueriesController < ApplicationController
   before_action :authenticate_user!, only: :show
 
   def index
+    @queries = []
     if session['address']
       @query = load_session
       @competitors = JSON.parse(@query.competitors_json)
@@ -18,12 +19,8 @@ class QueriesController < ApplicationController
 
     if current_user
       @queries = current_user.queries.reverse
-      # @queries = []
-
-      # @result.each do |query|
-      #   @queries << {query: query, competitors: }
-      # end
-      # # @competitors = JSON.parse(@query.competitors_json)
+    elsif session['address']
+      @queries << @query
     else
       redirect_to root_path
     end
@@ -38,7 +35,7 @@ class QueriesController < ApplicationController
     if competitors_parse.nil? == false
       competitors_parse.each do |competitor_parse|
          competitor = Competitor.new
-         # competitor.query_id = @query.id
+         competitor.query_id = @query.id
          competitor.location = {lat: competitor_parse["lat"], lng: competitor_parse["lng"] }
          competitor.place_id = competitor_parse["place_id"]
          competitor.name = competitor_parse["name"]
@@ -47,6 +44,7 @@ class QueriesController < ApplicationController
          @competitors << competitor
       end
     end
+    @city = City.near([@query.latitude, @query.longitude], 10).first
     respond_to do |format|
       format.html
       format.pdf do
