@@ -3,7 +3,7 @@ module StreetViewHelper
   def street_view(query) #options = {}
     params = {
       location: [query.latitude, query.longitude].join(","),
-      size: "300x600",
+      size: "360x600",
       key: ENV['GOOGLE_API_BROWSER_KEY']
       }#.merge(options)
 
