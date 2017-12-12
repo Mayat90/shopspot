@@ -1,6 +1,6 @@
 <%= render 'shared/navbar' %>
 <div id="showcontent">
-  <div id="showleft">    
+  <div id="showleft">
     <div id=showsearch>
       <%= render 'shared/show_search' %>
     </div>
@@ -17,7 +17,7 @@
     <div style="text-align: center"><%= link_to 'Download Pdf', query_path(@query, format: :pdf), class: 'btn btn-primary', id:'btn-show' %> </div>
     <div id="showstreetframe">
       <div id="showstreetcontent">
-        <%= street_view(session['search_coordinates']) %>
+        <%= street_view(@query) %>
       </div>
     </div>
   </div>
@@ -32,10 +32,10 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-6">
-          
+
 
           <div class="">
-            
+
           </div>
   </div>
 </div>

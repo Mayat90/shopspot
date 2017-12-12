@@ -2,12 +2,12 @@
   <div id="sccontent">
     <div id="sctitle">
       <p><strong>Your results</strong></p>
-      <p><%= @query.address %></p> 
+      <p><%= @query.address %></p>
     </div>
 
     <div id="scresults">
 
-      <div id="scresleft">      
+      <div id="scresleft">
         <h3>On catchment area<h3>
         <div id="scpopcatchment">
           <p>Population</p>
@@ -35,9 +35,9 @@
         </div>
         <div id="sccomp">
           <p>Competitors</p>
-          <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : TOUPDATE </p>
+          <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @competitors.count %> </p>
           <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : TOUPDATE </p>
-          <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : TOUPDATE </p>         
+          <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : TOUPDATE </p>
         </div>
       </div>
 
@@ -45,10 +45,10 @@
         <h3>On city<h3>
         <div id="scpopcity">
           <p>Population</p>
-          <p><i class="fa fa-users" aria-hidden="true"></i> Population : TOUPDATE </p>
-          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : TOUPDATE</p>
-          <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <%= @query.analytics[:revenus] %>€ / tax-unit</p>
-          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : TOUPDATE</p>
+          <p><i class="fa fa-users" aria-hidden="true"></i> Population : <%= @city.population %> </p>
+          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @city.population.fdiv(@city.area*1000000) %></p>
+          <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <%= @city.revenu %>€ / tax-unit</p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Unemployment rate : <%= @city.chomage %></p>
           <div id="scpopgraph">
             <div id="rcpopgraphhead">
               <div id="rcpopgraphhead1"><p>TU %</p></div>
@@ -75,7 +75,7 @@
           <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : TOUPDATE</p>
           <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : TOUPDATE
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div>
