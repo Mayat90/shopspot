@@ -33,7 +33,7 @@ class QueriesController < ApplicationController
   # GET /queries/1
   # GET /queries/1.json
   def show
-    @query = load_session
+    @competitors = []
     competitors_parse = JSON.parse(@query.competitors_json)
     if competitors_parse.nil? == false
       competitors_parse.each do |competitor_parse|
@@ -44,7 +44,7 @@ class QueriesController < ApplicationController
          competitor.name = competitor_parse["name"]
          competitor.activity = @query.activity
          competitor.save
-         competitors << competitor
+         @competitors << competitor
       end
     end
     respond_to do |format|
