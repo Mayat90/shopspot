@@ -13,8 +13,17 @@
     <div id="mapcaption" style="height: 100px; position: relative;">
       <div class="stacked-bar-graph">
         <span style="width:30%" class="bar-3">Pertinence</span>
-        <span style="width:30%" class="bar-1"> <i class="fa fa-users" aria-hidden="true"></i> Population</span>
+        <span style="width:30%" class="bar-1">Population</span>
         <span style="width:30%" class="bar-2">Competitors</span>
+      </div>
+      <div id="mapsettings">
+        <p>Highlight : </p>
+        <div id="setting-current">
+          <div id="slidecontainer">
+            <input type="range" min="0" max="100" oninput="heatmap.set('opacity', (this.value/100));" value="50">
+            <input type="range" min="0" max="100" id="sliderp" value="35">
+          </div>
+        </div>
       </div>
     </div>
     <div style="height: 600px; position: relative;">
@@ -24,13 +33,7 @@
         </div>
         <div id="show-setting" class="infohide">
           <p style="text-align:right; margin:0" ><i id="setting-close" onclick="closeset()" class="fa fa-close"></i></p>
-          <h3>Settings : </h3>
-          <div id="setting-current">
-            <div id="slidecontainer">
-              <input type="range" min="0" max="100" oninput="heatmap.set('opacity', (this.value/100));" value="50">
-              <input type="range" min="0" max="100" id="sliderp" value="35">
-            </div>
-          </div>
+          
         </div>
           <div id="infos-button"  onclick="openinf()">
             <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
@@ -47,19 +50,20 @@
           </div>
         </div>
 
-
-
       <div id="map"
-        style="width: 100%; height: 600px;"
+        style="width: 100%; height: calc(100vh - 190px);"
         data-lat="<%= @query["latitude"] %>"
         data-long="<%= @query["longitude"] %>"
         data-zoom="14"
         data-radius="<%= @query['radius_catchment_area'] %>"
         data-radiussearch="<%= @query['radius_search'] %>"
       ></div>
+      </div>
     </div>
   </div>
 </div>
+
+
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
 
