@@ -3,7 +3,6 @@ class QueriesController < ApplicationController
   before_action :authenticate_user!, only: :show
 
   def index
-    binding.pry
     @queries = []
     if session['address']
       @query = load_session
