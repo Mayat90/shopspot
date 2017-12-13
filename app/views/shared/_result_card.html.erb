@@ -20,8 +20,9 @@
   >
   <div class="rccontent">
     <div class="rctitle">
-      <%= image_tag("five-stars.png", height: '10') %>
-      <p><%= @query.address %></p>
+      <%= image_tag("five-stars.png", height: '12') %>
+      <h3><%= @query.address %></h3>
+
       <div id="icon<%= @query.id %>">
         <i class="fa fa-eye" aria-hidden="true" data-id="<%= @query.id %>"></i>
         <i class="fa fa-eye-slash infohide" aria-hidden="true" data-id="<%= @query.id %>"></i>
@@ -29,14 +30,14 @@
     </div>
     <div class="rcresults">
       <div class="rcpop">
-        <h3 style="color:green;">Population</h3>
+        <h3>Population</h3>
         <p> <i class="fa fa-users" aria-hidden="true"></i> Population : <%= @query.analytics[:population] %> </p>
         <p> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2) %> /10m2</p>
         <p> <i class="fa fa-birthday-cake" aria-hidden="true"></i>
  Middle age : <%= (@query.analytics[:res25]*12.5 + @query.analytics[:res2565]*45 + @query.analytics[:res65]*72).fdiv(100).round(1) %> years old</p>
       </div>
       <div class="rccomp">
-        <h3 style="color:red;">Competitors</h3>
+        <h3>Competitors</h3>
         <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @competitors.count %></p>
         <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <%= @query.analytics[:population].fdiv(@competitors.count).round %></p>
       </div>
