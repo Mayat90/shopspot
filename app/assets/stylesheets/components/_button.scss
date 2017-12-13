@@ -1,12 +1,18 @@
 .btn-primary {
-  background-color: #27B1BE !important;
-  border-color: #27B1BE !important;
+  background-color: $blue !important;
+  border-color: $blue !important;
 }
 #btn-show {
     width: 250px !important;
 }
 
-#btn-newaddress {
-  margin: 10px;
-  width: 100% !important;
+#btn-sign-up {
+  width: 240px;
+  border: 1px solid #fafafa !important;
+  border-radius: 50px;
+  background-color: rgba(200,200,200,0.1) !important;
+}
+
+#btn-sign-up:hover {
+  background-color: rgba(200,200,200,0.3) !important;
 }

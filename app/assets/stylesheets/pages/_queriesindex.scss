@@ -3,8 +3,7 @@
   height: calc(100vh - 70px);
   justify-content: space-between;
   margin: 30px;
-  background: #FAFAFA;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+  background: $lightblue;
 }
 
 .indexcards {
@@ -13,47 +12,45 @@
 
 .indexmap {
   width: 75%;
+  box-shadow: none;
 }
 
 #mapcaption {
   padding: 10px;
   background: white;
   margin-bottom: 30px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
-#mapsettings {
+
+#caption {
   display: flex;
-  width: 100%;
-  height: 50%;
+  align-items: center;
+  margin-bottom: 20px;
+  p {
+    margin-bottom: 0;
+  }
 }
+
+.captionbarpop {
+  width: 100px;
+  height: 16px;
+  background: linear-gradient(to right, #7fdb9b, #349151);
+}
+.captionbarcomp {
+  width: 100px;
+  height: 16px;
+  background: linear-gradient(to right, #f9909b, #c63b49);
+}
+.captionbardeal {
+  width: 100px;
+  height: 16px;
+  background: linear-gradient(to right, #d26e38, #d3a039);
+}
+
+
 
 #setting-current {
   width: 100%;
 }
 
-.stacked-bar-graph {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 50%;
-  color:#F4F4F4;
-  font-weight: 600;
-
-.bar-1 {
-  background: linear-gradient(to right, #CCC, green);
-}
-
-.bar-2 {
-  background: linear-gradient(to right, #ccc, red);
-}
-
-.bar-3 {
-  background: linear-gradient(to right, #CCC, #D57E00);
-}
-
-.bar-1, .bar-2, .bar-3 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-}

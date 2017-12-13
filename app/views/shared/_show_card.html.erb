@@ -4,7 +4,6 @@
       <p><strong>Your results</strong></p>
       <p><%= @query.address %></p>
     </div>
-
     <div id="scresults">
 
       <div id="scresleft">
@@ -46,9 +45,11 @@
         <div id="scpopcity">
           <p>Population</p>
           <p><i class="fa fa-users" aria-hidden="true"></i> Population : <%= @city.population %> </p>
+
           <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @city.population.fdiv(@city.area).round %> / km2</p>
           <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <%= @city.revenu.round %>€ / tax-unit</p>
           <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : </p>
+
           <div id="scpopgraph">
             <div id="rcpopgraphhead">
               <div id="rcpopgraphhead1"><p><%= (@city.age[:jeune].to_f*100).round %> %</p></div>
@@ -69,13 +70,18 @@
         </div>
         <div id="insee">
           <p>Insee analytics</p>
+
           <p>Gender <i class="fa fa-mars" aria-hidden="true"></i>
  : <%= (@city.sexe[:homme].to_f*100).round %> % | <i class="fa fa-venus" aria-hidden="true"></i> <%= (@city.sexe[:femme].to_f*100).round %> %
+
  </p>
           <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <%= @city.chomage*100 %> %</p>
           <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : TOUPDATE
         </div>
       </div>
+      <p>aaa</p>
     </div>
   </div>
 </div>
+
+ 
