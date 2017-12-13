@@ -1,2 +1,31 @@
-<h1>Cities#index</h1>
-<p>Find me in app/views/cities/index.html.erb</p>
+<%= render 'shared/navbar' %>
+<div class="container">
+  <div>
+    <h1>Worst Competitors</h1>
+    <p>Find the worst competitors, get your phone and buy a shop!</p>
+  </div>
+
+  <div>
+    <table class=".table table-sm table-hover">
+      <thead>
+        <th>#</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Phone Number</th>
+        <th>Rating</th>
+      </thead>
+    <% x = 0 %>
+    <% @competitors.each do |competitor| %>
+      <tbody>
+        <tr>
+          <% x = x + 1 %>
+          <th scope="row"><%= x %></th>
+          <td><%= competitor.name %></td>
+          <td><%= competitor.address %></td>
+          <td><%= competitor.phone_number %></td>
+          <td><%= competitor.rating %></td>
+        </tr>
+      </tbody>
+    <% end  %>
+    </table>
+  </div>

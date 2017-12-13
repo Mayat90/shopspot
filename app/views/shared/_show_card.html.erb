@@ -32,16 +32,12 @@
             </div>
           </div>
         </div>
+      </div>
         <div id="sccomp">
           <p>Competitors</p>
                <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @query.competitors_catchment %> </p>
           <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : TOUPDATE </p>
-          <p> <i class="fa fa-star" aria-hidden="true"></i> 
-            
-            
-            
-            
-            : TOUPDATE </p>
+          <p> <i class="fa fa-star" aria-hidden="true"></i>: TOUPDATE </p>
         </div>
       </div>
 
@@ -93,7 +89,7 @@
           <p><i class="fa fa-mars" aria-hidden="true"></i> <strong><%= (@city.sexe[:homme].to_f*100).round %></strong> %  <i class="fa fa-venus" aria-hidden="true" style="margin-left: 25px;"></i> <strong><%= (@city.sexe[:femme].to_f*100).round %></strong> % </p>
           <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= @city.chomage*100 %></strong> %</p>
           <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong>TOUPDATE </strong></p>
-        </div>        
+        </div>
       </div>
 
     </div>
