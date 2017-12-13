@@ -9,32 +9,34 @@
         @competitors = JSON.parse(@query.competitors_json) %>
         <%= render 'shared/result_card' %>
       <% end %>
-    <button class="btn btn-primary" id="btn-newaddress">Compare with new address</button>
+    
   </div>
   <div class="indexmap">
     <div id="mapcaption" style="height: 100px; position: relative;">
-      <div class="stacked-bar-graph">
-        <span style="width:30%" class="bar-3">Pertinence</span>
-        <span style="width:30%" class="bar-1">Population</span>
-        <span style="width:30%" class="bar-2">Competitors</span>
+      <div id="caption">
+        <p>Good deal </p><div class="captionbardeal"></div>
+        <p>Population  </p><div class="captionbarpop"></div>
+        <p>Competitors </p><div class="captionbarcomp"></div>
+        </p>
       </div>
-      <div id="mapsettings">
-        <p>Highlight : </p>
-        <div id="setting-current">
-          <div id="slidecontainer">
-            <input type="range" min="0" max="100" oninput="heatmap.set('opacity', (this.value/100));" value="50">
-            <input type="range" min="0" max="100" id="sliderp" value="35">
-          </div>
-        </div>
+      <div id="formnewrequest">
+        <button class="btn btn-primary" id="btn-newaddress">Compare with new address</button>
       </div>
     </div>
-    <div style="height: 600px; position: relative;">
+    <div style="position: relative;">
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
         <div id="setting-button"  onclick="openset()">
           <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
         </div>
         <div id="show-setting" class="infohide">
           <p style="text-align:right; margin:0" ><i id="setting-close" onclick="closeset()" class="fa fa-close"></i></p>
+          <h3>Settings:</h3>
+          <div id="setting-current">
+          <div id="slidecontainer">
+            <input type="range" min="0" max="100" oninput="heatmap.set('opacity', (this.value/100));" value="50">
+            <input type="range" min="0" max="100" id="sliderp" value="35">
+          </div>
+        </div>
           
         </div>
           <div id="infos-button"  onclick="openinf()">
@@ -53,7 +55,7 @@
         </div>
 
       <div id="map"
-        style="width: 100%; height: calc(100vh - 190px);"
+        style="width: 100%; height: calc(100vh - 230px);"
         data-lat="<%= @query["latitude"] %>"
         data-long="<%= @query["longitude"] %>"
         data-zoom="14"

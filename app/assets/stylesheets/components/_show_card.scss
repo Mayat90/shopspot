@@ -1,7 +1,6 @@
 #scframe {
-  color: #555;
-  background: #FAFAFA;
-  margin: 10px;
+  background: $backcards;
+  margin: 10px 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,19 +8,12 @@
 }
 
 #sccontent {
-  background: #F9F9F9;
+  width: 100%;
+  height: calc(100vh - 100px);
   padding: 10px;
-  line-height: 70%;
+  line-height: 120%;
   h3 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #555;
     margin-bottom: 12px;
-  }
-  p {
-    font-size: 1.8 rem;
-    font-weight: 400;
-    color: #333;
   }
 }
 
@@ -32,24 +24,24 @@
 
 #scresleft, #scresright {
   width: 50%;
-  margin: 0 10px;
+  margin: 0 40px;
 }
 
 #scpopgraph {
-  margin-top: 20px;
-  margin-bottom: 30px;
-  width: 90%;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  width: 70%;
   height: 100px;
   text-align: center;
     p {
-    font-size: 13px;
-    font-height: 300;
-    color: #333;
+    font-size: 1.5rem;
+    font-height: 500;
+    color: #555;
   }
 }
 
 #sctitle {
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #EEE;
   margin: 10px 0;
 }
 

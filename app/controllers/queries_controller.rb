@@ -31,27 +31,29 @@ class QueriesController < ApplicationController
   # GET /queries/1.json
   def show
     @competitors = []
-    competitors_parse = JSON.parse(@query.competitors_json)
-    if competitors_parse.nil? == false
-      competitors_parse.each do |competitor_parse|
-         competitor = Competitor.new
-         competitor.query_id = @query.id
-         competitor.location = {lat: competitor_parse["lat"], lng: competitor_parse["lng"] }
-         competitor.place_id = competitor_parse["place_id"]
-         competitor.name = competitor_parse["name"]
-         competitor.activity = @query.activity
-         competitor.save
-         @competitors << competitor
-      end
-    end
-    @city = City.near([@query.latitude, @query.longitude], 10).first
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "Your market studys",
-          template: "queries/show.html.erb"
-        # à mettre en forme avec Javascript tag pour garder css
+    if @query.competitors_json.nil? == false
+      competitors_parse = JSON.parse(@query.competitors_json)
+      if competitors_parse.nil? == false
+        competitors_parse.each do |competitor_parse|
+           competitor = Competitor.new
+           competitor.query_id = @query.id
+           competitor.location = {lat: competitor_parse["lat"], lng: competitor_parse["lng"] }
+           competitor.place_id = competitor_parse["place_id"]
+           competitor.name = competitor_parse["name"]
+           competitor.activity = @query.activity
+           competitor.save
+           @competitors << competitor
         end
+      end
+      @city = City.near([@query.latitude, @query.longitude], 10).first
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: "Your market studys",
+            template: "queries/show.html.erb"
+          # à mettre en forme avec Javascript tag pour garder css
+          end
+       end
      end
   end
 
