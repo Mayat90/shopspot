@@ -21,7 +21,9 @@
 @import "pages/index";
 
 @import "bootstrap";
-
+.rctitle i {
+  cursor: pointer;
+}
 
 .myflex {
   display:flex;

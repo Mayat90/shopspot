@@ -1,8 +1,31 @@
-<div class="rcframe">
+
+<!-- #<Query id: nil, address: "11 Rue du Doupra, 38080 L'Isle-d'Abeau",
+# activity: "bakery",
+# radius_search: 2000,
+# radius_catchment_area: 500,
+# latitude: 45.6213509,
+# longitude: 5.2326232,
+# analytics: {:population=>1761, :revenus=>20412, :res25=>76, :res2565=>19, :res65=>5},
+# competitors_json: "[{\"lat\":45.6227358,\"lng\":5.231298700000001,\"name\":..."
+ -->
+<div class="rcframe"
+  data-id="query<%= @query.id %>"
+  data-title ="<%= @query.address %>"
+  data-lat ="<%= @query.latitude %>"
+  data-lng ="<%= @query.longitude %>"
+  data-radiussearch ="<%= @query.radius_search %>"
+  data-radius_catchment_area ="<%= @query.radius_catchment_area %>"
+  data-competitors ='<%= @query.competitors_json %>'
+  <% p @competitors %>
+  >
   <div class="rccontent">
     <div class="rctitle">
       <%= image_tag("five-stars.png", height: '10') %>
       <p><%= @query.address %></p>
+      <div id="icon<%= @query.id %>">
+        <i class="fa fa-eye" aria-hidden="true" data-id="<%= @query.id %>"></i>
+        <i class="fa fa-eye-slash infohide" aria-hidden="true" data-id="<%= @query.id %>"></i>
+      </div>
     </div>
     <div class="rcresults">
       <div class="rcpop">
