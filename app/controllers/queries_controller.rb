@@ -57,6 +57,7 @@ class QueriesController < ApplicationController
         # à mettre en forme avec Javascript tag pour garder css
 
       end
+    end
 
       @city = City.near([@query.latitude, @query.longitude], 10).first
       respond_to do |format|
@@ -123,10 +124,8 @@ class QueriesController < ApplicationController
   # DELETE /queries/1.json
   def destroy
     @query.destroy
-    respond_to do |format|
-      format.html { redirect_to queries_url, notice: 'Query was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to queries_path
+
   end
 
   private

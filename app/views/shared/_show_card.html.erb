@@ -75,7 +75,7 @@
  : <%= (@city.sexe[:homme].to_f*100).round %> % | <i class="fa fa-venus" aria-hidden="true"></i> <%= (@city.sexe[:femme].to_f*100).round %> %
 
  </p>
-          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <%= @city.chomage*100 %> %</p>
+          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <%= (@city.chomage*100).round %> %</p>
           <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : TOUPDATE
         </div>
       </div>
@@ -84,4 +84,4 @@
   </div>
 </div>
 
- 
+
