@@ -1,17 +1,15 @@
 #scframe {
   background: $backcards;
   margin: 10px 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 #sccontent {
+  position: relative;
   width: 100%;
-  height: calc(100vh - 100px);
-  padding: 10px;
-  line-height: 120%;
+  height: calc(100vh - 120px);
+  padding: 10px 25px;
+  line-height: 140%;
   h3 {
     margin-bottom: 12px;
   }
@@ -19,19 +17,25 @@
 
 #scresults {
   margin-top: 10px;
-  display: flex
 }
 
-#scresleft, #scresright {
-  width: 50%;
-  margin: 0 40px;
+#screstop, #scresbottom {
+  display: flex;
+}
+
+#screstop {
+  border-bottom: 1px solid #EEE;
+}
+
+#scresbottom {
+  padding-top: 30px;
 }
 
 #scpopgraph {
   margin-top: 30px;
-  margin-bottom: 40px;
-  width: 70%;
-  height: 100px;
+  margin-bottom: 20px;
+  width: 60%;
+  height: 150px;
   text-align: center;
     p {
     font-size: 1.5rem;
@@ -49,6 +53,23 @@
   font-weight: 300;
 }
 
-#scpopcatchment, #sccomp, #scpopcity, #insee {
-  margin-bottom: 40px;
+#scpopcatchment, #sccomp, #insee, #scpopcity {
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+#linktopdf {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  // border-top: 1px solid rgba(0,0,0,0.3);
+  a {
+    font-size: 2.2rem;
+    text-decoration: none;
+    color: $blue;
+    font-size: 1.8rem;
+    font-weight: 500;
+    padding: 3px 0;
+
+  }
 }
