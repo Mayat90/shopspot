@@ -123,10 +123,8 @@ class QueriesController < ApplicationController
   # DELETE /queries/1.json
   def destroy
     @query.destroy
-    respond_to do |format|
-      format.html { redirect_to queries_url, notice: 'Query was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to queries_path
+
   end
 
   private
