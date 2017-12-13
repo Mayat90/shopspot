@@ -4,7 +4,7 @@ module StaticMapHelper
     params = {
       center: [query.latitude, query.longitude].join(","),
       zoom: 16,
-      size: "300x450",
+      size: "360x450",
       # :markers => [location.lat, location.lng].join(","),
       sensor: true,
       key: ENV['GOOGLE_API_BROWSER_KEY']

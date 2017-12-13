@@ -21,9 +21,19 @@
 @import "pages/index";
 
 @import "bootstrap";
+
 .rctitle i {
   cursor: pointer;
 }
+
+p {
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
 
 .myflex {
   display:flex;
@@ -67,9 +77,6 @@
   }
 }
 
-p {
-  font-size: 1.8rem;
-}
 
 #setting-open {
   cursor: pointer;
@@ -99,8 +106,6 @@ p {
   }
 
 }
-
-
 
 .rangeslider,
 .rangeslider__fill {
