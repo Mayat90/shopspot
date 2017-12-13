@@ -68,7 +68,7 @@ class QueriesController < ApplicationController
           end
        end
      end
-  end
+
 
   # GET /queries/new
   def new
