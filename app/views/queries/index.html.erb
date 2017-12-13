@@ -8,7 +8,7 @@
         @competitors = JSON.parse(@query.competitors_json)%>
         <%= render 'shared/result_card' %>
       <% end %>
-    
+
   </div>
   <div class="indexmap">
     <div id="mapcaption" style="height: 100px; position: relative;">
@@ -72,7 +72,6 @@
   </div>
 </div>
 
-
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
 
@@ -81,3 +80,5 @@
 
   <% end %>
 <% end %>
+
+

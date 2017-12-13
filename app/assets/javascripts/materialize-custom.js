@@ -1,0 +1,17 @@
+//= require materialize/global
+//= require materialize/collapsible
+//= require materialize/dropdown
+//= require materialize/materialbox
+//= require materialize/parallax
+//= require materialize/tabs
+//= require materialize/tooltip
+//= require materialize/waves
+//= require materialize/toasts
+//= require materialize/scrollspy
+//= require materialize/forms
+//= require materialize/slider
+//= require materialize/cards
+//= require materialize/chips
+//= require materialize/pushpin
+//= require materialize/buttons
+//= require materialize/tapTarget
