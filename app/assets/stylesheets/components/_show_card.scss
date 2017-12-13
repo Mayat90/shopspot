@@ -15,9 +15,6 @@
   }
 }
 
-#scresults {
-  margin-top: 10px;
-}
 
 #screstop, #scresbottom {
   display: flex;
@@ -28,12 +25,11 @@
 }
 
 #scresbottom {
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
 #scpopgraph {
   margin-top: 30px;
-  margin-bottom: 20px;
   width: 60%;
   height: 150px;
   text-align: center;
@@ -54,7 +50,7 @@
 }
 
 #scpopcatchment, #sccomp, #insee, #scpopcity {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 50%;
 }
 
