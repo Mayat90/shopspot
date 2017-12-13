@@ -36,7 +36,6 @@
               <div id="rcpopgraphbot3"><p>65 +</p></div>
             </div>
           </div>
-
         </div>
         <div id="scpopcity">
           <h3>On city</h3>
@@ -79,10 +78,10 @@
         <div id="insee">
           <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Insee analytics</h3>
           <p><i class="fa fa-mars" aria-hidden="true"></i> <strong><%= (@city.sexe[:homme].to_f*100).round %></strong> %  <i class="fa fa-venus" aria-hidden="true" style="margin-left: 25px;"></i> <strong><%= (@city.sexe[:femme].to_f*100).round %></strong> % </p>
-          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= (@city.chomage*100).round %></strong> %</p>
-        </div>        
-      </div>
 
+          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= (@city.chomage*100).round %></strong> %</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
