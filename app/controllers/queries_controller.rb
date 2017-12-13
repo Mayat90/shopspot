@@ -53,7 +53,8 @@ class QueriesController < ApplicationController
       format.html
       format.pdf do
         render pdf: "Your market studys",
-          template: "queries/show.html.erb"
+          template: "queries/show.html.erb",
+          orientation: "Landscape"
         # à mettre en forme avec Javascript tag pour garder css
       end
     end
