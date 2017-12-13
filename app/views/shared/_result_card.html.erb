@@ -22,12 +22,14 @@
     <div class="rctitle">
       <h3><%= @query.address %></h3>
       <%= image_tag("five-stars.png", height: '12') %>
-      <div id="icon<%= @query.id %>">
-        <i class="fa fa-eye" aria-hidden="true" data-id="<%= @query.id %>"></i>
-        <i class="fa fa-eye-slash infohide" aria-hidden="true" data-id="<%= @query.id %>"></i>
-          <%= link_to "" , query_path(@query),class: "fa fa-trash-o",
-          method: :delete,
-          data: { confirm: "Are you sure?" } %>
+      <div id="icons">
+        <div id="icon<%= @query.id %>" style="display:flex; align-items: right">
+          <i class="fa fa-eye" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
+          <i class="fa fa-eye-slash infohide" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
+            <%= link_to "" , query_path(@query),class: "fa fa-trash-o",
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+        </div>
       </div>
     </div>
     <div class="rcresults">

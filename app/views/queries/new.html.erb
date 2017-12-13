@@ -13,8 +13,8 @@
           <% if current_user %>
             <%= link_to "Last search", queries_path, { :class=>"btn btn-primary", :id=>"btn-sign-up" }  %>
           <% else %>
-            <%= link_to "sign in", new_user_session_path, { :class=>"btn btn-primary", :id=>"btn-sign-up" }  %>
             <%= link_to "Sign up for free", new_user_registration_path, { :class=>"btn btn-primary", :id=>"btn-sign-up" }  %>
+            <%= link_to "Already an account ? Log in", new_user_session_path, { :id=>"homesignin" } %>
           <% end %>
 <!--           <a href="#" class="btn btn-primary" id="btn-sign-up">Sign up for free</a>
  -->        </div>
