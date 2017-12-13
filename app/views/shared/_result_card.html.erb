@@ -15,7 +15,11 @@
       <div class="rccomp">
         <h3 style="color:red;">Competitors</h3>
         <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @competitors.count %></p>
-        <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <%= @query.analytics[:population].fdiv(@competitors.count).round %></p>
+        <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor :
+          <% if @competitors.count != 0  %>
+          <%= @query.analytics[:population].fdiv(@competitors.count).round %>
+          <% end %>
+        </p>
       </div>
     </div>
     <div id="rclinks">

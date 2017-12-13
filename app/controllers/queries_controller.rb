@@ -44,7 +44,9 @@ class QueriesController < ApplicationController
          @competitors << competitor
       end
     end
-    @city = City.near([@query.latitude, @query.longitude], 10).first
+    city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][3]["long_name"]
+    city_geocoded = Geocoder.coordinates(city_name)
+    @city = City.near(city_geocoded,5).first
     respond_to do |format|
       format.html
       format.pdf do

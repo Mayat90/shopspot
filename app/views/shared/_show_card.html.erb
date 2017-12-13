@@ -46,19 +46,19 @@
         <div id="scpopcity">
           <p>Population</p>
           <p><i class="fa fa-users" aria-hidden="true"></i> Population : <%= @city.population %> </p>
-          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @city.population.fdiv(@city.area*1000000) %></p>
-          <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <%= @city.revenu %>€ / tax-unit</p>
-          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Unemployment rate : <%= @city.chomage %></p>
+          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @city.population.fdiv(@city.area).round %> / km2</p>
+          <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <%= @city.revenu.round %>€ / tax-unit</p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : </p>
           <div id="scpopgraph">
             <div id="rcpopgraphhead">
-              <div id="rcpopgraphhead1"><p>TU %</p></div>
-              <div id="rcpopgraphhead2"><p>TU %</p></div>
-              <div id="rcpopgraphhead3"><p>TU %</p></div>
+              <div id="rcpopgraphhead1"><p><%= (@city.age[:jeune].to_f*100).round %> %</p></div>
+              <div id="rcpopgraphhead2"><p><%= (@city.age[:adulte].to_f*100).round %> %</p></div>
+              <div id="rcpopgraphhead3"><p><%= (@city.age[:senior].to_f*100).round %> %</p></div>
             </div>
             <div id="rcpopgraphres">
-              <div id="rcpopgraphres1" style='height:<%= @query.analytics[:res25]%>%';></div>
-              <div id="rcpopgraphres2" style='height:<%= @query.analytics[:res2565]%>%';></div>
-              <div id="rcpopgraphres3" style='height:<%= @query.analytics[:res65]%>%';></div>
+              <div id="rcpopgraphres1" style='height:<%= @city.age[:jeune].to_f*100%>%';></div>
+              <div id="rcpopgraphres2" style='height:<%= @city.age[:adulte].to_f*100%>%';></div>
+              <div id="rcpopgraphres3" style='height:<%= @city.age[:senior].to_f*100%>%';></div>
             </div>
             <div id="rcpopgraphbot">
               <div id="rcpopgraphbot1"><p>25 -</p></div>
@@ -70,9 +70,9 @@
         <div id="insee">
           <p>Insee analytics</p>
           <p>Gender <i class="fa fa-mars" aria-hidden="true"></i>
- : TOUPDATE % | <i class="fa fa-venus" aria-hidden="true"></i> TOUPDATE %
+ : <%= (@city.sexe[:homme].to_f*100).round %> % | <i class="fa fa-venus" aria-hidden="true"></i> <%= (@city.sexe[:femme].to_f*100).round %> %
  </p>
-          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : TOUPDATE</p>
+          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <%= @city.chomage*100 %> %</p>
           <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : TOUPDATE
         </div>
       </div>
