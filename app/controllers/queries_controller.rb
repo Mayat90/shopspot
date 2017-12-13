@@ -6,7 +6,8 @@ class QueriesController < ApplicationController
     @queries = []
     if session['address']
       @query = load_session
-      @competitors = JSON.parse(@query.competitors_json)
+      @query.id = 0
+      # @competitors = JSON.parse(@query.competitors_json)
       if current_user
         if current_user.queries.count != 0
           @query.user = current_user
@@ -156,6 +157,7 @@ class QueriesController < ApplicationController
        p "session loaded"
        query
     end
+
     def session_delete
       session.delete('address')
       session.delete('activity')
@@ -166,4 +168,6 @@ class QueriesController < ApplicationController
       session.delete('analytics')
       session.delete('competitors')
     end
+
 end
+

@@ -4,9 +4,8 @@
 <div class="indexcontent">
   <div class="indexcards">
       <% @queries.each do |query|
-        p query
         @query = query
-        @competitors = JSON.parse(@query.competitors_json) %>
+        @competitors = JSON.parse(@query.competitors_json)%>
         <%= render 'shared/result_card' %>
       <% end %>
     
@@ -21,6 +20,7 @@
       </div>
       <div id="formnewrequest">
         <button class="btn btn-primary" id="btn-newaddress">Compare with new address</button>
+
       </div>
     </div>
     <div style="position: relative;">
@@ -72,57 +72,7 @@
   <%= javascript_tag do %>
 
     let heatmap = null;
-    function metersPerPixel(map) {
-      return (Math.cos(<%= @query["latitude"] %> * Math.PI/180) * 2 * Math.PI * 6378137 / (256 * Math.pow(2, map.getZoom())));
-    }
-    function changeRadius(radius) {
-      heatmap.set('radius', radius * 1.3);
-    }
 
-      function changeGradient() {
-        var gradient = [
-          'rgba(0, 255, 255, 0)',
-          'rgba(0, 127, 255, 1)',
-          'rgba(0, 0, 223, 1)',
-          'rgba(0, 0, 127, 1)',
-          'rgba(191, 0, 31, 1)',
-          'rgba(255, 0, 0, 1)',
-          'rgba(255, 0, 0, 1)',
-          'rgba(255, 0, 0, 1)'
-        ]
-        heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-      }
-
-    function addcompetitors(map) {
-      let markers = [];
-      let points = [];
-      let bounds = new google.maps.LatLngBounds();
-      <% @competitors.each do |competitor| %>
-        var marker = new google.maps.Marker({
-          position: {lat:<%= competitor["lat"].to_f%>, lng:<%= competitor["lng"].to_f %>},
-          map: map,
-          title: 'Hello World!'
-        });
-        markers.push(marker);
-        points.push(new google.maps.LatLng(<%= competitor["lat"].to_f%>, <%= competitor["lng"].to_f %>))
-        bounds.extend( marker.getPosition() );
-      <% end %>
-      map.fitBounds(bounds);
-
-    var radius = Math.floor(<%= @query['radius_catchment_area'] %> / metersPerPixel(map));
-        heatmap = new google.maps.visualization.HeatmapLayer({
-          data: points,
-          radius: radius,
-          radiusCatch: <%= @query['radius_catchment_area'] %>,
-          map: map
-        });
-        changeGradient();
-      map.addListener('zoom_changed', function() {
-        var radius = Math.floor(heatmap.radiusCatch / metersPerPixel(map));
-        changeRadius(radius);
-      });
-
-    }
 
   <% end %>
 <% end %>
