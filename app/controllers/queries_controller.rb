@@ -56,18 +56,17 @@ class QueriesController < ApplicationController
           template: "queries/show.html.erb"
         # à mettre en forme avec Javascript tag pour garder css
 
-        end
       end
-      @city = City.near([@query.latitude, @query.longitude], 10).first
-      respond_to do |format|
-        format.html
-        format.pdf do
-          render pdf: "Your market studys",
-            template: "queries/show.html.erb"
-          # à mettre en forme avec Javascript tag pour garder css
-          end
-       end
-     end
+    end
+    @city = City.near([@query.latitude, @query.longitude], 10).first
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Your market studys",
+          template: "queries/show.html.erb"
+        # à mettre en forme avec Javascript tag pour garder css
+      end
+    end
   end
 
   # GET /queries/new
