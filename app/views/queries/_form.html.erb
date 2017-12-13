@@ -1,17 +1,10 @@
 <%= simple_form_for(@query, :method => :post, :url => queries_path ) do |f| %>
   <%= f.error_notification %>
 
-    <%= f.input :address, label: 'Address', placeholder: '1 rue Charlemagne, Lyon', input_html: { value: '1 rue Charlemagne, Lyon' } %>
-    <%= f.input :activity, label: 'Activity', placeholder: 'Bakery', input_html: { value: 'bakery' } %>
-    <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000', input_html: { value: '2000'} %>
-    <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200', input_html: { value: '500' } %>
-    <%= f.button :button, "Find my results", class: 'btn btn-primary', id: 'btn-form-homepage'  %>
+  <%= f.input :address, label: 'Address', placeholder: '1 rue Charlemagne, Lyon', input_html: { value: '1 rue Charlemagne, Lyon' } %>
+  <%= f.input :activity, label: 'Activity', placeholder: 'Bakery', input_html: { value: 'bakery' } %>
+  <%= f.input :radius_search, label: 'Radius search in meters', placeholder: '1000', input_html: { value: '2000'} %>
+  <%= f.input :radius_catchment_area, label: 'Catchment in meters', placeholder: '200', input_html: { value: '500' } %>
+  <%= f.button :button, "Find my results", class: 'btn btn-primary', id: 'btn-form-homepage'  %>
 
-  <% end %>
-
-
-
-
-  <%= content_for(:after_js) do %>
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=<%= ENV['GOOGLE_API_BROWSER_KEY'] %>"></script>
-  <% end %>
+<% end %>
