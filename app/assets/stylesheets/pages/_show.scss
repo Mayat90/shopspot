@@ -1,6 +1,6 @@
 #showcontent {
   display: flex;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 130px);
   justify-content: space-between;
   margin: 30px 80px;
   background: $lightblue;
@@ -24,20 +24,15 @@
 }
 
 #showmapframe {
+  height: 515px;
   color: #555;
   background: #FAFAFA;
   margin: 10px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
-#showmapcontent {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 #showstreetframe {
+  height: 564px;
   color: #555;
   background: #FAFAFA;
   margin: 10px;

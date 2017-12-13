@@ -4,13 +4,17 @@
     <div id="sctitle">
       <h3>Your results</h3>
       <p style="color: #307A94; font-weight:600"><%= @query.address %></p>
+          <div id="linktopdf">
+      <i class="fa fa-download" aria-hidden="true" style="color: #307A94;"></i>
+<%= link_to 'PDF', query_path(@query, format: :pdf) %>
+    </div>
     </div>
     <div id="scresults">
 
       <div id="screstop">
         <div id="scpopcatchment">
           <h3>On catchment area</h3>
-          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600">Population</h3>
+          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Population</h3>
           <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @query.analytics[:population] %></strong> </p>
           <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2) %> /10m2</strong></p>
           <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <strong><%= @query.analytics[:revenus] %>€ / tax-unit </strong></p>
@@ -36,7 +40,7 @@
         </div>
         <div id="scpopcity">
           <h3>On city</h3>
-          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600">Population</h3>
+          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Population</h3>
           <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @city.population %> </strong></p>
 
           <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= @city.population.fdiv(@city.area).round %> / km2</strong></p>
@@ -66,24 +70,19 @@
 
       <div id="scresbottom">
         <div id="sccomp">
-          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600">Competitors</h3>
-               <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <strong><%= @competitors.count %></strong> </p>
-          <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <strong>TOUPDATE</strong> </p>
+          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Competitors</h3>
+               <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <strong><%= @query.competitors_catchment %></strong> </p>
+          <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <strong><%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %></strong> </p>
 
           <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : <strong>TOUPDATE</strong> </p>
         </div>
         <div id="insee">
-          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600">Insee analytics</h3>
+          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Insee analytics</h3>
           <p><i class="fa fa-mars" aria-hidden="true"></i> <strong><%= (@city.sexe[:homme].to_f*100).round %></strong> %  <i class="fa fa-venus" aria-hidden="true" style="margin-left: 25px;"></i> <strong><%= (@city.sexe[:femme].to_f*100).round %></strong> % </p>
-          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= @city.chomage*100 %></strong> %</p>
-          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong>TOUPDATE </strong></p>
+          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= (@city.chomage*100).round %></strong> %</p>
         </div>        
       </div>
 
-    </div>
-    <div id="linktopdf">
-      <i class="fa fa-file" aria-hidden="true" style="color: #307A94;"></i>
-<%= link_to 'Download Pdf', query_path(@query, format: :pdf) %>
     </div>
   </div>
 </div>
