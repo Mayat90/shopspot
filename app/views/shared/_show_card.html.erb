@@ -71,7 +71,10 @@
         <div id="sccomp">
           <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Competitors</h3>
                <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <strong><%= @query.competitors_catchment %></strong> </p>
-          <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <strong><%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %></strong> </p>
+          <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <strong>
+            <% if @query.competitors_catchment != (0 || nil) %>
+            <%= @query.analyticss[:population].fdiv(@query.competitors_catchment).round %>
+            <% end %></strong> </p>
 
           <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : <strong>TOUPDATE</strong> </p>
         </div>
