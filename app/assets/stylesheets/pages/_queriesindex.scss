@@ -2,7 +2,9 @@
   display: flex;
   height: calc(100vh - 70px);
   justify-content: space-between;
-  margin: 10px 30px;
+  margin: 30px;
+  background: #FAFAFA;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 .indexcards {
@@ -16,6 +18,7 @@
 #mapcaption {
   padding: 10px;
   background: white;
+  margin-bottom: 30px;
 }
 
 #mapsettings {
