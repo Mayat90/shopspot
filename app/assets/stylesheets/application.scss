@@ -6,7 +6,8 @@
 
 
 // External libraries
-@import "materialize";
+
+@import "materialize-custom";
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome-sprockets";
@@ -34,7 +35,7 @@ body {
 
 p {
   font-size: 1.8rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 a {
@@ -54,7 +55,9 @@ h3 {
 }
 
 .fa {
-  color: #BBB;
+  color: #CCC;
+  font-size: 2.1rem;
+  margin-right: 0.6rem;
 }
 
 .myflex {

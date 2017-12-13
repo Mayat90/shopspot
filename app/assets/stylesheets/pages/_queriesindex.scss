@@ -2,8 +2,26 @@
   display: flex;
   height: calc(100vh - 70px);
   justify-content: space-between;
-  margin: 30px;
+  margin: 30px 80px;
   background: $lightblue;
+}
+
+.map-controls {
+  position: absolute;
+  top: 10px;
+  left: 112px;
+  background: white;
+  border-radius: 3px;
+  z-index: 20;
+
+  label {
+    font-size: 17px;
+  }
+
+  input {
+    opacity: 1 !important;
+    position: relative !important;
+  }
 }
 
 .indexcards {
@@ -29,22 +47,26 @@
   margin-bottom: 20px;
   p {
     margin-bottom: 0;
+    margin-right:1rem;
   }
 }
 
 .captionbarpop {
   width: 100px;
   height: 16px;
+  margin-right: 4rem;
   background: linear-gradient(to right, #7fdb9b, #349151);
 }
 .captionbarcomp {
   width: 100px;
   height: 16px;
+  margin-right: 4rem;
   background: linear-gradient(to right, #f9909b, #c63b49);
 }
 .captionbardeal {
   width: 100px;
   height: 16px;
+  margin-right: 4rem;
   background: linear-gradient(to right, #d26e38, #d3a039);
 }
 

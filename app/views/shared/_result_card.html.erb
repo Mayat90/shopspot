@@ -40,10 +40,10 @@
       </div>
       <div class="rccomp">
         <h3>Competitors</h3>
-        <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @competitors.count %></p>
+        <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @query.competitors_catchment %></p>
         <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor :
-          <% if @competitors.count != 0  %>
-          <%= @query.analytics[:population].fdiv(@competitors.count).round %>
+          <% if @query.competitors_catchment != 0  %>
+          <%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %>
           <% end %>
         </p>
       </div>

@@ -8,14 +8,14 @@
         @competitors = JSON.parse(@query.competitors_json)%>
         <%= render 'shared/result_card' %>
       <% end %>
-    
+
   </div>
   <div class="indexmap">
     <div id="mapcaption" style="height: 100px; position: relative;">
       <div id="caption">
-        <p>Good deal </p><div class="captionbardeal"></div>
-        <p>Population  </p><div class="captionbarpop"></div>
-        <p>Competitors </p><div class="captionbarcomp"></div>
+        <p>Good deal</p><div class="captionbardeal"></div>
+        <p>Population</p><div class="captionbarpop"></div>
+        <p>Competitors</p><div class="captionbarcomp"></div>
         </p>
       </div>
       <div id="formnewrequest">
@@ -24,6 +24,10 @@
       </div>
     </div>
     <div style="position: relative;">
+      <div class="map-controls">
+        <label>Show population<input type="checkbox"></label>
+        <label>Show competitors<input type="checkbox"></label>
+      </div>
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
         <div id="setting-button"  onclick="openset()">
           <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
@@ -68,7 +72,6 @@
   </div>
 </div>
 
-
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
 
@@ -77,3 +80,5 @@
 
   <% end %>
 <% end %>
+
+
