@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 console.log(select.value)
               document.getElementById('query_radius_search').value = radiusSearch;
               document.getElementById('query_radius_catchment_area').value = radiusCatchment;
-              document.getElementById('edit_query_5').submit();
+              document.getElementById('formid').submit();
             }
 
           });
