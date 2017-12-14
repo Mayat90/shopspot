@@ -80,7 +80,7 @@
 
           <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= @city.population.fdiv(@city.area).round %> / km2</strong></p>
           <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <strong><%= @city.revenu.round %>€ / tax-unit </strong></p>
-          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong>TOUPDATE</strong></p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong><%= (@city.age[:jeune].to_i*100*12.5 + @city.age[:adulte].to_i*100*45 + @city.age[:senior].to_i*100*72).fdiv(100).round(1) %> years old</strong></p>
 
           <div id="scpopgraph">
             <div id="rcpopgraphhead">
@@ -110,7 +110,7 @@
             <%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %>
             <% end %></strong> </p>
 
-          <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : <strong>TOUPDATE</strong> </p>
+          <!-- <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : <strong>TOUPDATE</strong> </p> -->
         </div>
         <div id="insee">
           <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Insee analytics</h3>
