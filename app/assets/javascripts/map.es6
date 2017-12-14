@@ -38,36 +38,78 @@ document.addEventListener('DOMContentLoaded', () => {
       addpopulation();
     });
 
-    bounds = new google.maps.LatLngBounds();
+    google.maps.event.addListener(map, "rightclick", function(event) {
+        var lat = event.latLng.lat();
+        var lng = event.latLng.lng();
+        // populate yor box/field with lat, lng
+           url =`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=AIzaSyDpBXB_T-w0nBmUYIMkVOhTpIWbPO4rCtI`;
+        console.log(url)
+        fetch(url)
+          .then((response) => response.json())
+          .then((results) => {
+            if (results["status"] == "OK" ) {
 
+              address = results["results"][0]["formatted_address"];
+
+              element = document.querySelector('.rcframe');
+              activity = element.getAttribute('data-activity');
+              radiusSearch = parseInt(element.getAttribute('data-radiussearch'));
+              radiusCatchment = parseInt(element.getAttribute('data-radius_catchment_area'));
+
+              console.log(address)
+              document.getElementById('query_address').value = address;
+              console.log(activity)
+              select = document.getElementById('query_activity');
+ select.value=activity;
+console.log(select.value)
+              console.log(radiusSearch)
+              document.getElementById('query_radius_search').value = "200";
+              console.log(radiusCatchment)
+              document.getElementById('query_radius_catchment_area').value = "1000";
+              document.getElementById('edit_query_5').submit();
+            }
+
+          });
+    });
+
+    bounds = new google.maps.LatLngBounds();
     const rescard = document.querySelectorAll('.rcframe');
     rescard.forEach(function(element) { affichecard(element) });
     map.fitBounds(bounds);
-
     afficheheatmap();
 
-    google.maps.event.addListener(map, "rightclick", function(event) {
-      var lat = parseFloat(event.latLng.lat());
-      var lng = event.latLng.lng();
-      // populate yor box/field with lat, lng
-       console.log(lat)
+    document.getElementById('infos-button').addEventListener('click', ()=>{
+      document.getElementById('show-content').classList.remove("infohide");
+        polya.forEach((poly) => {
+          poly.setOptions({clickable: true });
+        });
+    })
 
-    //   url =`http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
-    //   alert(url);
-    // fetch(url)
-    //   .then((response) => response.json())
-    //   .then((results) => {
-    //     console.log(results)
+    document.getElementById('infos-close').addEventListener('click', ()=>{
+      document.getElementById('show-content').classList.add("infohide");
+        polya.forEach((poly) => {
+          poly.setOptions({clickable: false });
+        });
+    })
 
-    //   });
-    });
+    // function openinf() {
+    //   document.getElementById('show-content').classList.remove("infohide");
+    //     polya.forEach((poly) => {
+    //       poly.setOptions({clickable: true });
+    //     });
+    // }infos-close
+
+    // function closeinf() {
+    //   document.getElementById('show-content').classList.add("infohide");
+    //       polya.forEach((poly) => {
+    //       poly.setOptions({clickable: false });
+    //     });
+    // }
   }
 
   function reloadcompetitors() {
     points = []
-    markers.forEach((marker) => {
-      marker.setMap(null);
-    });
+    markers.forEach((marker) => { marker.setMap(null); });
     heatmap.setMap(null);
     heatmap = null;
     markers = [];
@@ -115,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
       fillColor: '#FF0000',
       fillOpacity: 0,
       map: map,
+      clickable: false,
       center: search,
       radius: radiusCatchment
     });
@@ -124,6 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
       strokeWeight: 4,
       fillColor: '#FFFF00',
       fillOpacity: 0,
+      clickable: false,
       map: map,
       center: search,
       radius: radiusSearch
@@ -175,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data: points,
         radius: radius,
         radiusCatch: radiusCatchment,
+        clickable: false,
         map: map
       });
       heatmap.set('opacity', opacity);
@@ -483,6 +528,8 @@ document.addEventListener('DOMContentLoaded', () => {
       styles:    mapStyle,
       streetViewControl: false,
     });
+
+
     // var marker = new google.maps.Marker({
     //   position: search,
     //   icon: search_icon,
@@ -533,9 +580,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const opacity = document.getElementById('sliderp').value;
         tiles.forEach((tile) => {
           poly = new google.maps.Polygon(tile);
-          poly.setOptions({'fillOpacity': opacity /100});
-            poly.setMap(map);
           addListenersOnPolygon(poly);
+          poly.setOptions({'fillOpacity': opacity /100, clickable: false });
+            poly.setMap(map);
           polya.push(poly);
         });
       });
@@ -582,20 +629,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // competitors_all[p].setMap(map);
     reloadcompetitors()
   });
+
 });
 
-function openinf() {
-  document.getElementById('show-content').classList.remove("infohide");
-}
 
-function closeinf() {
-  document.getElementById('show-content').classList.add("infohide");
-}
+// function openset() {
+//   document.getElementById('show-setting').classList.remove("infohide");
+// }
 
-function openset() {
-  document.getElementById('show-setting').classList.remove("infohide");
-}
-
-function closeset() {
-  document.getElementById('show-setting').classList.add("infohide");
-}
+// function closeset() {
+//   document.getElementById('show-setting').classList.add("infohide");
+// }
