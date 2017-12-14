@@ -10,6 +10,11 @@
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
+#icons {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .rccontent {
   position: absolute;
   padding: 20px;
@@ -21,9 +26,6 @@
   }
 }
 
-.rcresults {
-}
-
 .rctitle {
   line-height: 120%;
   border-bottom: 1px solid #EEE;
@@ -32,6 +34,9 @@
     margin-bottom: 5px;
     color: $blue;
     font-weight: 600;
+  }
+  .fa {
+    color: $blue;
   }
 }
 
