@@ -96,6 +96,13 @@ class QueriesController < ApplicationController
     resultats_insee = Tiles.calculate([@query.latitude, @query.longitude], @query.radius_catchment_area)
     @query.analytics = resultats_insee
 
+    if @query.competitors_catchment != 0
+      pop_grade = @query.analytics[:population].fdiv(@query.competitors_catchment)
+      @query.pertinence_grade = pertinence_grade(pop_grade)
+    else
+      @query.pertinence_grade = 0
+    end
+
     if current_user
       @query.user = current_user
       @query.save
@@ -177,5 +184,20 @@ class QueriesController < ApplicationController
       session.delete('competitors')
     end
 
+    def pertinence_grade(number)
+      if number < 50
+        return 0
+      elsif number < 100
+        return 1
+      elsif number < 200
+        return 2
+      elsif number < 500
+        return 3
+      elsif number < 900
+        return 4
+      else
+        return 5
+      end
+    end
 end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213163913) do
+ActiveRecord::Schema.define(version: 20171213220355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20171213163913) do
     t.string   "competitors_json"
     t.integer  "user_id"
     t.integer  "competitors_catchment"
+    t.integer  "pertinence_grade"
     t.index ["user_id"], name: "index_queries_on_user_id", using: :btree
   end
 
