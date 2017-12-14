@@ -16,7 +16,6 @@ class QueriesController < ApplicationController
           session_delete
       end
     end
-
     if current_user
       @queries = current_user.queries.reverse
       redirect_to root_path if @queries.count < 1
