@@ -1,0 +1,129 @@
+<body style="background-color: white">
+<div id="showcontentpdf" class="nobreak">
+  <div id="showleft">
+    <div id="showstreetframepdf">
+      <% params = { %>
+      <% location: [@query.latitude, @query.longitude].join(","), %>
+      <% size: "300x220", %>
+      <% key: ENV['GOOGLE_API_BROWSER_KEY'] %>
+      <% } %>
+      <% query_string =  params.map{|k,v| "#{k}=#{v}"}.join("&") %>
+      <%= image_tag "http://maps.googleapis.com/maps/api/streetview?#{query_string}" %>
+    </div>
+    <div id=showsearch>
+      <div id="ssframe">
+        <div id="sscontent" >
+          <div id="sstitle">
+            <h3>Your search</h3>
+          </div>
+          <p style="margin-top: 20px";> <i class="fa fa-users" aria-hidden="true"></i> Activity : <strong><%= @query.activity %></strong> </p>
+          <p> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Radius search : <strong><%= @query.radius_search %> m</strong>  </p>
+          <p style="margin-bottom:40px;"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Catchment area : <strong><%= @query.radius_catchment_area %>m</strong></p>
+          <div class="backtohome">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="showmapframepdf">
+      <% params = {%>
+      <% center: [@query.latitude, @query.longitude].join(","),%>
+      <% zoom: 16,%>
+      <% size: "300x220",%>
+      <% sensor: true, %>
+      <% key: ENV['GOOGLE_API_BROWSER_KEY'] %>
+      <% } %>
+      <% query_string =  params.map{|k,v| "#{k}=#{v}"}.join("&") %>
+      <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string}", :alt => @query.radius_search %>
+    </div>
+  </div>
+  <div id="showcard">
+
+<div id="scframepdf">
+  <div id="sccontent">
+    <div id="sctitle">
+      <h3>Your results</h3>
+      <p style="color: #307A94; font-weight:600"><%= @query.address %></p>
+    </div>
+    <div id="scresults">
+
+      <div id="screstop">
+        <div id="scpopcatchment">
+          <h3>On catchment area</h3>
+          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Population</h3>
+          <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @query.analytics[:population] %></strong> </p>
+          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2) %> /10m2</strong></p>
+          <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <strong><%= @query.analytics[:revenus] %>€ / tax-unit </strong></p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong><%= (@query.analytics[:res25]*12.5 + @query.analytics[:res2565]*45 + @query.analytics[:res65]*72).fdiv(100).round(1) %> years old</strong></p>
+          <div id="scpopgraph">
+            <div id="rcpopgraphhead">
+              <div id="rcpopgraphhead1"><p><%= @query.analytics[:res25] %> %</p></div>
+              <div id="rcpopgraphhead2"><p><%= @query.analytics[:res2565] %> %</p></div>
+              <div id="rcpopgraphhead3"><p><%= @query.analytics[:res65] %> %</p></div>
+            </div>
+            <div id="rcpopgraphres">
+              <div id="rcpopgraphres1" style='height:<%= @query.analytics[:res25]%>%';></div>
+              <div id="rcpopgraphres2" style='height:<%= @query.analytics[:res2565]%>%';></div>
+              <div id="rcpopgraphres3" style='height:<%= @query.analytics[:res65]%>%';></div>
+            </div>
+            <div id="rcpopgraphbot">
+              <div id="rcpopgraphbot1"><p>25 -</p></div>
+              <div id="rcpopgraphbot2"><p>25 - 65</p></div>
+              <div id="rcpopgraphbot3"><p>65 +</p></div>
+            </div>
+          </div>
+        </div>
+        <div id="scpopcity">
+          <h3>On city</h3>
+          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Population</h3>
+          <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @city.population %> </strong></p>
+
+          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= @city.population.fdiv(@city.area).round %> / km2</strong></p>
+          <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <strong><%= @city.revenu.round %>€ / tax-unit </strong></p>
+          <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong>TOUPDATE</strong></p>
+
+          <div id="scpopgraph">
+            <div id="rcpopgraphhead">
+              <div id="rcpopgraphhead1"><p><%= (@city.age[:jeune].to_f*100).round %> %</p></div>
+              <div id="rcpopgraphhead2"><p><%= (@city.age[:adulte].to_f*100).round %> %</p></div>
+              <div id="rcpopgraphhead3"><p><%= (@city.age[:senior].to_f*100).round %> %</p></div>
+            </div>
+            <div id="rcpopgraphres">
+              <div id="rcpopgraphres1" style='height:<%= @city.age[:jeune].to_f*100%>%';></div>
+              <div id="rcpopgraphres2" style='height:<%= @city.age[:adulte].to_f*100%>%';></div>
+              <div id="rcpopgraphres3" style='height:<%= @city.age[:senior].to_f*100%>%';></div>
+            </div>
+            <div id="rcpopgraphbot">
+              <div id="rcpopgraphbot1"><p>25 -</p></div>
+              <div id="rcpopgraphbot2"><p>25 - 65</p></div>
+              <div id="rcpopgraphbot3"><p>65 +</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="scresbottom">
+        <div id="sccomp">
+          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Competitors</h3>
+               <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <strong><%= @query.competitors_catchment %></strong> </p>
+          <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <strong>
+            <% if @query.competitors_catchment != (0 || nil) %>
+            <%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %>
+            <% end %></strong> </p>
+
+          <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : <strong>TOUPDATE</strong> </p>
+        </div>
+        <div id="insee">
+          <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Insee analytics</h3>
+          <p><i class="fa fa-mars" aria-hidden="true"></i> <strong><%= (@city.sexe[:homme].to_f*100).round %></strong> %  <i class="fa fa-venus" aria-hidden="true" style="margin-left: 25px;"></i> <strong><%= (@city.sexe[:femme].to_f*100).round %></strong> % </p>
+          <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= (@city.chomage*100).round %></strong> %</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+</body>
+
+
+
