@@ -78,8 +78,7 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
-p "*********************************************"
-    p query_params
+
     loc = Geocoder.coordinates(@query.address)
     @query.latitude = loc[0]
     @query.longitude = loc[1]

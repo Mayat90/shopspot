@@ -18,13 +18,16 @@
 .indexmap {
   width: 75%;
   box-shadow: none;
+  position: sticky;
+  align-self: flex-start;
+  top: 30px;
 }
 
 #mapcaption {
   padding: 10px;
   background: white;
   margin-bottom: 30px;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 2px 2px 1px rgba(165, 165, 165, 0.1);
 }
 
 
