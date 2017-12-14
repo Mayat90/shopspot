@@ -73,7 +73,7 @@
                <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <strong><%= @query.competitors_catchment %></strong> </p>
           <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <strong>
             <% if @query.competitors_catchment != (0 || nil) %>
-            <%= @query.analyticss[:population].fdiv(@query.competitors_catchment).round %>
+            <%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %>
             <% end %></strong> </p>
 
           <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : <strong>TOUPDATE</strong> </p>

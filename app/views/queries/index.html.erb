@@ -11,19 +11,10 @@
 
   </div>
   <div class="indexmap">
-    <div id="mapcaption" style="height: 100px; position: relative;">
-      <div id="caption">
-        <p>Good deal</p><div class="captionbardeal"></div>
-        <p>Population</p><div class="captionbarpop"></div>
-        <p>Competitors</p><div class="captionbarcomp"></div>
-        </p>
-      </div>
+    <div id="mapcaption" style="height: 50px; position: relative;">
       <div id="formnewrequest">
-        <button class="btn btn-primary" id="btn-newaddress">Compare with new address</button>
 <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-          Launch demo modal
-        </button>
+        <button class="btn btn-primary" id="btn-newaddress" data-toggle="modal" data-target="#myModal">Compare with new address</button>
 
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -31,14 +22,14 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 class="modal-title" id="myModalLabel">New search</h4>
               </div>
               <div class="modal-body">
-                ...
+                <%= render 'form' %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary">Search</button>
               </div>
             </div>
           </div>
@@ -48,29 +39,24 @@
       </div>
     </div>
     <div style="position: relative;">
-      <div class="map-controls">
-        <label>Show population<input type="checkbox"></label>
-        <label>Show competitors<input type="checkbox"></label>
+      <div class="myflex map-controls">
+          <div style="width: 30%;">
+              <div class="captionbarpop innercaption">Population</div>
+              <input type="range" min="0" max="100" id="sliderp" value="35">
+          </div>
+          <div style="width: 30%;">
+              <div class="captionbarcomp innercaption">Competitors</div>
+              <input type="range" min="0" max="100" id="sliderh" value="40">
+          </div>
+          <div style="width: 30%;">
+              <div class="captionbardeal innercaption">Good deal</div>
+          </div>
       </div>
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
-        <div id="form-content" class="infohide">
-
-        </div>
-        <div id="setting-button"  onclick="openset()">
+<!--         <div id="setting-button" class="infohie" onclick="openset()">
           <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
-        </div>
-        <div id="show-setting" class="infohide">
-          <p style="text-align:right; margin:0" ><i id="setting-close" onclick="closeset()" class="fa fa-close"></i></p>
+        </div> -->
 
-          <h3>Settings:</h3>
-          <div id="setting-current">
-          <div id="slidecontainer">
-            <input type="range" min="0" max="100" id="sliderh" value="50">
-            <input type="range" min="0" max="100" id="sliderp" value="35">
-          </div>
-        </div>
-
-        </div>
           <div id="infos-button"  onclick="openinf()">
             <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
           </div>

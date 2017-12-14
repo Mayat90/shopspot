@@ -18,7 +18,7 @@ class QueriesController < ApplicationController
     end
     if current_user
       @queries = current_user.queries.reverse
-      redirect_to root_path if @queries.count < 1
+      # redirect_to root_path if @queries.count < 1
     elsif session['address']
       @query.id = 0
       @queries << @query
@@ -74,6 +74,7 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
+    binding.pry
     loc = Geocoder.coordinates(@query.address)
     @query.latitude = loc[0]
     @query.longitude = loc[1]
