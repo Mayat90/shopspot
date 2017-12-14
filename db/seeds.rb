@@ -1,4 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
+  # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
 # Examples:
@@ -9,7 +9,7 @@ require 'csv'
 
 
 
-CSV.foreach('lib/seeds/cities.csv', encoding: 'iso-8859-1:utf-8') do |row|
+CSV.foreach('lib/seeds/cities.csv', encoding: 'utf-8') do |row|
   City.create!(
   name: row[0],
   insee_id: row[1],
