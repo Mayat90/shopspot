@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let heatmap = null;
   let heatmaps = {};
   const search_icon = 'http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png';
-  const concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
+  let concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
 
   if (mapDomElement) {
+// concurrence_icon = mapDomElement.getAttribute('data-icon-market');
 
     zoom = parseInt(mapDomElement.getAttribute('data-zoom'));
     radiusCatchment = parseInt(mapDomElement.getAttribute('data-radius'));
@@ -80,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let title = element.getAttribute('data-title');
     let id = element.getAttribute('data-id');
     lat = parseFloat(element.getAttribute('data-lat'));
+    const search_icon = element.getAttribute('data-icon');
     search = {
       lat: parseFloat(element.getAttribute('data-lat')),
       lng: parseFloat(element.getAttribute('data-lng'))
@@ -175,6 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var marker = new google.maps.Marker({
           position: {lat: competitor["lat"], lng:competitor["lng"]},
           map: map,
+          icon: concurrence_icon,
           title: competitor["name"],
         });
           markers.push(marker);

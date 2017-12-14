@@ -3,11 +3,18 @@
 
 <div class="indexcontent">
   <div class="indexcards">
-      <% @queries.each do |query|
+      <% letter = 0
+        @queries.each do |query|
+        @letter =image_url("mapicons/letter_" + @letters[letter] + ".png")
+        @market = image_url("mapicons/market.png")
+        p @market
         @query = query
         @competitors = JSON.parse(@query.competitors_json)%>
+
         <%= render 'shared/result_card' %>
-      <% end %>
+
+        <% letter += 1
+        end %>
 
   </div>
   <div class="indexmap">
@@ -79,6 +86,7 @@
         data-zoom="14"
         data-radius="<%= @query['radius_catchment_area'] %>"
         data-radiussearch="<%= @query['radius_search'] %>"
+        data-icon-market ='<%= @market %>'
       ></div>
       </div>
     </div>
