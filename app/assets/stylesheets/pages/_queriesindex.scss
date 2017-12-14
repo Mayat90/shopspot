@@ -1,6 +1,5 @@
 .indexcontent {
   display: flex;
-  height: calc(100vh - 70px);
   justify-content: space-between;
   margin: 30px 80px;
   background: $lightblue;
@@ -94,3 +93,6 @@ a:hover, a:focus {
     text-decoration: none !important;
   }
 
+input[type=range] + .thumb {
+  background: $blue !important;
+}
