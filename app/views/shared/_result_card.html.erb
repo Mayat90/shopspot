@@ -42,10 +42,14 @@
       </div>
       <div class="rccomp">
         <h3>Competitors</h3>
-        <p style="margin-left: 8px;"> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @query.competitors_catchment %></p>
+        <p style="margin-left: 8px;"> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors :
+          <% if @query.competitors_catchment != 0 && @query.competitors_catchment != nil %>
+          <%= @query.competitors_catchment %>
+          <% end %>
+        </p>
         <p style="margin-left: 8px;"> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor :
-          <% if @query.competitors_catchment != 0  %>
-          <%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %>
+          <% if @query.competitors_catchment != 0 && @query.competitors_catchment != nil %>
+            <%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %>
           <% end %>
         </p>
       </div>
