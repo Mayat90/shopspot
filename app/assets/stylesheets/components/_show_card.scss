@@ -1,13 +1,11 @@
 #scframe {
   background: $backcards;
   margin: 10px 30px;
-  box-shadow: 2px 2px 2px 1px rgba(165, 165, 165, 0.1);
 }
 
 #sccontent {
   position: relative;
   width: 100%;
-  height: calc(100vh - 120px);
   padding: 10px 25px;
   line-height: 140%;
   h3 {

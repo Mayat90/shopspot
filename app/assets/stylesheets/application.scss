@@ -39,16 +39,27 @@ body {
   cursor: pointer;
 }
 
-p {
+p, td {
   font-size: 1.8rem;
   font-weight: 400;
+}
+
+td {
+  border-bottom: 1px solid rgba(165,165,165,0.1)
+}
+
+th {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: $blue;
+  text-align: center;
 }
 
 a {
   font-size: 1.8rem;
 }
 
-h2 {
+h2, h1 {
   font-size: 1.8rem;
   font-weight: 600;
   color: #555;

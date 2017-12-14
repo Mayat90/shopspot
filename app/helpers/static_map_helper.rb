@@ -1,6 +1,6 @@
 module StaticMapHelper
 
-  def static_map_for(query, options = {})
+  def static_map_for(query)
     params = {
       center: [query.latitude, query.longitude].join(","),
       zoom: 16,
@@ -12,7 +12,7 @@ module StaticMapHelper
 
 
     query_string =  params.map{|k,v| "#{k}=#{v}"}.join("&")
-    image_tag "http://maps.googleapis.com/maps/api/staticmap?#{query_string}", options
+    "http://maps.googleapis.com/maps/api/staticmap?#{query_string}"
   end
 
 end

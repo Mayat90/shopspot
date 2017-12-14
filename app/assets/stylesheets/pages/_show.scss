@@ -8,14 +8,21 @@
 
 #showleft {
   width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 #showcard {
   flex-grow: 1;
+  margin: 10px 20px;
+  background: $backcards;
+  box-shadow: 2px 2px 2px 1px rgba(165, 165, 165, 0.1);
 }
 
 #showright {
   width: 400px;
+  display: flex;
+  flex-direction: column;
   }
   
 .buttons-next-action{
@@ -24,7 +31,7 @@
 }
 
 #showmapframe {
-  height: 515px;
+  flex-grow: 1;
   color: #555;
   background: #FAFAFA;
   margin: 10px;
@@ -32,7 +39,7 @@
 }
 
 #showstreetframe {
-  height: 564px;
+  flex-grow: 1;
   color: #555;
   background: #FAFAFA;
   margin: 10px;
