@@ -75,7 +75,11 @@ i = 0
         end
       end
     end
-    revenus = revenus.inject{ |sum, el| sum + el } / revenus.size
+    if revenus.count > 0
+      revenus = revenus.inject{ |sum, el| sum + el } / revenus.size
+    else
+      revenus = 0
+    end
     res25 = (res25 / population * 100).round
     res65 = (res65 / population * 100).round
     menloc = (menloc / population * 100).round
