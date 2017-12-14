@@ -3,11 +3,18 @@
 
 <div class="indexcontent">
   <div class="indexcards">
-      <% @queries.each do |query|
+      <% letter = 0
+        @queries.each do |query|
+        @letter =image_url("mapicons/letter_" + @letters[letter] + ".png")
+        @market = image_url("mapicons/market.png")
+        p @market
         @query = query
         @competitors = JSON.parse(@query.competitors_json)%>
+
         <%= render 'shared/result_card' %>
-      <% end %>
+
+        <% letter += 1
+        end %>
 
   </div>
   <div class="indexmap">
@@ -15,7 +22,6 @@
 <!-- Button trigger modal -->
       <button class="btn btn-primary" id="btn-newaddress" data-toggle="modal" data-target="#myModal">Compare with new address</button>
 
-      <!-- Modal -->
 
     </div>
     <div style="position: relative;">
@@ -26,7 +32,7 @@
           </div>
           <div style="width: 30%;">
               <div class="captionbarcomp innercaption">Competitors</div>
-              <input type="range" min="0" max="100" id="sliderh" value="40">
+              <input type="range" min="0" max="100" id="sliderh" value="30">
           </div>
           <div style="width: 30%;">
               <div class="captionbardeal innercaption">Good deal</div>
@@ -37,11 +43,11 @@
           <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
         </div> -->
 
-          <div id="infos-button"  onclick="openinf()">
+          <div id="infos-button" >
             <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
           </div>
           <div id="show-content" class="infohide">
-            <p style="text-align:right; margin:0" ><i id="infos-close" onclick="closeinf()" class="fa fa-close"></i></p>
+            <p style="text-align:right; margin:0" ><i id="infos-close" class="fa fa-close"></i></p>
             <h3>Informations : </h3>
             <div id="infos-current">
               <p><b>Population : </b> <span id="pop">--</span> habitants</p>
@@ -59,6 +65,7 @@
         data-zoom="14"
         data-radius="<%= @query['radius_catchment_area'] %>"
         data-radiussearch="<%= @query['radius_search'] %>"
+        data-icon-market ='<%= @market %>'
       ></div>
       </div>
     </div>
