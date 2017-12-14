@@ -1,4 +1,4 @@
-<%= simple_form_for(@query, :method => :post, :url => queries_path ) do |f| %>
+<%= simple_form_for(@query, :method => :post, :url => queries_path, html: { id: :formid } ) do |f| %>
   <%= f.error_notification %>
 
   <%= f.input :address, label: 'Address', placeholder: '1 rue Charlemagne, Lyon', input_html: { value: '1 rue Charlemagne, Lyon' } %>

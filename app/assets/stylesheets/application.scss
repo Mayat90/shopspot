@@ -23,6 +23,15 @@
 
 @import "bootstrap";
 
+input[type=range]::-webkit-slider-thumb {
+  background: $blue;
+}
+
+.map-controls input {
+  border: none !important;
+}
+
+
 .form-content {
   width: 80%;
   height: 80%;
@@ -74,4 +83,5 @@ h3 {
 .mygrow {
   flex-grow: 1;
 }
+
 
