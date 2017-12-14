@@ -6,28 +6,6 @@
   background: $lightblue;
 }
 
-.map-controls {
-  position: absolute;
-  padding: 5px 10px;
-  top: 10px;
-  left: 112px;
-  background: white;
-  border-radius: 5px;
-  z-index: 20;
-
-  label {
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: #555;
-      input {
-    opacity: 1 !important;
-    position: relative !important;
-    margin-left: 5px;
-    margin-right: 10px;
-    width: 1.1em; height: 1.1em;
-  }
-}
-}
 
 #setting-open, #infos-open {
   color: black;
@@ -62,25 +40,29 @@
 }
 
 .captionbarpop {
-  width: 100px;
+  width: 100%;
   height: 16px;
   margin-right: 4rem;
   background: linear-gradient(to right, #7fdb9b, #349151);
 }
 .captionbarcomp {
-  width: 100px;
+  width: 100%;
   height: 16px;
   margin-right: 4rem;
   background: linear-gradient(to right, #f9909b, #c63b49);
 }
 .captionbardeal {
-  width: 100px;
+  width: 100%;
   height: 16px;
   margin-right: 4rem;
   background: linear-gradient(to right, #d26e38, #d3a039);
 }
 
-
+.innercaption {
+  font-size: 0.7em;
+  color: white;
+  text-align:center;
+}
 
 #setting-current {
   width: 100%;
