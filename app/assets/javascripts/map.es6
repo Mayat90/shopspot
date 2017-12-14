@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let heatmap = null;
   let heatmaps = {};
   const search_icon = 'http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png';
-  const concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
+  let concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
 
   if (mapDomElement) {
+// concurrence_icon = mapDomElement.getAttribute('data-icon-market');
 
     zoom = parseInt(mapDomElement.getAttribute('data-zoom'));
     radiusCatchment = parseInt(mapDomElement.getAttribute('data-radius'));
@@ -94,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let title = element.getAttribute('data-title');
     let id = element.getAttribute('data-id');
     lat = parseFloat(element.getAttribute('data-lat'));
+    const search_icon = element.getAttribute('data-icon');
     search = {
       lat: parseFloat(element.getAttribute('data-lat')),
       lng: parseFloat(element.getAttribute('data-lng'))
@@ -190,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var marker = new google.maps.Marker({
           position: {lat: competitor["lat"], lng:competitor["lng"]},
           map: map,
+          icon: concurrence_icon,
           title: competitor["name"],
         });
           markers.push(marker);
@@ -516,26 +519,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addpopulation() {
-    // let zoom = map.getZoom();
-    // let lat1 = map.getBounds().getSouthWest().lat() // latitude du coin inférieur gauche
-    // let lng1 = map.getBounds().getSouthWest().lng() // longitude du coin inférieur gauche
-    // let lat2 = map.getBounds().getNorthEast().lat() // latitude du coin supérieur droit
-    // let lng2 = map.getBounds().getNorthEast().lng() // longitude du coin supérieur droit
 
-    // fetch(`/tiles?lat1=${lat1}&lng1=${lng1}&lat2=${lat2}&lng2=${lng2}&zoom=${zoom}`)
-    //   .then((response) => response.json())
-    //   .then((tiles) => {
-    //     delpoly();
-    //     const opacity = document.getElementById('sliderp').value;
-    //     tiles.forEach((tile) => {
-    //       poly = new google.maps.Polygon(tile);
-    //       poly.setOptions({'fillOpacity': opacity /100});
-    //       poly.setZIndex(9999);
-    //         poly.setMap(map);
-    //       addListenersOnPolygon(poly);
-    //       polya.push(poly);
-    //     });
-    //   });x
+    let zoom = map.getZoom();
+    let lat1 = map.getBounds().getSouthWest().lat() // latitude du coin inférieur gauche
+    let lng1 = map.getBounds().getSouthWest().lng() // longitude du coin inférieur gauche
+    let lat2 = map.getBounds().getNorthEast().lat() // latitude du coin supérieur droit
+    let lng2 = map.getBounds().getNorthEast().lng() // longitude du coin supérieur droit
+
+    fetch(`/tiles?lat1=${lat1}&lng1=${lng1}&lat2=${lat2}&lng2=${lng2}&zoom=${zoom}`)
+      .then((response) => response.json())
+      .then((tiles) => {
+        delpoly();
+        const opacity = document.getElementById('sliderp').value;
+        tiles.forEach((tile) => {
+          poly = new google.maps.Polygon(tile);
+          poly.setOptions({'fillOpacity': opacity /100});
+            poly.setMap(map);
+          addListenersOnPolygon(poly);
+          polya.push(poly);
+        });
+      });
+
   }
 
   $("#sliderp").on("input", function(){

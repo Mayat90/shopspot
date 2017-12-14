@@ -16,12 +16,16 @@
   data-radiussearch ="<%= @query.radius_search %>"
   data-radius_catchment_area ="<%= @query.radius_catchment_area %>"
   data-competitors ='<%= @query.competitors_json %>'
+  data-icon = '<%= @letter %>'
+  data-icon-market ='<%= @market %>'
+
   <% p @competitors %>
   >
   <div class="rccontent">
     <div class="rctitle">
       <h3><%= @query.address %></h3>
       <%= image_tag("five-stars.png", height: '12') %>
+      <%= image_tag(@letter) %>
       <div id="icons">
         <div id="icon<%= @query.id %>" style="display:flex; align-items: right">
           <i class="fa fa-eye" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>

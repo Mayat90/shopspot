@@ -3,6 +3,9 @@ class QueriesController < ApplicationController
   before_action :authenticate_user!, only: :show
 
   def index
+    @letters = %w(a b c d e f g h i j k l m n o p q r s t u v w x y z)
+    p @letters
+    @market=""
     @queries = []
     if session['address']
       @query = load_session
@@ -75,7 +78,6 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
-    binding.pry
     loc = Geocoder.coordinates(@query.address)
     @query.latitude = loc[0]
     @query.longitude = loc[1]
