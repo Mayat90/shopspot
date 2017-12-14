@@ -3,6 +3,9 @@ class QueriesController < ApplicationController
   before_action :authenticate_user!, only: :show
 
   def index
+    @letters = %w(a b c d e f g h i j k l m n o p q r s t u v w x y z)
+    p @letters
+    @market=""
     @queries = []
     if session['address']
       @query = load_session
@@ -46,20 +49,19 @@ class QueriesController < ApplicationController
          @competitors << competitor
       end
     end
-    city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][3]["long_name"]
+    city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][2]["long_name"]
     city_geocoded = Geocoder.coordinates(city_name)
     @city = City.near(city_geocoded,5).first
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "Your market studys",
-          template: "queries/show.html.erb",
-          orientation: "Landscape"
+          template: "queries/pdf.html.erb",
+          orientation: "Landscape",
+          layout: 'pdf'
         # à mettre en forme avec Javascript tag pour garder css
       end
     end
-
-      @city = City.near([@query.latitude, @query.longitude], 10).first
   end
   # GET /queries/new
   def new

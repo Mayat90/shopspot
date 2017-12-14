@@ -1,43 +1,30 @@
-    <%= render 'shared/navbar' %>
+<%= render 'shared/navbar' %>
 
 
 <div class="indexcontent">
   <div class="indexcards">
-      <% @queries.each do |query|
+
+    <div id="formnewrequest">
+      <a href="#" data-toggle="modal" data-target="#myModal">Compare with new address</a>
+    </div>
+
+      <% letter = 0
+        @queries.each do |query|
+        @letter =image_url("mapicons/letter_" + @letters[letter] + ".png")
+        @market = image_url("mapicons/market.png")
+        p @market
+
         @query = query
         @competitors = JSON.parse(@query.competitors_json)%>
+
         <%= render 'shared/result_card' %>
-      <% end %>
+
+        <% letter += 1
+        end %>
 
   </div>
   <div class="indexmap">
-    <div id="mapcaption" style="height: 50px; position: relative;">
-      <div id="formnewrequest">
-<!-- Button trigger modal -->
-        <button class="btn btn-primary" id="btn-newaddress" data-toggle="modal" data-target="#myModal">Compare with new address</button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">New search</h4>
-              </div>
-              <div class="modal-body">
-                <%= render 'form' %>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Search</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
     <div style="position: relative;">
       <div class="myflex map-controls">
           <div style="width: 30%;">
@@ -46,22 +33,19 @@
           </div>
           <div style="width: 30%;">
               <div class="captionbarcomp innercaption">Competitors</div>
-              <input type="range" min="0" max="100" id="sliderh" value="40">
+              <input type="range" min="0" max="100" id="sliderh" value="30">
           </div>
           <div style="width: 30%;">
               <div class="captionbardeal innercaption">Good deal</div>
           </div>
       </div>
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
-<!--         <div id="setting-button" class="infohie" onclick="openset()">
-          <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
-        </div> -->
 
-          <div id="infos-button"  onclick="openinf()">
+          <div id="infos-button" >
             <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
           </div>
           <div id="show-content" class="infohide">
-            <p style="text-align:right; margin:0" ><i id="infos-close" onclick="closeinf()" class="fa fa-close"></i></p>
+            <p style="text-align:right; margin:0" ><i id="infos-close" class="fa fa-close"></i></p>
             <h3>Informations : </h3>
             <div id="infos-current">
               <p><b>Population : </b> <span id="pop">--</span> habitants</p>
@@ -79,9 +63,26 @@
         data-zoom="14"
         data-radius="<%= @query['radius_catchment_area'] %>"
         data-radiussearch="<%= @query['radius_search'] %>"
+        data-icon-market ='<%= @market %>'
       ></div>
       </div>
     </div>
   </div>
 </div>
 
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">New search</h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'form' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
