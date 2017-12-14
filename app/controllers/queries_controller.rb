@@ -19,7 +19,6 @@ class QueriesController < ApplicationController
           session_delete
       end
     end
-
     if current_user
       @queries = current_user.queries.reverse
       # redirect_to root_path if @queries.count < 1
@@ -50,7 +49,7 @@ class QueriesController < ApplicationController
          @competitors << competitor
       end
     end
-    city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][2]["long_name"]
+    city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][3]["long_name"]
     city_geocoded = Geocoder.coordinates(city_name)
     @city = City.near(city_geocoded,5).first
     respond_to do |format|
@@ -77,8 +76,6 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
-
-
     loc = Geocoder.coordinates(@query.address)
     @query.latitude = loc[0]
     @query.longitude = loc[1]
