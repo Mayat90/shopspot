@@ -20,28 +20,32 @@
   >
   <div class="rccontent">
     <div class="rctitle">
-      <%= image_tag("five-stars.png", height: '12') %>
       <h3><%= @query.address %></h3>
-
-      <div id="icon<%= @query.id %>">
-        <i class="fa fa-eye" aria-hidden="true" data-id="<%= @query.id %>"></i>
-        <i class="fa fa-eye-slash infohide" aria-hidden="true" data-id="<%= @query.id %>"></i>
+      <%= image_tag("five-stars.png", height: '12') %>
+      <div id="icons">
+        <div id="icon<%= @query.id %>" style="display:flex; align-items: right">
+          <i class="fa fa-eye" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
+          <i class="fa fa-eye-slash infohide" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
+            <%= link_to "" , query_path(@query),class: "fa fa-trash-o",
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+        </div>
       </div>
     </div>
     <div class="rcresults">
       <div class="rcpop">
         <h3>Population</h3>
-        <p> <i class="fa fa-users" aria-hidden="true"></i> Population : <%= @query.analytics[:population] %> </p>
-        <p> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2) %> /10m2</p>
-        <p> <i class="fa fa-birthday-cake" aria-hidden="true"></i>
+        <p style="margin-left: 8px;"> <i class="fa fa-users" aria-hidden="true"></i> Population : <%= @query.analytics[:population] %> </p>
+        <p style="margin-left: 8px;"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2) %> /10m2</p>
+        <p style="margin-left: 8px;"> <i class="fa fa-birthday-cake" aria-hidden="true"></i>
  Middle age : <%= (@query.analytics[:res25]*12.5 + @query.analytics[:res2565]*45 + @query.analytics[:res65]*72).fdiv(100).round(1) %> years old</p>
       </div>
       <div class="rccomp">
         <h3>Competitors</h3>
-        <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @competitors.count %></p>
-        <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor :
-          <% if @competitors.count != 0  %>
-          <%= @query.analytics[:population].fdiv(@competitors.count).round %>
+        <p style="margin-left: 8px;"> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <%= @query.competitors_catchment %></p>
+        <p style="margin-left: 8px;"> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor :
+          <% if @query.competitors_catchment != 0  %>
+          <%= @query.analytics[:population].fdiv(@query.competitors_catchment).round %>
           <% end %>
         </p>
       </div>

@@ -9,9 +9,9 @@
 
     <% if user_signed_in? %>
       <!-- Links when logged in -->
-      <%= link_to "My serach", "#", class: "navbar-wagon-item navbar-wagon-link" %>
+      <%= link_to "My searches", "#", class: "navbar-wagon-item navbar-wagon-link" %>
       <%= link_to destroy_user_session_path, method: :delete do %>
-        <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+        <i class="fa fa-sign-out" style="color:#307A94"></i>  <%= t(".sign_out", default: "Log out") %>
       <% end %>
     <% end %>
   </div>

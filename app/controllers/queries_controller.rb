@@ -54,23 +54,14 @@ class QueriesController < ApplicationController
       format.html
       format.pdf do
         render pdf: "Your market studys",
-          template: "queries/show.html.erb"
+          template: "queries/show.html.erb",
+          orientation: "Landscape"
         # à mettre en forme avec Javascript tag pour garder css
-
-        end
       end
+    end
+
       @city = City.near([@query.latitude, @query.longitude], 10).first
-      respond_to do |format|
-        format.html
-        format.pdf do
-          render pdf: "Your market studys",
-            template: "queries/show.html.erb"
-          # à mettre en forme avec Javascript tag pour garder css
-          end
-       end
-     end
-
-
+  end
   # GET /queries/new
   def new
     @query = Query.new
@@ -96,8 +87,22 @@ class QueriesController < ApplicationController
       @competitors << competitor if distance <= @query.radius_search #competitors dans la search_area
     end
     @query.competitors_json = @competitors.to_json
+
+    @competitors_catchment = []
+    @competitors_search.each do |competitor|
+      distance = Tiles.distance((loc), [competitor["lat"], competitor["lng"]])
+      @competitors_catchment << competitor if distance <= @query.radius_catchment_area #competitors dans la search_area
+    end
+    @query.competitors_catchment = @competitors_catchment.count
     resultats_insee = Tiles.calculate([@query.latitude, @query.longitude], @query.radius_catchment_area)
     @query.analytics = resultats_insee
+
+    if @query.competitors_catchment != 0
+      pop_grade = @query.analytics[:population].fdiv(@query.competitors_catchment)
+      @query.pertinence_grade = pertinence_grade(pop_grade)
+    else
+      @query.pertinence_grade = 0
+    end
 
     if current_user
       @query.user = current_user
@@ -126,10 +131,8 @@ class QueriesController < ApplicationController
   # DELETE /queries/1.json
   def destroy
     @query.destroy
-    respond_to do |format|
-      format.html { redirect_to queries_url, notice: 'Query was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to queries_path
+
   end
 
   private
@@ -182,5 +185,20 @@ class QueriesController < ApplicationController
       session.delete('competitors')
     end
 
+    def pertinence_grade(number)
+      if number < 50
+        return 0
+      elsif number < 100
+        return 1
+      elsif number < 200
+        return 2
+      elsif number < 500
+        return 3
+      elsif number < 900
+        return 4
+      else
+        return 5
+      end
+    end
 end
 
