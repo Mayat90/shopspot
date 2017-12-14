@@ -79,6 +79,10 @@ form abbr {
 text-decoration: none;    
 }
 
+.select-wrapper {
+  padding-bottom: 1px;
+}
+
 .select-wrapper input.select-dropdown {
   font-size: 1.8rem;
 }
@@ -90,3 +94,4 @@ text-decoration: none;
 .dropdown-content li > a, .dropdown-content li > span {
   color: $blue;
 }
+
