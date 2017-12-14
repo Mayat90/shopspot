@@ -32,11 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     initMap();
-    
+
     google.maps.event.addListener(map, 'bounds_changed', function() {
       addpopulation();
     });
-    
+
     bounds = new google.maps.LatLngBounds();
 
     const rescard = document.querySelectorAll('.rcframe');
@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function affichecard(element) {
     // radiusCatchment = parseInt(element.getAttribute('data-radius_catchment_area'));
     radiusSearch = parseInt(element.getAttribute('data-radiussearch'));
+    radiusCatchment = parseInt(element.getAttribute('data-radius_catchment_area'));
     let title = element.getAttribute('data-title');
     let id = element.getAttribute('data-id');
     lat = parseFloat(element.getAttribute('data-lat'));
@@ -513,8 +514,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const opacity = document.getElementById('sliderp').value;
         tiles.forEach((tile) => {
           poly = new google.maps.Polygon(tile);
-          poly.setOptions({'fillOpacity': opacity /100})
-          poly.setMap(map);
+          poly.setOptions({'fillOpacity': opacity /100});
+          poly.setZIndex(9999);
+            poly.setMap(map);
           addListenersOnPolygon(poly);
           polya.push(poly);
         });
