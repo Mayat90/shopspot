@@ -515,7 +515,6 @@ document.addEventListener('DOMContentLoaded', () => {
         tiles.forEach((tile) => {
           poly = new google.maps.Polygon(tile);
           poly.setOptions({'fillOpacity': opacity /100});
-          poly.setZIndex(9999);
             poly.setMap(map);
           addListenersOnPolygon(poly);
           polya.push(poly);
