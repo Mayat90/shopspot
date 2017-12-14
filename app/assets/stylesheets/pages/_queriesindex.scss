@@ -44,25 +44,35 @@
 
 .captionbarpop {
   width: 100%;
-  height: 16px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 4rem;
   background: linear-gradient(to right, #7fdb9b, #349151);
 }
 .captionbarcomp {
   width: 100%;
-  height: 16px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 4rem;
   background: linear-gradient(to right, #f9909b, #c63b49);
 }
 .captionbardeal {
   width: 100%;
-  height: 16px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 4rem;
   background: linear-gradient(to right, #d26e38, #d3a039);
 }
 
 .innercaption {
-  font-size: 0.7em;
+  font-size: 1em;
+  font-weight: 400;
   color: white;
   text-align:center;
 }
@@ -70,4 +80,17 @@
 #setting-current {
   width: 100%;
 }
+
+#formnewrequest {
+  margin-bottom: 10px;
+  a {
+  color: $blue;
+  margin-bottom: 10px;
+  font-weight: 500;
+  }
+}
+
+a:hover, a:focus {
+    text-decoration: none !important;
+  }
 

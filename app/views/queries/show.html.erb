@@ -6,7 +6,7 @@
     </div>
 
     <div id="showmapframe">
-        <%= static_map_for(@query) %>
+        <%= static_map_for(@query, class: '') %>
     </div>
   </div>
   <div id="showcard">
@@ -23,7 +23,7 @@
       </div> 
     </div>
     <div id="showstreetframe">
-        <%= street_view(@query) %>
+        <%= street_view(@query, class: '') %>
     </div>
   </div>
 </div>

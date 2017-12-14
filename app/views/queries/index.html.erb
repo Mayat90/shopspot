@@ -1,13 +1,19 @@
-    <%= render 'shared/navbar' %>
+<%= render 'shared/navbar' %>
 
 
 <div class="indexcontent">
   <div class="indexcards">
+
+    <div id="formnewrequest">
+      <a href="#" data-toggle="modal" data-target="#myModal">Compare with new address</a>
+    </div>
+
       <% letter = 0
         @queries.each do |query|
         @letter =image_url("mapicons/letter_" + @letters[letter] + ".png")
         @market = image_url("mapicons/market.png")
         p @market
+
         @query = query
         @competitors = JSON.parse(@query.competitors_json)%>
 
@@ -18,12 +24,7 @@
 
   </div>
   <div class="indexmap">
-    <div id="formnewrequest">
-<!-- Button trigger modal -->
-      <button class="btn btn-primary" id="btn-newaddress" data-toggle="modal" data-target="#myModal">Compare with new address</button>
 
-
-    </div>
     <div style="position: relative;">
       <div class="myflex map-controls">
           <div style="width: 30%;">
@@ -39,9 +40,6 @@
           </div>
       </div>
       <div style = "background-color: white; position: absolute; right: 10px; top: 50px; z-index:20">
-<!--         <div id="setting-button" class="infohie" onclick="openset()">
-          <i id="setting-open" class="fa fa-cogs fa-fw fa-lg"></i>
-        </div> -->
 
           <div id="infos-button" >
             <i id="infos-open" class="fa fa-info-circle fa-fw fa-lg"></i>
