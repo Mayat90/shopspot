@@ -56,16 +56,12 @@ document.addEventListener('DOMContentLoaded', () => {
               radiusSearch = parseInt(element.getAttribute('data-radiussearch'));
               radiusCatchment = parseInt(element.getAttribute('data-radius_catchment_area'));
 
-              console.log(address)
               document.getElementById('query_address').value = address;
-              console.log(activity)
               select = document.getElementById('query_activity');
  select.value=activity;
 console.log(select.value)
-              console.log(radiusSearch)
-              document.getElementById('query_radius_search').value = "200";
-              console.log(radiusCatchment)
-              document.getElementById('query_radius_catchment_area').value = "1000";
+              document.getElementById('query_radius_search').value = radiusSearch;
+              document.getElementById('query_radius_catchment_area').value = radiusCatchment;
               document.getElementById('edit_query_5').submit();
             }
 
@@ -152,7 +148,7 @@ console.log(select.value)
     });
     var searchcircle = new google.maps.Circle({
       strokeColor: '#0f5',
-      strokeOpacity: 0.8,
+      strokeOpacity: 0.5,
       strokeWeight: 4,
       fillColor: '#FF0000',
       fillOpacity: 0,
@@ -220,9 +216,9 @@ console.log(select.value)
         radius: radius,
         radiusCatch: radiusCatchment,
         clickable: false,
+        opacity: opacity,
         map: map
       });
-      heatmap.set('opacity', opacity);
       changeGradient();
       map.addListener('zoom_changed', function() {
         var radius = Math.floor(heatmap.radiusCatch / metersPerPixel(map));
@@ -257,100 +253,22 @@ console.log(select.value)
   }
 
   function initMap() {
-    var mapStyle = [
-      {
-          "featureType": "all",
-          "elementType": "labels",
-          "stylers": [
-              {
-                  "visibility": "on"
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "saturation": 36
-              },
-              {
-                  "color": "#000000"
-              },
-              {
-                  "lightness": 40
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-              {
-                  "visibility": "on"
-              },
-              {
-                  "color": "#000000"
-              },
-              {
-                  "lightness": 16
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "labels.icon",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#000000"
-              },
-              {
-                  "lightness": 20
-              }
-          ]
-      },
-      {
-          "featureType": "administrative",
-          "elementType": "geometry.stroke",
-          "stylers": [
-              {
-                  "color": "#000000"
-              },
-              {
-                  "lightness": 17
-              },
-              {
-                  "weight": 1.2
-              }
-          ]
-      },
-      {
-          "featureType": "administrative.country",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "color": "#e5c163"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative.locality",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "color": "#c4c4c4"
-              }
-          ]
-      },
+    var mapStyle = [{"featureType": "all", "elementType": "labels",
+          "stylers": [{"visibility": "on"}]},
+      {"featureType": "all","elementType": "labels.text.fill",
+          "stylers": [{"saturation": 36},{"color": "#000000"},
+              {"lightness": 40}]},
+      {"featureType": "all","elementType": "labels.text.stroke",
+          "stylers": [{"visibility": "on"}, {"color": "#000000" },{"lightness": 16 }] },
+      {"featureType": "all","elementType": "labels.icon",
+          "stylers": [{ "visibility": "off"} ] },{ "featureType": "administrative", "elementType": "geometry.fill",
+          "stylers": [{"color": "#000000" },  { "lightness": 20} ]},
+      {"featureType": "administrative", "elementType": "geometry.stroke",
+          "stylers": [ { "color": "#000000"},  { "lightness": 17 }, {"weight": 1.2 } ] },
+      {"featureType": "administrative.country","elementType": "labels.text.fill",
+          "stylers": [{"color": "#e5c163" } ]},
+      {"featureType": "administrative.locality", "elementType": "labels.text.fill",
+          "stylers": [ { "color": "#c4c4c4" } ]},
       {
           "featureType": "administrative.neighborhood",
           "elementType": "labels.text.fill",
@@ -528,35 +446,6 @@ console.log(select.value)
       styles:    mapStyle,
       streetViewControl: false,
     });
-
-
-    // var marker = new google.maps.Marker({
-    //   position: search,
-    //   icon: search_icon,
-    //   animation: 'google.maps.Animation.DROP',
-    //   map: map
-    // });
-    // var searchcircle = new google.maps.Circle({
-    //   strokeColor: '#0f5',
-    //   strokeOpacity: 0.8,
-    //   strokeWeight: 4,
-    //   fillColor: '#FF0000',
-    //   fillOpacity: 0,
-    //   map: map,
-    //   center: search,
-    //   radius: radiusCatchment
-    // });
-    // var catchcircle = new google.maps.Circle({
-    //   strokeColor: '#05F',
-    //   strokeOpacity: 0.8,
-    //   strokeWeight: 4,
-    //   fillColor: '#FFFF00',
-    //   fillOpacity: 0,
-    //   map: map,
-    //   center: search,
-    //   radius: radiusSearch
-    // });
-    // addcompetitors(map)
   }
 
   function delpoly() {
@@ -586,7 +475,6 @@ console.log(select.value)
           polya.push(poly);
         });
       });
-
   }
 
   $("#sliderp").on("input", function(){
@@ -597,22 +485,16 @@ console.log(select.value)
 
   $("#sliderh").on("input", function(){
     heatmap.set('opacity', (this.value/100));
-      // for (var key in heatmaps) {
-      //     heatmaps[key].set('opacity', (this.value/100));
-      // }
   });
 
   $(".fa-eye").on("click", function(){
     let id = parseInt(this.getAttribute('data-id'));
     document.querySelector("#icon" + id + " .fa-eye").classList.add("infohide");
     document.querySelector("#icon" + id + " .fa-eye-slash").classList.remove("infohide");
-    // efface
     p = "query" + id;
     places[p][0].setMap(null);
     places[p][1].setMap(null);
     places[p][2].setMap(null);
-    // heatmaps[p].setMap(null);
-    // competitors_all[p].setMap(null);
     reloadcompetitors()
   });
 
@@ -625,18 +507,8 @@ console.log(select.value)
     places[p][0].setMap(map);
     places[p][1].setMap(map);
     places[p][2].setMap(map);
-    // heatmaps[p].setMap(map);
-    // competitors_all[p].setMap(map);
     reloadcompetitors()
   });
 
 });
 
-
-// function openset() {
-//   document.getElementById('show-setting').classList.remove("infohide");
-// }
-
-// function closeset() {
-//   document.getElementById('show-setting').classList.add("infohide");
-// }
