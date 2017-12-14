@@ -2,12 +2,14 @@
 
 // For example:
 $red: #EE5F5B;
-$blue: #27B1BE;
+// $blue: #27B1BE;
+$blue: #307A94;
 $yellow: #FDB631;
 $orange: #E67E22;
 $green: #32B796;
 $gray: #000000;
 $light-gray: #F4F4F4;
+$backcards: #FEFEFE;
 
 
-$blue: lighten($blue, 30%);
+$lightblue: lighten($blue, 59%);

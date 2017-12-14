@@ -6,7 +6,8 @@ class QueriesController < ApplicationController
     @queries = []
     if session['address']
       @query = load_session
-      @competitors = JSON.parse(@query.competitors_json)
+      @query.id = 0
+      # @competitors = JSON.parse(@query.competitors_json)
       if current_user
         if current_user.queries.count != 0
           @query.user = current_user
@@ -31,6 +32,7 @@ class QueriesController < ApplicationController
   # GET /queries/1.json
   def show
     @competitors = []
+
     competitors_parse = JSON.parse(@query.competitors_json)
     if competitors_parse.nil? == false
       competitors_parse.each do |competitor_parse|
@@ -44,17 +46,21 @@ class QueriesController < ApplicationController
          @competitors << competitor
       end
     end
-    @city = City.near([@query.latitude, @query.longitude], 10).first
+    city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][3]["long_name"]
+    city_geocoded = Geocoder.coordinates(city_name)
+    @city = City.near(city_geocoded,5).first
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "Your market studys",
-          template: "queries/show.html.erb"
+          template: "queries/show.html.erb",
+          orientation: "Landscape"
         # à mettre en forme avec Javascript tag pour garder css
-        end
-     end
-  end
+      end
+    end
 
+      @city = City.near([@query.latitude, @query.longitude], 10).first
+  end
   # GET /queries/new
   def new
     @query = Query.new
@@ -80,6 +86,13 @@ class QueriesController < ApplicationController
       @competitors << competitor if distance <= @query.radius_search #competitors dans la search_area
     end
     @query.competitors_json = @competitors.to_json
+
+    @competitors_catchment = []
+    @competitors_search.each do |competitor|
+      distance = Tiles.distance((loc), [competitor["lat"], competitor["lng"]])
+      @competitors_catchment << competitor if distance <= @query.radius_catchment_area #competitors dans la search_area
+    end
+    @query.competitors_catchment = @competitors_catchment.count
     resultats_insee = Tiles.calculate([@query.latitude, @query.longitude], @query.radius_catchment_area)
     @query.analytics = resultats_insee
 
@@ -110,10 +123,8 @@ class QueriesController < ApplicationController
   # DELETE /queries/1.json
   def destroy
     @query.destroy
-    respond_to do |format|
-      format.html { redirect_to queries_url, notice: 'Query was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to queries_path
+
   end
 
   private
@@ -154,6 +165,7 @@ class QueriesController < ApplicationController
        p "session loaded"
        query
     end
+
     def session_delete
       session.delete('address')
       session.delete('activity')
@@ -164,4 +176,6 @@ class QueriesController < ApplicationController
       session.delete('analytics')
       session.delete('competitors')
     end
+
 end
+

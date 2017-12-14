@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :queries do
     resources :competitors, only: [:index]
+    resources :cities, only: [:index]
   end
   root to: 'queries#new'
 

@@ -1,12 +1,13 @@
 #showcontent {
   display: flex;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 130px);
   justify-content: space-between;
-  margin: 10px 30px;
+  margin: 30px 80px;
+  background: $lightblue;
 }
 
 #showleft {
-  width: 400px;
+  width: 300px;
 }
 
 #showcard {
@@ -23,21 +24,15 @@
 }
 
 #showmapframe {
+  height: 515px;
   color: #555;
   background: #FAFAFA;
   margin: 10px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
-#showmapcontent {
-  background: #F9F9F9;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 #showstreetframe {
+  height: 564px;
   color: #555;
   background: #FAFAFA;
   margin: 10px;
@@ -51,21 +46,19 @@
 
 #linksframe {
   color: #555;
-  background: #FAFAFA;
+  background: $backcards;
   margin: 10px;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 
 #linkscontent {
-  background: #F9F9F9;
-  padding: 10px;
+  padding: 10px 25px;
     h3 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #555;
     margin-bottom: 12px;
   }
-  p {
-    font-size: 1.8rem;
-  }
+}
+
+#linkstitle {
+  border-bottom: 1px solid #EEE;
+  margin: 10px 0;
 }

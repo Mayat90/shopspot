@@ -1,6 +1,6 @@
 #ssframe {
-  color: #555;
-  background: #FAFAFA;
+  background: $backcards;
+  position: relative;
   margin: 10px;
   display: flex;
   align-items: center;
@@ -9,23 +9,24 @@
 }
 
 #sscontent {
-  background: #F9F9F9;
-  padding: 10px;
-  line-height: 70%;
+  padding: 10px 25px;
+  line-height: 140%;
   width: 100%;
   h3 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #555;
     margin-bottom: 12px;
-  }
-  p {
-    font-size: 1.8rem;
   }
 }
 
 #sstitle {
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #EEE;
   margin: 10px 0;
-  text-align: right;
+}
+
+.backtohome a {
+  font-weight: 500;
+  text-decoration: none;
+  color: $blue;
+position: absolute;
+bottom: 10px;
+right: 10px;
 }

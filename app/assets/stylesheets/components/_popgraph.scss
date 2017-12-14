@@ -1,0 +1,49 @@
+#rcpopgraph {
+  margin-top: 20px;
+  width: 150px;
+  height: 70px;
+  text-align: center;
+    p {
+    font-height: 300;
+    color: #333;
+  }
+}
+
+#rcpopgraphhead {
+  display: flex;
+  height: 20%;
+  justify-content: space-around;
+  text-align: center;
+}
+
+#rcpopgraphres {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: flex-end;
+  height: 60%;
+}
+
+#rcpopgraphbot {
+  display: flex;
+  height: 20%;
+  justify-content: space-around;
+  text-align: center;
+}
+
+#rcpopgraphres1, #rcpopgraphres3 {
+  width: 30%;
+  background: #CCC;
+}
+
+#rcpopgraphres2 {
+  width: 40%;
+  background: #EEE;
+}
+
+#rcpopgraphhead1, #rcpopgraphhead3 {
+  width: 30%;
+}
+
+#rcpopgraphhead2 {
+  width: 40%;
+}
