@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
 
   if (mapDomElement) {
+
     zoom = parseInt(mapDomElement.getAttribute('data-zoom'));
     radiusCatchment = parseInt(mapDomElement.getAttribute('data-radius'));
     radiusSearch = parseInt(mapDomElement.getAttribute('data-radiussearch'));
@@ -38,9 +39,38 @@ document.addEventListener('DOMContentLoaded', () => {
     
     bounds = new google.maps.LatLngBounds();
 
-    const rescard = document.querySelectorAll('.rcframe')
+    const rescard = document.querySelectorAll('.rcframe');
     rescard.forEach(function(element) { affichecard(element) });
     map.fitBounds(bounds);
+
+        afficheheatmap();
+
+
+  }
+
+  function reloadcompetitors() {
+    points = []
+    markers.forEach((marker) => {
+      marker.setMap(null);
+    });
+    heatmap.setMap(null);
+    heatmap = null;
+    markers = [];
+    competitors_place = {};
+    bounds = new google.maps.LatLngBounds();
+    const rescard = document.querySelectorAll('.rcframe');
+    rescard.forEach(function(element) { check(element) });
+    afficheheatmap();
+    map.fitBounds(bounds);
+  }
+
+
+  function check(element) {
+    if (element.querySelector('.fa-eye-slash').classList.contains('infohide')) {
+      const json = JSON.parse(element.getAttribute('data-competitors'));
+      json.forEach(function(competitor) { affichecompetitors(competitor) });
+
+    }
   }
 
   function affichecard(element) {
@@ -83,11 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     places[id] = [marker, searchcircle, catchcircle];
     bounds.extend( marker.getPosition() );
-    points = []
+    // points = []
     const json = JSON.parse(element.getAttribute('data-competitors'));
-    json.forEach(function(competitor) { affichecompetitors(competitor) });
-        afficheheatmap()
-    heatmaps[id] = heatmap
+    json.forEach(function(competitor) {
+      affichecompetitors(competitor);
+      // points.push(new google.maps.LatLng(competitor["lat"], competitor["lng"]))
+ });
+    //     afficheheatmap()
+    // heatmaps[id] = heatmap
 
   }
 
@@ -96,10 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
       return a
     }
     function changeRadius(radius) {
-      for (var key in heatmaps) {
-          console.log(heatmaps[key]);
-          heatmaps[key].set('radius', radius * 2);
-      }
+           heatmap.set('radius', radius * 1.5);
+      // for (var key in heatmaps) {
+      //      heatmaps[key].set('radius', radius * 1.5);
+      // }
     }
 
     function changeGradient() {
@@ -119,34 +152,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function afficheheatmap() {
         var radius = Math.floor(radiusCatchment / metersPerPixel(map));
+        const opacity = document.getElementById('sliderh').value;
         heatmap = new google.maps.visualization.HeatmapLayer({
           data: points,
           radius: radius,
           radiusCatch: radiusCatchment,
           map: map
         });
+        heatmap.set('opacity', opacity);
         changeGradient();
       map.addListener('zoom_changed', function() {
         var radius = Math.floor(heatmap.radiusCatch / metersPerPixel(map));
         changeRadius(radius);
-         console.log(radius);
       });
   }
 
   function affichecompetitors(competitor) {
-    // if (competitors_place[competitor["place_id"]]) {
-
-    //   console.log('exist deja');
-    // }else{
+    if (competitors_place[competitor["place_id"]]) {
+      console.log('exist deja');
+    }else{
         var marker = new google.maps.Marker({
           position: {lat: competitor["lat"], lng:competitor["lng"]},
           map: map,
           title: competitor["name"],
         });
-          points.push(new google.maps.LatLng(competitor["lat"], competitor["lng"]))
+          markers.push(marker);
           competitors_place[competitor["place_id"]] = marker;
           bounds.extend( marker.getPosition() );
-    // }
+      points.push(new google.maps.LatLng(competitor["lat"], competitor["lng"]))
+    }
   }
 
   var addListenersOnPolygon = function(polygon) {
@@ -493,10 +527,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   $("#sliderh").on("input", function(){
-    // heatmap.set('opacity', (this.value/100));
-      for (var key in heatmaps) {
-          heatmaps[key].set('opacity', (this.value/100));
-      }
+    heatmap.set('opacity', (this.value/100));
+      // for (var key in heatmaps) {
+      //     heatmaps[key].set('opacity', (this.value/100));
+      // }
   });
 
   $(".fa-eye").on("click", function(){
@@ -508,23 +542,39 @@ document.addEventListener('DOMContentLoaded', () => {
     places[p][0].setMap(null);
     places[p][1].setMap(null);
     places[p][2].setMap(null);
-    heatmaps[p].setMap(null);
-    competitors_all[p].setMap(null);
+    // heatmaps[p].setMap(null);
+    // competitors_all[p].setMap(null);
+    reloadcompetitors()
   });
 
   $(".fa-eye-slash").on("click", function(){
     let id = parseInt(this.getAttribute('data-id'));
     document.querySelector("#icon" + id + " .fa-eye-slash").classList.add("infohide");
     document.querySelector("#icon" + id + " .fa-eye").classList.remove("infohide");
-    // this.classList.add("infohide");
+    this.classList.add("infohide");
     p = "query" + id;
     places[p][0].setMap(map);
     places[p][1].setMap(map);
     places[p][2].setMap(map);
-    heatmaps[p].setMap(map);
-    competitors_all[p].setMap(map);
+    // heatmaps[p].setMap(map);
+    // competitors_all[p].setMap(map);
+    reloadcompetitors()
   });
+  google.maps.event.addListener(map, "rightclick", function(event) {
+      var lat = parseFloat(event.latLng.lat());
+      var lng = event.latLng.lng();
+      // populate yor box/field with lat, lng
+       console.log(lat)
 
+    //   url =`http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
+    //   alert(url);
+    // fetch(url)
+    //   .then((response) => response.json())
+    //   .then((results) => {
+    //     console.log(results)
+
+    //   });
+  });
 });
 
 function openinf() {
