@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let heatmap = null;
   let heatmaps = {};
   const search_icon = 'http://maps.google.com/mapfiles/ms/icons/blue-pushpin.png';
-  const concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
+  let concurrence_icon = 'http://maps.gstatic.com/mapfiles/ms2/micons/red.png';
 
   if (mapDomElement) {
+// concurrence_icon = mapDomElement.getAttribute('data-icon-market');
 
     zoom = parseInt(mapDomElement.getAttribute('data-zoom'));
     radiusCatchment = parseInt(mapDomElement.getAttribute('data-radius'));
@@ -37,22 +38,74 @@ document.addEventListener('DOMContentLoaded', () => {
       addpopulation();
     });
 
-    bounds = new google.maps.LatLngBounds();
+    google.maps.event.addListener(map, "rightclick", function(event) {
+        var lat = event.latLng.lat();
+        var lng = event.latLng.lng();
+        // populate yor box/field with lat, lng
+           url =`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=AIzaSyDpBXB_T-w0nBmUYIMkVOhTpIWbPO4rCtI`;
+        console.log(url)
+        fetch(url)
+          .then((response) => response.json())
+          .then((results) => {
+            if (results["status"] == "OK" ) {
 
+              address = results["results"][0]["formatted_address"];
+
+              element = document.querySelector('.rcframe');
+              activity = element.getAttribute('data-activity');
+              radiusSearch = parseInt(element.getAttribute('data-radiussearch'));
+              radiusCatchment = parseInt(element.getAttribute('data-radius_catchment_area'));
+
+              document.getElementById('query_address').value = address;
+              select = document.getElementById('query_activity');
+ select.value=activity;
+console.log(select.value)
+              document.getElementById('query_radius_search').value = radiusSearch;
+              document.getElementById('query_radius_catchment_area').value = radiusCatchment;
+              document.getElementById('edit_query_5').submit();
+            }
+
+          });
+    });
+
+    bounds = new google.maps.LatLngBounds();
     const rescard = document.querySelectorAll('.rcframe');
     rescard.forEach(function(element) { affichecard(element) });
     map.fitBounds(bounds);
+    afficheheatmap();
 
-        afficheheatmap();
+    document.getElementById('infos-button').addEventListener('click', ()=>{
+      document.getElementById('show-content').classList.remove("infohide");
+        polya.forEach((poly) => {
+          poly.setOptions({clickable: true });
+        });
+    })
 
+    document.getElementById('infos-close').addEventListener('click', ()=>{
+      document.getElementById('show-content').classList.add("infohide");
+        polya.forEach((poly) => {
+          poly.setOptions({clickable: false });
+        });
+    })
 
+    // function openinf() {
+    //   document.getElementById('show-content').classList.remove("infohide");
+    //     polya.forEach((poly) => {
+    //       poly.setOptions({clickable: true });
+    //     });
+    // }infos-close
+
+    // function closeinf() {
+    //   document.getElementById('show-content').classList.add("infohide");
+    //       polya.forEach((poly) => {
+    //       poly.setOptions({clickable: false });
+    //     });
+    // }
   }
 
   function reloadcompetitors() {
     points = []
-    markers.forEach((marker) => {
-      marker.setMap(null);
-    });
+    markers.forEach((marker) => { marker.setMap(null); });
     heatmap.setMap(null);
     heatmap = null;
     markers = [];
@@ -80,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let title = element.getAttribute('data-title');
     let id = element.getAttribute('data-id');
     lat = parseFloat(element.getAttribute('data-lat'));
+    const search_icon = element.getAttribute('data-icon');
     search = {
       lat: parseFloat(element.getAttribute('data-lat')),
       lng: parseFloat(element.getAttribute('data-lng'))
@@ -94,11 +148,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     var searchcircle = new google.maps.Circle({
       strokeColor: '#0f5',
-      strokeOpacity: 0.8,
+      strokeOpacity: 0.5,
       strokeWeight: 4,
       fillColor: '#FF0000',
       fillOpacity: 0,
       map: map,
+      clickable: false,
       center: search,
       radius: radiusCatchment
     });
@@ -108,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
       strokeWeight: 4,
       fillColor: '#FFFF00',
       fillOpacity: 0,
+      clickable: false,
       map: map,
       center: search,
       radius: radiusSearch
@@ -119,49 +175,51 @@ document.addEventListener('DOMContentLoaded', () => {
     json.forEach(function(competitor) {
       affichecompetitors(competitor);
       // points.push(new google.maps.LatLng(competitor["lat"], competitor["lng"]))
- });
+    });
     //     afficheheatmap()
     // heatmaps[id] = heatmap
 
   }
 
-    function metersPerPixel(map) {
-      a= (Math.cos(lat * Math.PI/180) * 2 * Math.PI * 6378137 / (256 * Math.pow(2, map.getZoom())));
-      return a
-    }
-    function changeRadius(radius) {
-           heatmap.set('radius', radius * 1.5);
-      // for (var key in heatmaps) {
-      //      heatmaps[key].set('radius', radius * 1.5);
-      // }
-    }
+  function metersPerPixel(map) {
+    a= (Math.cos(lat * Math.PI/180) * 2 * Math.PI * 6378137 / (256 * Math.pow(2, map.getZoom())));
+    return a
+  }
 
-    function changeGradient() {
-      var gradient = [
-        'rgba(0, 255, 255, 0)',
-        'rgba(0, 0, 223, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)'
-      ]
-      heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-    }
+  function changeRadius(radius) {
+    heatmap.set('radius', radius * 1.5);
+    // for (var key in heatmaps) {
+    //      heatmaps[key].set('radius', radius * 1.5);
+    // }
+  }
+
+  function changeGradient() {
+    var gradient = [
+      'rgba(0, 255, 255, 0)',
+      'rgba(0, 0, 223, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)'
+    ]
+    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+  }
 
   function afficheheatmap() {
-        var radius = Math.floor(radiusCatchment / metersPerPixel(map));
-        const opacity = document.getElementById('sliderh').value;
-        heatmap = new google.maps.visualization.HeatmapLayer({
-          data: points,
-          radius: radius,
-          radiusCatch: radiusCatchment,
-          map: map
-        });
-        heatmap.set('opacity', opacity);
-        changeGradient();
+      var radius = Math.floor(radiusCatchment / metersPerPixel(map));
+      const opacity = document.getElementById('sliderh').value;
+      heatmap = new google.maps.visualization.HeatmapLayer({
+        data: points,
+        radius: radius,
+        radiusCatch: radiusCatchment,
+        clickable: false,
+        opacity: opacity,
+        map: map
+      });
+      changeGradient();
       map.addListener('zoom_changed', function() {
         var radius = Math.floor(heatmap.radiusCatch / metersPerPixel(map));
         changeRadius(radius);
@@ -175,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var marker = new google.maps.Marker({
           position: {lat: competitor["lat"], lng:competitor["lng"]},
           map: map,
+          icon: concurrence_icon,
           title: competitor["name"],
         });
           markers.push(marker);
@@ -194,100 +253,22 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function initMap() {
-    var mapStyle = [
-      {
-          "featureType": "all",
-          "elementType": "labels",
-          "stylers": [
-              {
-                  "visibility": "on"
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "saturation": 36
-              },
-              {
-                  "color": "#000000"
-              },
-              {
-                  "lightness": 40
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-              {
-                  "visibility": "on"
-              },
-              {
-                  "color": "#000000"
-              },
-              {
-                  "lightness": 16
-              }
-          ]
-      },
-      {
-          "featureType": "all",
-          "elementType": "labels.icon",
-          "stylers": [
-              {
-                  "visibility": "off"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative",
-          "elementType": "geometry.fill",
-          "stylers": [
-              {
-                  "color": "#000000"
-              },
-              {
-                  "lightness": 20
-              }
-          ]
-      },
-      {
-          "featureType": "administrative",
-          "elementType": "geometry.stroke",
-          "stylers": [
-              {
-                  "color": "#000000"
-              },
-              {
-                  "lightness": 17
-              },
-              {
-                  "weight": 1.2
-              }
-          ]
-      },
-      {
-          "featureType": "administrative.country",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "color": "#e5c163"
-              }
-          ]
-      },
-      {
-          "featureType": "administrative.locality",
-          "elementType": "labels.text.fill",
-          "stylers": [
-              {
-                  "color": "#c4c4c4"
-              }
-          ]
-      },
+    var mapStyle = [{"featureType": "all", "elementType": "labels",
+          "stylers": [{"visibility": "on"}]},
+      {"featureType": "all","elementType": "labels.text.fill",
+          "stylers": [{"saturation": 36},{"color": "#000000"},
+              {"lightness": 40}]},
+      {"featureType": "all","elementType": "labels.text.stroke",
+          "stylers": [{"visibility": "on"}, {"color": "#000000" },{"lightness": 16 }] },
+      {"featureType": "all","elementType": "labels.icon",
+          "stylers": [{ "visibility": "off"} ] },{ "featureType": "administrative", "elementType": "geometry.fill",
+          "stylers": [{"color": "#000000" },  { "lightness": 20} ]},
+      {"featureType": "administrative", "elementType": "geometry.stroke",
+          "stylers": [ { "color": "#000000"},  { "lightness": 17 }, {"weight": 1.2 } ] },
+      {"featureType": "administrative.country","elementType": "labels.text.fill",
+          "stylers": [{"color": "#e5c163" } ]},
+      {"featureType": "administrative.locality", "elementType": "labels.text.fill",
+          "stylers": [ { "color": "#c4c4c4" } ]},
       {
           "featureType": "administrative.neighborhood",
           "elementType": "labels.text.fill",
@@ -465,33 +446,6 @@ document.addEventListener('DOMContentLoaded', () => {
       styles:    mapStyle,
       streetViewControl: false,
     });
-    // var marker = new google.maps.Marker({
-    //   position: search,
-    //   icon: search_icon,
-    //   animation: 'google.maps.Animation.DROP',
-    //   map: map
-    // });
-    // var searchcircle = new google.maps.Circle({
-    //   strokeColor: '#0f5',
-    //   strokeOpacity: 0.8,
-    //   strokeWeight: 4,
-    //   fillColor: '#FF0000',
-    //   fillOpacity: 0,
-    //   map: map,
-    //   center: search,
-    //   radius: radiusCatchment
-    // });
-    // var catchcircle = new google.maps.Circle({
-    //   strokeColor: '#05F',
-    //   strokeOpacity: 0.8,
-    //   strokeWeight: 4,
-    //   fillColor: '#FFFF00',
-    //   fillOpacity: 0,
-    //   map: map,
-    //   center: search,
-    //   radius: radiusSearch
-    // });
-    // addcompetitors(map)
   }
 
   function delpoly() {
@@ -501,6 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addpopulation() {
+
     let zoom = map.getZoom();
     let lat1 = map.getBounds().getSouthWest().lat() // latitude du coin inférieur gauche
     let lng1 = map.getBounds().getSouthWest().lng() // longitude du coin inférieur gauche
@@ -514,10 +469,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const opacity = document.getElementById('sliderp').value;
         tiles.forEach((tile) => {
           poly = new google.maps.Polygon(tile);
-          poly.setOptions({'fillOpacity': opacity /100});
-          poly.setZIndex(9999);
-            poly.setMap(map);
           addListenersOnPolygon(poly);
+          poly.setOptions({'fillOpacity': opacity /100, clickable: false });
+            poly.setMap(map);
           polya.push(poly);
         });
       });
@@ -528,24 +482,19 @@ document.addEventListener('DOMContentLoaded', () => {
       poly.setOptions({'fillOpacity': this.value /100})
     });
   });
+
   $("#sliderh").on("input", function(){
     heatmap.set('opacity', (this.value/100));
-      // for (var key in heatmaps) {
-      //     heatmaps[key].set('opacity', (this.value/100));
-      // }
   });
 
   $(".fa-eye").on("click", function(){
     let id = parseInt(this.getAttribute('data-id'));
     document.querySelector("#icon" + id + " .fa-eye").classList.add("infohide");
     document.querySelector("#icon" + id + " .fa-eye-slash").classList.remove("infohide");
-    // efface
     p = "query" + id;
     places[p][0].setMap(null);
     places[p][1].setMap(null);
     places[p][2].setMap(null);
-    // heatmaps[p].setMap(null);
-    // competitors_all[p].setMap(null);
     reloadcompetitors()
   });
 
@@ -558,39 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
     places[p][0].setMap(map);
     places[p][1].setMap(map);
     places[p][2].setMap(map);
-    // heatmaps[p].setMap(map);
-    // competitors_all[p].setMap(map);
     reloadcompetitors()
   });
-  google.maps.event.addListener(map, "rightclick", function(event) {
-      var lat = parseFloat(event.latLng.lat());
-      var lng = event.latLng.lng();
-      // populate yor box/field with lat, lng
-       console.log(lat)
 
-    //   url =`http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
-    //   alert(url);
-    // fetch(url)
-    //   .then((response) => response.json())
-    //   .then((results) => {
-    //     console.log(results)
-
-    //   });
-  });
 });
 
-function openinf() {
-  document.getElementById('show-content').classList.remove("infohide");
-}
-
-function closeinf() {
-  document.getElementById('show-content').classList.add("infohide");
-}
-
-function openset() {
-  document.getElementById('show-setting').classList.remove("infohide");
-}
-
-function closeset() {
-  document.getElementById('show-setting').classList.add("infohide");
-}
