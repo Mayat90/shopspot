@@ -1,3 +1,7 @@
+require 'json'
+require 'open-uri'
+require 'rest-client'
+
 class CompetitorsController < ApplicationController
   before_action :set_query, only: [:index]
   def index
@@ -8,6 +12,7 @@ class CompetitorsController < ApplicationController
 
   def find_details(competitors)
     competitors.each do |competitor|
+      if competitor.phone_number == nil
         url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=#{competitor.place_id}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}"
         result_search = RestClient.get(url)
         results = JSON.parse(result_search)
@@ -19,6 +24,7 @@ class CompetitorsController < ApplicationController
             competitor.number_rating = results["result"]["reviews"].count
           end
           competitor.save
+        end
       end
   end
 
