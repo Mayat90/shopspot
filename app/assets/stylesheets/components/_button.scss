@@ -29,3 +29,20 @@
 #btn-sign-up:hover {
   background-color: rgba(200,200,200,0.3) !important;
 }
+
+#btn-newaddress {
+  width: 100%;
+  margin-bottom: 15px;
+  margin-right: 30px;
+  background: transparent !important;
+  border: 1px solid $blue;
+  color: $blue;
+  border-radius: 5px;
+}
+
+#btn-newaddress:hover {
+  border: 1px solid $blue;
+  color: white;
+  background: $blue !important;
+  border-radius: 5px;
+}

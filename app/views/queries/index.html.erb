@@ -1,8 +1,11 @@
-    <%= render 'shared/navbar' %>
+<%= render 'shared/navbar' %>
 
 
 <div class="indexcontent">
   <div class="indexcards">
+    <div id="formnewrequest">
+      <a href="#" data-toggle="modal" data-target="#myModal">Compare with new address</a>
+    </div>
       <% @queries.each do |query|
         @query = query
         @competitors = JSON.parse(@query.competitors_json)%>
@@ -11,13 +14,7 @@
 
   </div>
   <div class="indexmap">
-    <div id="formnewrequest">
-<!-- Button trigger modal -->
-      <button class="btn btn-primary" id="btn-newaddress" data-toggle="modal" data-target="#myModal">Compare with new address</button>
 
-      <!-- Modal -->
-
-    </div>
     <div style="position: relative;">
       <div class="myflex map-controls">
           <div style="width: 30%;">

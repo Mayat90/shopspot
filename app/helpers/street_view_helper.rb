@@ -1,6 +1,6 @@
 module StreetViewHelper
 
-  def street_view(query) #options = {}
+  def street_view(query, options = {})
     params = {
       location: [query.latitude, query.longitude].join(","),
       size: "380x563",
@@ -9,6 +9,6 @@ module StreetViewHelper
 
 
     query_string =  params.map{|k,v| "#{k}=#{v}"}.join("&")
-    image_tag "http://maps.googleapis.com/maps/api/streetview?#{query_string}"
+    image_tag "http://maps.googleapis.com/maps/api/streetview?#{query_string}", options
   end
 end
