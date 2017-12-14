@@ -25,7 +25,9 @@
   <div class="rccontent">
     <div class="rctitle">
       <h3><%= @query.address %></h3>
-      <%= image_tag("five-stars.png", height: '12') %>
+      <% @query.pertinence_grade.times do %>
+        <%= image_tag('star_yellow.png', height: '12') %>
+      <% end %>
       <%= image_tag(@letter) %>
       <div id="icons">
         <div id="icon<%= @query.id %>" style="display:flex; align-items: right">
