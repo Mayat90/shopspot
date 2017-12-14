@@ -9,7 +9,6 @@ gem 'rails', '5.0.6'
 gem 'redis'
 gem 'materialize-sass'
 gem 'devise'
-
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
@@ -25,6 +24,7 @@ gem 'rest-client'
 gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
 gem 'activerecord-session_store'
+
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"

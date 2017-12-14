@@ -6,7 +6,6 @@ class QueriesController < ApplicationController
     @queries = []
     if session['address']
       @query = load_session
-      @query.id = 0
       # @competitors = JSON.parse(@query.competitors_json)
       if current_user
         if current_user.queries.count != 0
@@ -20,7 +19,9 @@ class QueriesController < ApplicationController
 
     if current_user
       @queries = current_user.queries.reverse
+      redirect_to root_path if @queries.count < 1
     elsif session['address']
+      @query.id = 0
       @queries << @query
     else
       redirect_to root_path
