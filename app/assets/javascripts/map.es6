@@ -43,9 +43,23 @@ document.addEventListener('DOMContentLoaded', () => {
     rescard.forEach(function(element) { affichecard(element) });
     map.fitBounds(bounds);
 
-        afficheheatmap();
+    afficheheatmap();
 
+    google.maps.event.addListener(map, "rightclick", function(event) {
+      var lat = parseFloat(event.latLng.lat());
+      var lng = event.latLng.lng();
+      // populate yor box/field with lat, lng
+       console.log(lat)
 
+    //   url =`http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
+    //   alert(url);
+    // fetch(url)
+    //   .then((response) => response.json())
+    //   .then((results) => {
+    //     console.log(results)
+
+    //   });
+    });
   }
 
   function reloadcompetitors() {
@@ -119,49 +133,50 @@ document.addEventListener('DOMContentLoaded', () => {
     json.forEach(function(competitor) {
       affichecompetitors(competitor);
       // points.push(new google.maps.LatLng(competitor["lat"], competitor["lng"]))
- });
+    });
     //     afficheheatmap()
     // heatmaps[id] = heatmap
 
   }
 
-    function metersPerPixel(map) {
-      a= (Math.cos(lat * Math.PI/180) * 2 * Math.PI * 6378137 / (256 * Math.pow(2, map.getZoom())));
-      return a
-    }
-    function changeRadius(radius) {
-           heatmap.set('radius', radius * 1.5);
-      // for (var key in heatmaps) {
-      //      heatmaps[key].set('radius', radius * 1.5);
-      // }
-    }
+  function metersPerPixel(map) {
+    a= (Math.cos(lat * Math.PI/180) * 2 * Math.PI * 6378137 / (256 * Math.pow(2, map.getZoom())));
+    return a
+  }
 
-    function changeGradient() {
-      var gradient = [
-        'rgba(0, 255, 255, 0)',
-        'rgba(0, 0, 223, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)',
-        'rgba(255, 0, 0, 1)'
-      ]
-      heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-    }
+  function changeRadius(radius) {
+    heatmap.set('radius', radius * 1.5);
+    // for (var key in heatmaps) {
+    //      heatmaps[key].set('radius', radius * 1.5);
+    // }
+  }
+
+  function changeGradient() {
+    var gradient = [
+      'rgba(0, 255, 255, 0)',
+      'rgba(0, 0, 223, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)',
+      'rgba(255, 0, 0, 1)'
+    ]
+    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+  }
 
   function afficheheatmap() {
-        var radius = Math.floor(radiusCatchment / metersPerPixel(map));
-        const opacity = document.getElementById('sliderh').value;
-        heatmap = new google.maps.visualization.HeatmapLayer({
-          data: points,
-          radius: radius,
-          radiusCatch: radiusCatchment,
-          map: map
-        });
-        heatmap.set('opacity', opacity);
-        changeGradient();
+      var radius = Math.floor(radiusCatchment / metersPerPixel(map));
+      const opacity = document.getElementById('sliderh').value;
+      heatmap = new google.maps.visualization.HeatmapLayer({
+        data: points,
+        radius: radius,
+        radiusCatch: radiusCatchment,
+        map: map
+      });
+      heatmap.set('opacity', opacity);
+      changeGradient();
       map.addListener('zoom_changed', function() {
         var radius = Math.floor(heatmap.radiusCatch / metersPerPixel(map));
         changeRadius(radius);
@@ -501,26 +516,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addpopulation() {
-    let zoom = map.getZoom();
-    let lat1 = map.getBounds().getSouthWest().lat() // latitude du coin inférieur gauche
-    let lng1 = map.getBounds().getSouthWest().lng() // longitude du coin inférieur gauche
-    let lat2 = map.getBounds().getNorthEast().lat() // latitude du coin supérieur droit
-    let lng2 = map.getBounds().getNorthEast().lng() // longitude du coin supérieur droit
+    // let zoom = map.getZoom();
+    // let lat1 = map.getBounds().getSouthWest().lat() // latitude du coin inférieur gauche
+    // let lng1 = map.getBounds().getSouthWest().lng() // longitude du coin inférieur gauche
+    // let lat2 = map.getBounds().getNorthEast().lat() // latitude du coin supérieur droit
+    // let lng2 = map.getBounds().getNorthEast().lng() // longitude du coin supérieur droit
 
-    fetch(`/tiles?lat1=${lat1}&lng1=${lng1}&lat2=${lat2}&lng2=${lng2}&zoom=${zoom}`)
-      .then((response) => response.json())
-      .then((tiles) => {
-        delpoly();
-        const opacity = document.getElementById('sliderp').value;
-        tiles.forEach((tile) => {
-          poly = new google.maps.Polygon(tile);
-          poly.setOptions({'fillOpacity': opacity /100});
-          poly.setZIndex(9999);
-            poly.setMap(map);
-          addListenersOnPolygon(poly);
-          polya.push(poly);
-        });
-      });
+    // fetch(`/tiles?lat1=${lat1}&lng1=${lng1}&lat2=${lat2}&lng2=${lng2}&zoom=${zoom}`)
+    //   .then((response) => response.json())
+    //   .then((tiles) => {
+    //     delpoly();
+    //     const opacity = document.getElementById('sliderp').value;
+    //     tiles.forEach((tile) => {
+    //       poly = new google.maps.Polygon(tile);
+    //       poly.setOptions({'fillOpacity': opacity /100});
+    //       poly.setZIndex(9999);
+    //         poly.setMap(map);
+    //       addListenersOnPolygon(poly);
+    //       polya.push(poly);
+    //     });
+    //   });x
   }
 
   $("#sliderp").on("input", function(){
@@ -528,6 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
       poly.setOptions({'fillOpacity': this.value /100})
     });
   });
+
   $("#sliderh").on("input", function(){
     heatmap.set('opacity', (this.value/100));
       // for (var key in heatmaps) {
@@ -561,21 +577,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // heatmaps[p].setMap(map);
     // competitors_all[p].setMap(map);
     reloadcompetitors()
-  });
-  google.maps.event.addListener(map, "rightclick", function(event) {
-      var lat = parseFloat(event.latLng.lat());
-      var lng = event.latLng.lng();
-      // populate yor box/field with lat, lng
-       console.log(lat)
-
-    //   url =`http://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true`;
-    //   alert(url);
-    // fetch(url)
-    //   .then((response) => response.json())
-    //   .then((results) => {
-    //     console.log(results)
-
-    //   });
   });
 });
 
