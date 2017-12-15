@@ -1,6 +1,6 @@
 class QueriesController < ApplicationController
+  before_action :authenticate_user!, only: [:show]
   before_action :set_query, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: :show
 
   def index
     @letters = %w(a b c d e f g h i j k l m n o p q r s t u v w x y z)
@@ -20,8 +20,9 @@ class QueriesController < ApplicationController
       end
     end
     if current_user
-      @queries = current_user.queries.reverse
-      # redirect_to root_path if @queries.count < 1
+      @queries = current_user.queries.sort_by {|q| q.pertinence_grade}
+      @queries.reverse!
+      redirect_to root_path if @queries.count < 1
     elsif session['address']
       @query.id = 0
       @queries << @query
@@ -139,7 +140,11 @@ class QueriesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_query
-      @query = Query.find(params[:id])
+      if params[:id] == "0"
+        redirect_to queries_path
+      else
+        @query = Query.find(params[:id])
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -156,6 +161,7 @@ class QueriesController < ApplicationController
       session['longitude'] = query.longitude
       session['analytics'] = query.analytics.to_json
       session['competitors'] = query.competitors_json
+      session['pertinence_grade'] = query.pertinence_grade
     end
 
     def load_session
@@ -167,6 +173,7 @@ class QueriesController < ApplicationController
        query.radius_catchment_area = session['radius_catchment_area'].to_i
        query.latitude = session['latitude'].to_f
        query.longitude = session['longitude'].to_f
+      query.pertinence_grade = session['pertinence_grade']
 
        my_hash = JSON.parse(session['analytics'])
        query.analytics = my_hash.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
