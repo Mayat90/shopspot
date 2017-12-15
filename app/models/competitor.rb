@@ -46,7 +46,7 @@ class Competitor < ApplicationRecord
       url_3 = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=#{results_2["next_page_token"]}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}"
       response = RestClient.get(url_3)
       results_3 = JSON.parse(response)
-      results_2["results"].each do |result|
+      results_3["results"].each do |result|
         competitors << {
           "lat" => result["geometry"]["location"]["lat"],
           "lng" => result["geometry"]["location"]["lng"],
