@@ -51,7 +51,14 @@ class QueriesController < ApplicationController
          @competitors << competitor
       end
     end
-    city_name = @query.address.split(', ')[1]
+    address_array = @query.address.split(', ')
+    if address_array.count == 2
+      city_name = address_array[0]
+    else
+      city_name = address_array[1]
+    end
+    # pour les grandes villes - on peut renvoyer l'arrondissement
+    # city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][2]["long_name"]
 
     city_geocoded = Geocoder.coordinates(city_name)
     @city = City.near(city_geocoded,5).first
