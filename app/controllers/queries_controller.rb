@@ -53,7 +53,7 @@ class QueriesController < ApplicationController
     end
     address_array = @query.address.split(', ')
     if address_array.count == 2
-      city_name = address_array[0]
+      city_name = address_array.join(', ')
     else
       city_name = address_array[1]
     end
