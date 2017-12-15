@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   let polya = [];
   let markers = [];
-
+  let loaded = false;
   let map = null;
   let mapDomElement = document.getElementById('map');
   let zoom = null;
@@ -34,9 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initMap();
 
-    google.maps.event.addListener(map, 'bounds_changed', function() {
-      addpopulation();
-    });
 
     google.maps.event.addListener(map, "rightclick", function(event) {
         var lat = event.latLng.lat();
@@ -80,6 +77,9 @@ console.log(select.value)
           poly.setOptions({clickable: true });
         });
     })
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+      addpopulation();
+    });
 
     document.getElementById('infos-close').addEventListener('click', ()=>{
       document.getElementById('show-content').classList.add("infohide");
@@ -88,6 +88,7 @@ console.log(select.value)
         });
     })
 
+    loaded = true;
     // function openinf() {
     //   document.getElementById('show-content').classList.remove("infohide");
     //     polya.forEach((poly) => {
@@ -210,7 +211,7 @@ console.log(select.value)
 
   function afficheheatmap() {
       var radius = Math.floor(radiusCatchment / metersPerPixel(map));
-      const opacity = document.getElementById('sliderh').value;
+      const opacity = document.getElementById('sliderh').value/100;
       heatmap = new google.maps.visualization.HeatmapLayer({
         data: points,
         radius: radius,
@@ -455,7 +456,7 @@ console.log(select.value)
   }
 
   function addpopulation() {
-
+    if (loaded == false) { return }
     let zoom = map.getZoom();
     let lat1 = map.getBounds().getSouthWest().lat() // latitude du coin inférieur gauche
     let lng1 = map.getBounds().getSouthWest().lng() // longitude du coin inférieur gauche

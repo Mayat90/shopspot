@@ -27,10 +27,14 @@ input[type=range]::-webkit-slider-thumb {
   background: $blue;
 }
 
+
 .map-controls input {
   border: none !important;
 }
-
+.marg {
+  margin-right: 10px;
+  margin-left: 10px;
+}
 
 .form-content {
   width: 80%;

@@ -24,31 +24,35 @@
   >
   <div class="rccontent">
     <div class="rctitle">
-      <h3><%= @query.address %></h3>
-      <% @query.pertinence_grade.times do %>
-        <%= image_tag('star_yellow.png', height: '12') %>
-      <% end %>
-      <%= image_tag(@letter) %>
-      <div id="icons">
+      <div class="myflex">
+        <%= image_tag(@letter) %>
+        <h3 class="mygrow marg"><%= @query.activity %></h3>
+        <% @query.pertinence_grade.times do %>
+          <%= image_tag('star_yellow.png', height: '12') %>
+        <% end %>
+      <div id="icons" class="marg">
         <div id="icon<%= @query.id %>" style="display:flex; align-items: right">
           <i class="fa fa-eye" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
           <i class="fa fa-eye-slash infohide" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
-            <%= link_to "" , query_path(@query),class: "fa fa-trash-o",
-            method: :delete,
-            data: { confirm: "Are you sure?" } %>
+          <%= link_to "" , query_path(@query),class: "fa fa-trash-o",
+          method: :delete,
+          data: { confirm: "Are you sure?" } %>
         </div>
       </div>
+
+      </div>
+      <%= @query.address %>
     </div>
     <div class="rcresults">
       <div class="rcpop">
-        <h3>Population</h3>
+        <h3 style="color: #307A94;">Population</h3>
         <p style="margin-left: 8px;"> <i class="fa fa-users" aria-hidden="true"></i> Population : <%= @query.analytics[:population] %> </p>
         <p style="margin-left: 8px;"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2) %> /10m2</p>
         <p style="margin-left: 8px;"> <i class="fa fa-birthday-cake" aria-hidden="true"></i>
  Middle age : <%= (@query.analytics[:res25]*12.5 + @query.analytics[:res2565]*45 + @query.analytics[:res65]*72).fdiv(100).round(1) %> years old</p>
       </div>
       <div class="rccomp">
-        <h3>Competitors</h3>
+        <h3 style="color: #307A94;">Competitors</h3>
         <p style="margin-left: 8px;"> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors :
           <% if @query.competitors_catchment != 0 && @query.competitors_catchment != nil %>
           <%= @query.competitors_catchment %>
@@ -62,7 +66,11 @@
       </div>
     </div>
     <div id="rclinks">
-      <a href="queries/<%= @query.id%>"> More analytics</a>
+      <% if current_user %>
+        <a href="queries/<%= @query.id%>"> More analytics</a>
+      <% else %>
+        <a href="queries/<%= @query.id%>"> More analytics ? Sign in</a>
+      <% end %>
     </div>
   </div>
 </div>
