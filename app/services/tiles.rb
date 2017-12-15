@@ -91,7 +91,7 @@ i = 0
   end
 
   def self.perform(coord1, coord2, zoom)
-    zoom -= 3
+    zoom -= 2
     zoom = 14 if zoom > 14
     zoom = 6 if zoom < 6
     tab1 = deg2num(coord1[0], coord1[1], zoom)
