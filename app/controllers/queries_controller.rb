@@ -11,7 +11,7 @@ class QueriesController < ApplicationController
       @query = load_session
       # @competitors = JSON.parse(@query.competitors_json)
       if current_user
-        if current_user.queries.count != 0
+        if current_user.queries.count != -1
           @query.user = current_user
           @query.save
           p "session save to db"
@@ -35,6 +35,7 @@ class QueriesController < ApplicationController
   # GET /queries/1
   # GET /queries/1.json
   def show
+
     @competitors = []
 
     competitors_parse = JSON.parse(@query.competitors_json)
@@ -58,6 +59,7 @@ class QueriesController < ApplicationController
     end
     # pour les grandes villes - on peut renvoyer l'arrondissement
     # city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][2]["long_name"]
+
     city_geocoded = Geocoder.coordinates(city_name)
     @city = City.near(city_geocoded,5).first
 
@@ -74,7 +76,21 @@ class QueriesController < ApplicationController
   end
   # GET /queries/new
   def new
+    if session['address']
+      @query = load_session
+      # @competitors = JSON.parse(@query.competitors_json)
+      if current_user
+        if current_user.queries.count != -1
+          @query.user = current_user
+          @query.save
+          p "session save to db"
+        end
+          session_delete
+      end
+    else
+
     @query = Query.new
+    end
   end
 
   # GET /queries/1/edit
@@ -170,6 +186,7 @@ class QueriesController < ApplicationController
       session['analytics'] = query.analytics.to_json
       session['competitors'] = query.competitors_json
       session['pertinence_grade'] = query.pertinence_grade
+      session['competitors_catchment'] = query.competitors_catchment
     end
 
     def load_session
@@ -182,7 +199,7 @@ class QueriesController < ApplicationController
        query.latitude = session['latitude'].to_f
        query.longitude = session['longitude'].to_f
       query.pertinence_grade = session['pertinence_grade']
-
+      query.competitors_catchment = session['competitors_catchment']
        my_hash = JSON.parse(session['analytics'])
        query.analytics = my_hash.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
        query.competitors_json = session['competitors']

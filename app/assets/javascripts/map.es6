@@ -160,7 +160,7 @@ console.log(select.value)
     });
     var catchcircle = new google.maps.Circle({
       strokeColor: '#05F',
-      strokeOpacity: 0.8,
+      strokeOpacity: 0.2,
       strokeWeight: 4,
       fillColor: '#FFFF00',
       fillOpacity: 0,
