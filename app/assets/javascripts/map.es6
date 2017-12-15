@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         var lat = event.latLng.lat();
         var lng = event.latLng.lng();
         // populate yor box/field with lat, lng
-           url =`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=AIzaSyDpBXB_T-w0nBmUYIMkVOhTpIWbPO4rCtI`;
+           url =`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=AIzaSyCsHaNTrl7qpxyAL6EFL2H1RGT22XPkcTM`;
         console.log(url)
         fetch(url)
           .then((response) => response.json())
@@ -160,7 +160,7 @@ console.log(select.value)
     });
     var catchcircle = new google.maps.Circle({
       strokeColor: '#05F',
-      strokeOpacity: 0.8,
+      strokeOpacity: 0.2,
       strokeWeight: 4,
       fillColor: '#FFFF00',
       fillOpacity: 0,

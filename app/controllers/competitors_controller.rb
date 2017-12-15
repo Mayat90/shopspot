@@ -3,6 +3,7 @@ require 'open-uri'
 require 'rest-client'
 
 class CompetitorsController < ApplicationController
+  before_action :authenticate_user!, only: [:show]
   before_action :set_query, only: [:index]
   def index
     @competitors = Competitor.where(query_id: @query)

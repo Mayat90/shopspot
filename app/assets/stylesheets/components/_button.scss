@@ -46,3 +46,7 @@
   background: $blue !important;
   border-radius: 5px;
 }
+
+.btn:hover, .btn-large:hover {
+  background: $blue;
+}
