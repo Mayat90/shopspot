@@ -37,7 +37,7 @@ class QueriesController < ApplicationController
     @competitors = []
 
     competitors_parse = JSON.parse(@query.competitors_json)
-    if competitors_parse.nil? == false
+    if competitors_parse.nil? == false && @query.competitors.count == 0
       competitors_parse.each do |competitor_parse|
          competitor = Competitor.new
          competitor.query_id = @query.id

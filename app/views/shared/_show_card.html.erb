@@ -6,7 +6,7 @@
       <p style="color: #307A94; font-weight:600"><%= @query.address %></p>
           <div id="linktopdf">
       <i class="fa fa-download" aria-hidden="true" style="color: #307A94;"></i>
-<%= link_to 'PDF', query_path(@query, format: :pdf) %>
+<%= link_to 'PDF', query_path(@query, format: :pdf), target: :_blank %>
     </div>
     </div>
     <div id="scresults">
@@ -16,7 +16,7 @@
           <h3>On catchment area</h3>
           <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Population</h3>
           <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @query.analytics[:population] %></strong> </p>
-          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= @query.analytics[:population].fdiv(@query.radius_catchment_area*@query.radius_catchment_area*0.0314).round(2)*100000 %> /km2</strong></p>
+          <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= (@query.analytics[:population].fdiv((@query.radius_catchment_area.to_f/1000)*(@query.radius_catchment_area.to_f/1000)*3.14)).round %> /km2</strong></p>
           <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <strong><%= @query.analytics[:revenus] %>€ / tax-unit </strong></p>
           <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong><%= (@query.analytics[:res25]*12.5 + @query.analytics[:res2565]*45 + @query.analytics[:res65]*72).fdiv(100).round(1) %> years old</strong></p>
           <div id="scpopgraph">
