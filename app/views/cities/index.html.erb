@@ -25,14 +25,14 @@
         <tr>
           <% x = x + 1 %>
           <th scope="row"><%= x %></th>
-          <td><%= city.name %></td>
-          <td><%= Geocoder::Calculations.distance_between([@query.latitude,@query.longitude], [city.latitude,city.longitude]).round(1) %> km</td>
-          <td><%= city.population %></td>
-          <td><%= (city.population / city.area).round %></td>
-          <td><%= (city.sexe[:homme].to_f*100).round%> % / <%= (city.sexe[:femme].to_f*100).round%> % </td>
-          <td><%= (city.age[:jeune].to_f*100).round%> % / <%= (city.age[:adulte].to_f*100).round%> % / <%= (city.age[:senior].to_f*100).round %> % </td>
-          <td><%= (city.chomage * 100).round %> % </td>
-          <td><%= city.revenu.round %> € </td>
+          <td><%= city[:name] %></td>
+          <td><%= Geocoder::Calculations.distance_between([@query.latitude,@query.longitude], [city[:latitude],city[:longitude]]).round(1) %> km</td>
+          <td><%= city[:population] %></td>
+          <td><%= (city[:population] / city[:area]).round %></td>
+          <td><%= (city[:sexe][:homme].to_f*100).round%> % / <%= (city[:sexe][:femme].to_f*100).round%> % </td>
+          <td><%= (city[:age][:jeune].to_f*100).round%> % / <%= (city[:age][:adulte].to_f*100).round%> % / <%= (city[:age][:senior].to_f*100).round %> % </td>
+          <td><%= (city[:chomage] * 100).round %> % </td>
+          <td><%= city[:revenu].round %> € </td>
         </tr>
       </tbody>
     <% end  %>

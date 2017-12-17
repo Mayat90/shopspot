@@ -188,7 +188,7 @@ console.log(select.value)
   }
 
   function changeRadius(radius) {
-    heatmap.set('radius', radius * 1.5);
+    heatmap.set('radius', radius * 1.3);
     // for (var key in heatmaps) {
     //      heatmaps[key].set('radius', radius * 1.5);
     // }
