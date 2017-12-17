@@ -1,6 +1,6 @@
 
 # require 'csv'
-
+City.destroy_all
 
 
 # CSV.foreach('lib/seeds/cities.csv', encoding: 'utf-8') do |row|
