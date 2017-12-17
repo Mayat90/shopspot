@@ -76,22 +76,22 @@
             <div id="scpopcity">
               <h3>On city</h3>
               <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Population</h3>
-              <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @city.population %> </strong></p>
+              <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @city[:population] %> </strong></p>
 
-              <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= @city.population.fdiv(@city.area).round %> / km2</strong></p>
-              <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <strong><%= @city.revenu.round %>€ / tax-unit </strong></p>
-              <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong><%= ((@city.age[:jeune].to_f)*100*12.5 + (@city.age[:adulte].to_f)*100*45 + (@city.age[:senior].to_f)*100*72).fdiv(100).round(1) %> years old</strong></p>
+              <p><i class="fa fa-user-circle-o" aria-hidden="true"></i> Density : <strong><%= @city[:population].fdiv(@city[:area]).round %> / km2</strong></p>
+              <p><i class="fa fa-usd" aria-hidden="true"></i> Revenues : <strong><%= @city[:revenu].round %>€ / tax-unit </strong></p>
+              <p><i class="fa fa-birthday-cake" aria-hidden="true"></i> Middle age : <strong><%= ((@city[:age][:jeune].to_f)*100*12.5 + (@city[:age][:adulte].to_f)*100*45 + (@city[:age][:senior].to_f)*100*72).fdiv(100).round(1) %> years old</strong></p>
 
               <div id="scpopgraph">
                 <div id="rcpopgraphhead">
-                  <div id="rcpopgraphhead1"><p><%= (@city.age[:jeune].to_f*100).round %> %</p></div>
-                  <div id="rcpopgraphhead2"><p><%= (@city.age[:adulte].to_f*100).round %> %</p></div>
-                  <div id="rcpopgraphhead3"><p><%= (@city.age[:senior].to_f*100).round %> %</p></div>
+                  <div id="rcpopgraphhead1"><p><%= (@city[:age][:jeune].to_f*100).round %> %</p></div>
+                  <div id="rcpopgraphhead2"><p><%= (@city[:age][:adulte].to_f*100).round %> %</p></div>
+                  <div id="rcpopgraphhead3"><p><%= (@city[:age][:senior].to_f*100).round %> %</p></div>
                 </div>
                 <div id="rcpopgraphres">
-                  <div id="rcpopgraphres1" style='height:<%= @city.age[:jeune].to_f*100%>%';></div>
-                  <div id="rcpopgraphres2" style='height:<%= @city.age[:adulte].to_f*100%>%';></div>
-                  <div id="rcpopgraphres3" style='height:<%= @city.age[:senior].to_f*100%>%';></div>
+                  <div id="rcpopgraphres1" style='height:<%= @city[:age][:jeune].to_f*100%>%';></div>
+                  <div id="rcpopgraphres2" style='height:<%= @city[:age][:adulte].to_f*100%>%';></div>
+                  <div id="rcpopgraphres3" style='height:<%= @city[:age][:senior].to_f*100%>%';></div>
                 </div>
                 <div id="rcpopgraphbot">
                   <div id="rcpopgraphbot1"><p>25 -</p></div>
@@ -114,8 +114,8 @@
             </div>
             <div id="insee">
               <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Insee analytics</h3>
-              <p><i class="fa fa-mars" aria-hidden="true"></i> <strong><%= (@city.sexe[:homme].to_f*100).round %></strong> %  <i class="fa fa-venus" aria-hidden="true" style="margin-left: 25px;"></i> <strong><%= (@city.sexe[:femme].to_f*100).round %></strong> % </p>
-              <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= (@city.chomage*100).round %></strong> %</p>
+              <p><i class="fa fa-mars" aria-hidden="true"></i> <strong><%= (@city[:sexe][:homme].to_f*100).round %></strong> %  <i class="fa fa-venus" aria-hidden="true" style="margin-left: 25px;"></i> <strong><%= (@city[:sexe][:femme].to_f*100).round %></strong> % </p>
+              <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= (@city[:chomage]*100).round %></strong> %</p>
             </div>
           </div>
         </div>

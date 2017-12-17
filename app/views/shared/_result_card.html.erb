@@ -69,7 +69,8 @@
       <% if current_user %>
         <a href="queries/<%= @query.id%>"> More analytics</a>
       <% else %>
-        <a href="queries/<%= @query.id%>"> More analytics ? Sign in</a>
+      <%= link_to "More analytics ? Sign in", user_session_path %>
+        <!-- <a href="queries"> More analytics ? Sign in</a> -->
       <% end %>
     </div>
   </div>

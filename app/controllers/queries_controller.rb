@@ -1,3 +1,4 @@
+require 'csv'
 class QueriesController < ApplicationController
   before_action :authenticate_user!, only: [:show]
   before_action :set_query, only: [:show, :edit, :update, :destroy]
@@ -62,8 +63,29 @@ class QueriesController < ApplicationController
     # city_name = Geocoder.search([@query.latitude, @query.longitude]).first.data["address_components"][2]["long_name"]
 
     city_geocoded = Geocoder.coordinates(city_name)
-    p city_geocoded
-    @city = City.near(city_geocoded,5).first
+    # p city_geocoded
+    # @city = City.near(city_geocoded,5).first
+
+
+    @mydistance = 9999999
+CSV.foreach('lib/seeds/cities.csv', encoding: 'utf-8') do |row|
+   distance = Tiles.distance(city_geocoded, [row[4].to_f,row[3].to_f])
+  if distance < @mydistance
+    @city  = {
+    name: row[0],
+    insee_id: row[1].to_i,
+    area: row[2].to_f,
+    longitude: row[3].to_f,
+    latitude: row[4].to_f,
+    population: row[5].to_i,
+    sexe: {homme: row[6], femme: row[7]},
+    age: {jeune: row[8], adulte: row[9], senior: row[10]},
+    chomage: row[11].to_f,
+    revenu: row[12].to_f
+     }
+     @mydistance = distance
+  end
+end
 
     respond_to do |format|
       format.html
@@ -103,42 +125,51 @@ class QueriesController < ApplicationController
   # POST /queries.json
   def create
     @query = Query.new(query_params)
-    loc = Geocoder.coordinates(@query.address)
-    @query.latitude = loc[0]
-    @query.longitude = loc[1]
-    hash_request = {type: @query.activity, radius_search: @query.radius_search}
-    hash_request[:location] = {latitude: loc[0], longitude: loc[1]}
-    @competitors_search = Competitor.find(hash_request)
-    @competitors = []
-    @competitors_search.each do |competitor|
-      distance = Tiles.distance((loc), [competitor["lat"], competitor["lng"]])
-      @competitors << competitor if distance <= @query.radius_search #competitors dans la search_area
-    end
-    @query.competitors_json = @competitors.to_json
 
-    @competitors_catchment = []
-    @competitors_search.each do |competitor|
-      distance = Tiles.distance((loc), [competitor["lat"], competitor["lng"]])
-      @competitors_catchment << competitor if distance <= @query.radius_catchment_area #competitors dans la search_area
-    end
-    @query.competitors_catchment = @competitors_catchment.count
-    resultats_insee = Tiles.calculate([@query.latitude, @query.longitude], @query.radius_catchment_area)
-    @query.analytics = resultats_insee
+    if @query.valid?
+      loc = Geocoder.coordinates(@query.address)
+      @query.latitude = loc[0]
+      @query.longitude = loc[1]
+      hash_request = {type: @query.activity, radius_search: @query.radius_search}
+      hash_request[:location] = {latitude: loc[0], longitude: loc[1]}
+      @competitors_search = Competitor.find(hash_request)
+      @competitors = []
+      @competitors_search.each do |competitor|
+        distance = Tiles.distance((loc), [competitor["lat"], competitor["lng"]])
+        @competitors << competitor if distance <= @query.radius_search #competitors dans la search_area
+      end
+      @query.competitors_json = @competitors.to_json
 
-    if @query.competitors_catchment != 0
-      pop_grade = @query.analytics[:population].fdiv(@query.competitors_catchment)
-      @query.pertinence_grade = pertinence_grade(pop_grade)
+      @competitors_catchment = []
+      @competitors_search.each do |competitor|
+        distance = Tiles.distance((loc), [competitor["lat"], competitor["lng"]])
+        @competitors_catchment << competitor if distance <= @query.radius_catchment_area #competitors dans la search_area
+      end
+      @query.competitors_catchment = @competitors_catchment.count
+      resultats_insee = Tiles.calculate([@query.latitude, @query.longitude], @query.radius_catchment_area)
+      @query.analytics = resultats_insee
+
+      if @query.competitors_catchment != 0
+        pop_grade = @query.analytics[:population].fdiv(@query.competitors_catchment)
+        @query.pertinence_grade = pertinence_grade(pop_grade)
+      else
+        @query.pertinence_grade = 0
+      end
+
+      if current_user
+        @query.user = current_user
+        @query.save
+      else
+        save_session(@query)
+      end
+      redirect_to queries_path
     else
-      @query.pertinence_grade = 0
+      @alert= ""
+      @query.errors.messages.each_key {| key |
+        @alert += " #{key.to_s} #{@query.errors[key]}"
+       }
+      redirect_to request.path, flash: {alert: @alert}
     end
-
-    if current_user
-      @query.user = current_user
-      @query.save
-    else
-      save_session(@query)
-    end
-    redirect_to queries_path
   end
 
   # PATCH/PUT /queries/1
