@@ -5,6 +5,9 @@ class PagesController < ApplicationController
   def home
   end
 
+  def about
+  end
+
   def insee
     lat = params["lat"].to_f
     long = params["long"].to_f
