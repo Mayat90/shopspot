@@ -160,7 +160,7 @@ console.log(select.value)
     });
     var catchcircle = new google.maps.Circle({
       strokeColor: '#05F',
-      strokeOpacity: 0.8,
+      strokeOpacity: 0.2,
       strokeWeight: 4,
       fillColor: '#FFFF00',
       fillOpacity: 0,
@@ -188,7 +188,7 @@ console.log(select.value)
   }
 
   function changeRadius(radius) {
-    heatmap.set('radius', radius * 1.5);
+    heatmap.set('radius', radius * 1.3);
     // for (var key in heatmaps) {
     //      heatmaps[key].set('radius', radius * 1.5);
     // }

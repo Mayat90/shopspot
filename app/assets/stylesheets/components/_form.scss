@@ -88,10 +88,40 @@ text-decoration: none;
 }
 
 .select.required {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 .dropdown-content li > a, .dropdown-content li > span {
   color: $blue;
 }
 
+input.string.required, .numeric.integer.required, .select-wrapper.select.required {
+  margin-top: 5px;
+}
+
+.caret {
+  border-color: transparent !important;
+}
+
+.select-wrapper span.caret {
+  margin-top: 5px;
+}
+
+
+
+//=========== SIGN IN
+
+.btn.waves-effect.waves-light.waves-input-wrapper {
+  margin: 30px 0;
+}
+
+.string-email-optional {
+}
+
+.form-actions a {
+  color: $blue;
+}
+
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+  padding-top: 5px;
+}

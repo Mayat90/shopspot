@@ -25,7 +25,6 @@ gem 'sprockets', '>= 3.0.0'
 gem 'sprockets-es6'
 gem 'activerecord-session_store'
 
-
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
 end
