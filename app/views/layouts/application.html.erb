@@ -9,9 +9,11 @@
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'https://fonts.googleapis.com/icon?family=Material+Icons' %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+
   </head>
 
   <body>
+    <div class="se-pre-con"></div>
     <%= render 'shared/flashes' %>
     <%= yield %>
     <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=visualization,places&key=#{ENV['GOOGLE_API_BROWSER_KEY']} " %>

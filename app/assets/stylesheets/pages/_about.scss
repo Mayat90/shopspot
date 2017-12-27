@@ -13,6 +13,7 @@
   overflow:hidden;
   display: flex;
   color: $lightblue;
+  box-shadow: 2px 2px 2px 1px rgba(165, 165, 165, 0.1);
 }
 
 .abitem img {
@@ -41,9 +42,8 @@
 
 .abitem h2 {
   font-size: 3rem;
-  padding-left:25px;
   margin:0;
-  padding:20px 0px 5px 0px;
+  padding:30px 0px 5px 0px;
   text-align:center;
   color: $lightblue;
 }
