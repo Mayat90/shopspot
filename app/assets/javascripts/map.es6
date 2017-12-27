@@ -40,26 +40,26 @@ document.addEventListener('DOMContentLoaded', () => {
         var lng = event.latLng.lng();
         // populate yor box/field with lat, lng
            url =`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&sensor=true&key=AIzaSyDpBXB_T-w0nBmUYIMkVOhTpIWbPO4rCtI`;
-        console.log(url)
         fetch(url)
           .then((response) => response.json())
           .then((results) => {
             if (results["status"] == "OK" ) {
+              if (results["results"][0]["formatted_address"]) {
+                address = results["results"][0]["formatted_address"];
+  console.log(address)
+                element = document.querySelector('.rcframe');
+                activity = element.getAttribute('data-activity');
+                radiusSearch = parseInt(element.getAttribute('data-radiussearch'));
+                radiusCatchment = parseInt(element.getAttribute('data-radius_catchment_area'));
 
-              address = results["results"][0]["formatted_address"];
-
-              element = document.querySelector('.rcframe');
-              activity = element.getAttribute('data-activity');
-              radiusSearch = parseInt(element.getAttribute('data-radiussearch'));
-              radiusCatchment = parseInt(element.getAttribute('data-radius_catchment_area'));
-
-              document.getElementById('query_address').value = address;
-              select = document.getElementById('query_activity');
- select.value=activity;
-console.log(select.value)
-              document.getElementById('query_radius_search').value = radiusSearch;
-              document.getElementById('query_radius_catchment_area').value = radiusCatchment;
-              document.getElementById('formid').submit();
+                document.getElementById('query_address').value = address;
+                select = document.getElementById('query_activity');
+   select.value=activity;
+  console.log(select.value)
+                document.getElementById('query_radius_search').value = radiusSearch;
+                document.getElementById('query_radius_catchment_area').value = radiusCatchment;
+                document.getElementById('formid').submit();
+              }
             }
 
           });
