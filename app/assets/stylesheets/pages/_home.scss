@@ -68,12 +68,12 @@
 
 .exp {
   padding: 20px;
-  margin: 0 50px;
+  margin: 10px 50px;
   width: 250px;
   height: 400px;
-  background: white;
-  box-shadow: 0 2px 4px 0 rgba(165, 165, 165, 0.1);
-  transition: 0.3s;
+  background: #FAFAFA;
+  box-shadow: 0 0 2px 0 rgba(165, 165, 165, 0.1);
+  transition: 0.2s;
   border-radius: 2px;
   text-align: center !important;
   h4 {
@@ -100,5 +100,5 @@
 
 #logoblack:hover, #logoblack:visited {
     transform: rotate(5deg);
-    transition: 0.5s;
+    transition: 0.3s;
 }
