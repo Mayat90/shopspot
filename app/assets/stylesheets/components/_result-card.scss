@@ -58,3 +58,10 @@
 .comp {
   left: 190px;
 }
+
+@media screen and (max-width:1000px)
+{
+  .rcframe {
+    margin: 0 0 10px 0;
+  }
+}

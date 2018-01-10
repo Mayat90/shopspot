@@ -69,3 +69,17 @@
 .pac-container {
   z-index: 10000 !important;
 }
+
+@media screen and (max-width:1000px)
+{
+  .map-controls {
+    width: 80%;
+    top: unset !important;
+    left: 10px;
+    bottom: 24px;
+  }
+  .innercaption {
+    font-size: 0.6em;
+    font-weight: 600;
+  }
+}
