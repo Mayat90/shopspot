@@ -5,7 +5,7 @@
   justify-content: space-between;
   height: 80px;
   padding: 0px 50px;
-  color: rgba(0,0,0,0.3);
+  color: #555;
 }
 
 .footer-links {
@@ -14,7 +14,7 @@
 }
 .footer-links a {
   color: black;
-  opacity: 0.3;
+  opacity: 0.5;
   text-decoration: none;
   padding: 0px 10px;
 }
@@ -23,4 +23,21 @@
 }
 .footer .fa-heart {
   color: $blue;
+}
+
+@media screen and (max-width:1000px)
+{
+  .footer {
+    font-size: 1.7rem;
+    padding: 2px;
+  }
+  .footer-copyright {
+    margin-left: 15px;
+  }
+
+  .footer-links a {
+    font-size: 1.7rem;
+    color: $blue;
+    opacity: 1;
+  }
 }

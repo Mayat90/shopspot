@@ -5,10 +5,6 @@
   h1 {
     font-size: 4rem;
   }
-  h3 {
-    font-size: 30px;
-    font-weight: 400;
-  }
 }
 
 #homepage-middle {
@@ -16,21 +12,22 @@
   transition: all 5s linear;
   min-height: 80vh;
   display: flex;
+  align-items: center;
   justify-content: space-around;
   h3 {
     font-weight: 400;
     margin-bottom: 50px;
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 }
 
 #homepage-middle:hover {
   background-image: linear-gradient(-225deg, rgba(0,101,168,0.5) 0%, rgba(0,36,61,0.5) 50%), url('https://cdn.vox-cdn.com/thumbor/3job2Q0siUze1rXAHq4aXEYdX0M=/339x0:1238x599/1200x800/filters:focal(339x0:1238x599)/cdn.vox-cdn.com/uploads/chorus_image/image/45205974/uber_SafeCities_BlogHeader.0.0.png');
-  transition: all 5s linear;
+  transition: 0.5s;
 }
 
 #homepage-bottom {
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 80px);
   font-family: Raleway;
   text-align: center;
   padding-bottom: 100px;
@@ -53,9 +50,18 @@
   // align-items: center;
   justify-content: center;
   height: 80vh;
+  padding: 20vh;
   h3 {
     color: #FAFAFA;
   }
+}
+
+#homepage-form {
+  padding: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 80vh;
 }
 
 
@@ -71,7 +77,7 @@
   margin: 10px 50px;
   width: 250px;
   height: 400px;
-  background: #FAFAFA;
+  background: $backcards;
   box-shadow: 0 0 2px 0 rgba(165, 165, 165, 0.1);
   transition: 0.2s;
   border-radius: 2px;
@@ -101,4 +107,37 @@
 #logoblack:hover, #logoblack:visited {
     transform: rotate(5deg);
     transition: 0.3s;
+}
+
+@media screen and (max-width:1000px)
+{
+
+#homepage-top {
+  h1 {
+    font-size: 3.2rem;
+  }
+}
+
+#homepage-middle {
+  flex-direction: column;
+  h3 {
+    font-weight: 400;
+    font-size: 2.5rem;
+  }
+}
+
+#homepage-bottom {
+  h1 {
+  }
+}
+
+
+#exp-cards {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#homepage-expl, #homepage-form {
+  max-height: 100vh;
+  }
 }
