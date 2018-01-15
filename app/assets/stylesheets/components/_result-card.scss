@@ -59,9 +59,30 @@
   left: 190px;
 }
 
+
+
 @media screen and (max-width:1000px)
 {
   .rcframe {
     margin: 0 0 10px 0;
+  }
+}
+
+@media screen and (min-width:1000px) and (max-width:1500px){
+  p, h3 {
+    font-size: 1.6rem !important;
+  }
+
+  .rccontent {
+    line-height: 80% !important;
+    padding: 8px !important;
+  }
+
+  .rctitle, .rcresults, .rclinks {
+    font-size: 1.6rem !important;
+  }
+
+  .fa {
+    font-size: 1.9rem !important;
   }
 }
