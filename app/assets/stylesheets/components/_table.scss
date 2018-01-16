@@ -1,3 +1,47 @@
 .w-auto {
     width: auto;
 }
+
+td {
+  border-bottom: 1px solid rgba(165,165,165,0.1);
+  padding: 5px !important;
+}
+
+th {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: $blue;
+  text-align: left;
+  padding: 10px;
+}
+
+.tablecontainer {
+  width: 1300px;
+  background:#FDFDFD; 
+  line-height:200%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.tabletitle {
+  padding: 20px;
+  padding-bottom: 10px;
+}
+
+.tablecontent {
+  padding: 20px;
+}
+
+thead {
+  line-height: 140%;
+}
+
+tbody {
+  th {
+    padding: 0 10px;
+  }
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: $lightblue !important;
+}

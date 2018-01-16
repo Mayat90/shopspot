@@ -69,9 +69,6 @@
 }
 
 @media screen and (min-width:1000px) and (max-width:1500px){
-  p, h3 {
-    font-size: 1.6rem !important;
-  }
 
   .rccontent {
     line-height: 80% !important;
@@ -79,7 +76,9 @@
   }
 
   .rctitle, .rcresults, .rclinks {
+    p, h3 {
     font-size: 1.6rem !important;
+    }
   }
 
   .fa {

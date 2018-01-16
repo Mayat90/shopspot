@@ -1,16 +1,14 @@
-
 <div id="scframe">
   <div id="sccontent">
     <div id="sctitle">
       <h3>Your results</h3>
       <p style="color: #307A94; font-weight:600"><%= @query.address %></p>
-          <div id="linktopdf">
+      <div id="linktopdf">
       <i class="fa fa-download" aria-hidden="true" style="color: #307A94;"></i>
 <%= link_to 'PDF', query_path(@query, format: :pdf), target: :_blank %>
-    </div>
+      </div>
     </div>
     <div id="scresults">
-
       <div id="screstop">
         <div id="scpopcatchment">
           <h3>On catchment area</h3>

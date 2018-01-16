@@ -1,12 +1,11 @@
 <%= render 'shared/navbar' %>
-<div class="container" style="background:#FDFDFD; line-height:200%; margin-top:30px;">
-  <div>
+<div class="tablecontainer">
+  <div class="tabletitle">
     <h1>Nearest Cities</h1>
-    <p>Choose the most suitable city considering your needs</p>
-    <p><%= link_to 'back', :back %></p>
-  </div>
+    <p>Here are the most suitable cities considering your needs</p>
+    <p><i class="fa fa-undo" aria-hidden="true"></i><%= link_to 'Back', :back %></p></div>
 
-  <div>
+  <div class="tablecontent">
     <table class=".table table-sm table-hover">
       <thead>
         <th></th>
@@ -38,3 +37,5 @@
     <% end  %>
     </table>
   </div>
+</div>
+<%= render 'shared/footer' %>
