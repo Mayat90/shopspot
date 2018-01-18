@@ -1,43 +1,41 @@
 <%= render 'shared/navbar' %>
-<div class="tablecontainer">
-  <div class="tabletitle">
-    <h4>Nearest Cities</h4>
-    <h5>Here are the most suitable cities considering your needs</h5>
-    <div class="tableback">
-    <p><i class="fa fa-undo" aria-hidden="true"></i><%= link_to 'Back', :back %></p>
-    </div>
+<div class="tabletitle">
+  <h4>Nearest Cities</h4>
+  <h5>Here are the most suitable cities considering your needs</h5>
+  <div class="tableback">
+  <p><i class="fa fa-undo" aria-hidden="true"></i><%= link_to 'Back', :back %></p>
   </div>
-  <div class="tablecontent">
-    <table class=".table table-sm table-hover">
-      <thead>
-        <th></th>
-        <th style="text-align: left !important;">Name</th>
-        <th>Distance</th>
-        <th>Population</th>
-        <th>Density</th>
-        <th><i class="fa fa-mars" aria-hidden="true"> - <i class="fa fa-venus" aria-hidden="true"></i></th>
-        <th>Age</br><span class="tabsmaller">(-25 - 25-64 - +65)</span></th>
-        <th>Unemployment</th>
-        <th>Revenues</th>
-      </thead>
-    <% x = 0 %>
-    <% @cities.each do |city| %>
-      <tbody>
-        <tr>
-          <% x = x + 1 %>
-          <th scope="row"><%= x %></th>
-          <td style="text-align: left !important;"><%= city[:name] %></td>
-          <td><%= Geocoder::Calculations.distance_between([@query.latitude,@query.longitude], [city[:latitude],city[:longitude]]).round(1) %> km</td>
-          <td><%= city[:population] %></td>
-          <td><%= (city[:population] / city[:area]).round %></td>
-          <td><%= (city[:sexe][:homme].to_f*100).round%> % - <%= (city[:sexe][:femme].to_f*100).round%> % </td>
-          <td><%= (city[:age][:jeune].to_f*100).round%> % - <%= (city[:age][:adulte].to_f*100).round%> % - <%= (city[:age][:senior].to_f*100).round %> % </td>
-          <td><%= (city[:chomage] * 100).round %> % </td>
-          <td><%= city[:revenu].round %> € </td>
-        </tr>
-      </tbody>
-    <% end  %>
-    </table>
-  </div>
+</div>
+<div class="tablecontent">
+  <table class=".table table-sm table-hover">
+    <thead>
+      <th id="tohide"></th>
+      <th style="text-align: left !important;">Name</th>
+      <th>Distance</th>
+      <th>Population</th>
+      <th>Density</th>
+      <th><i class="fa fa-mars" aria-hidden="true"> - <i class="fa fa-venus" aria-hidden="true"></i></th>
+      <th>Age<span class="br"></br></span><span class="tabsmaller">(-25 - 25-64 - +65)</span></th>
+      <th>Unemployment</th>
+      <th>Revenues</th>
+    </thead>
+  <% x = 0 %>
+    <tbody>
+  <% @cities.each do |city| %>
+      <tr>
+        <% x = x + 1 %>
+        <th scope="row"><%= x %></th>
+        <td style="text-align: left !important;"><%= city[:name] %></td>
+        <td><%= Geocoder::Calculations.distance_between([@query.latitude,@query.longitude], [city[:latitude],city[:longitude]]).round(1) %> km</td>
+        <td><%= city[:population] %></td>
+        <td><%= (city[:population] / city[:area]).round %></td>
+        <td><%= (city[:sexe][:homme].to_f*100).round%> % - <%= (city[:sexe][:femme].to_f*100).round%> % </td>
+        <td><%= (city[:age][:jeune].to_f*100).round%> % - <%= (city[:age][:adulte].to_f*100).round%> % - <%= (city[:age][:senior].to_f*100).round %> % </td>
+        <td><%= (city[:chomage] * 100).round %> % </td>
+        <td><%= city[:revenu].round %> € </td>
+      </tr>
+      <% end  %>
+    </tbody>
+  </table>
 </div>
 <%= render 'shared/footer' %>
