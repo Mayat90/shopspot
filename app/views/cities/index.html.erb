@@ -1,4 +1,5 @@
 <%= render 'shared/navbar' %>
+<div class="tables">
 <div class="tabletitle">
   <h4>Nearest Cities</h4>
   <h5>Here are the most suitable cities considering your needs</h5>
@@ -14,7 +15,7 @@
       <th>Distance</th>
       <th>Population</th>
       <th>Density</th>
-      <th><i class="fa fa-mars" aria-hidden="true"> - <i class="fa fa-venus" aria-hidden="true"></i></th>
+      <th><i class="fa fa-mars" aria-hidden="true"></i> - <i class="fa fa-venus" aria-hidden="true"></i></th>
       <th>Age<span class="br"></br></span><span class="tabsmaller">(-25 - 25-64 - +65)</span></th>
       <th>Unemployment</th>
       <th>Revenues</th>
@@ -37,5 +38,6 @@
       <% end  %>
     </tbody>
   </table>
+</div>
 </div>
 <%= render 'shared/footer' %>
