@@ -1,6 +1,6 @@
 <body style="background-color: white">
 <div id="showcontentpdf" class="nobreak">
-  <div id="showleft">
+  <div id="showleftpdf">
     <div id="showstreetframepdf">
       <% params = { %>
       <% location: [@query.latitude, @query.longitude].join(","), %>
@@ -24,7 +24,6 @@
         </div>
       </div>
     </div>
-
     <div id="showmapframepdf">
       <% params = {%>
       <% center: [@query.latitude, @query.longitude].join(","),%>
@@ -38,7 +37,6 @@
     </div>
   </div>
   <div id="showcard">
-
     <div id="scframepdf">
       <div id="sccontent">
         <div id="sctitle">
@@ -47,8 +45,8 @@
         </div>
         <div id="scresults">
 
-          <div id="screstop">
-            <div id="scpopcatchment">
+          <div id="screstoppdf">
+            <div id="scpopcatchmentpdf">
               <h3>On catchment area</h3>
               <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Population</h3>
               <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @query.analytics[:population] %></strong> </p>
@@ -73,7 +71,7 @@
                 </div>
               </div>
             </div>
-            <div id="scpopcity">
+            <div id="scpopcitypdf">
               <h3>On city</h3>
               <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Population</h3>
               <p><i class="fa fa-users" aria-hidden="true"></i> Population : <strong><%= @city[:population] %> </strong></p>
@@ -101,8 +99,8 @@
               </div>
             </div>
           </div>
-          <div id="scresbottom">
-            <div id="sccomp">
+          <div id="scresbottompdf">
+            <div id="sccomppdf">
               <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Competitors</h3>
                    <p> <i class="fa fa-briefcase" aria-hidden="true"></i> Competitors : <strong><%= @query.competitors_catchment %></strong> </p>
               <p> <i class="fa fa-star" aria-hidden="true"></i> Population / competitor : <strong>
@@ -112,7 +110,7 @@
 
               <!-- <p> <i class="fa fa-star" aria-hidden="true"></i> Average Rating : <strong>TOUPDATE</strong> </p> -->
             </div>
-            <div id="insee">
+            <div id="inseepdf">
               <h3 style="color: #307A94; margin-bottom:20px; font-weight:600; font-size: 2rem;">Insee analytics</h3>
               <p><i class="fa fa-mars" aria-hidden="true"></i> <strong><%= (@city[:sexe][:homme].to_f*100).round %></strong> %  <i class="fa fa-venus" aria-hidden="true" style="margin-left: 25px;"></i> <strong><%= (@city[:sexe][:femme].to_f*100).round %></strong> % </p>
               <p><i class="fa fa-male" aria-hidden="true"></i> Unemployment : <strong><%= (@city[:chomage]*100).round %></strong> %</p>
