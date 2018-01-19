@@ -1,6 +1,6 @@
 #showcontent {
   display: flex;
-  height: calc(100vh - 130px);
+  min-height: calc(100vh - 130px);
   justify-content: space-between;
   margin: 30px 80px;
   background: $lightblue;
@@ -69,3 +69,34 @@
   border-bottom: 1px solid #EEE;
   margin: 10px 0;
 }
+
+@media screen and (max-width:1000px)
+{
+  #showcontent {
+    flex-direction: column;
+    margin: 5px;
+    height: unset !important;
+      }
+
+  #shomapframe {
+    flex-grow: unset !important;
+  }
+
+  #showleft, #showcard, #showright {
+    width: 100%;
+    margin: 0;
+  }
+
+  #showstreetframe, #showmapframe {
+    height: 500px;
+  }
+
+  
+  #linksframe {
+    order: 2;
+  }
+
+  #showstreetframe {
+    order: 1;
+  }
+  }

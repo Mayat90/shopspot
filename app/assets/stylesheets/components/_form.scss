@@ -10,13 +10,6 @@
   transition: all .7s linear;
 }
 
-#homepage-form {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 100%
-}
-
 #container-form {
   margin: 20px;
   width: 250px;
@@ -75,10 +68,6 @@ form abbr {
   border-bottom: 0 !important;
 }
 
-.caret {
-text-decoration: none;    
-}
-
 .select-wrapper {
   padding-bottom: 1px;
 }
@@ -99,12 +88,10 @@ input.string.required, .numeric.integer.required, .select-wrapper.select.require
   margin-top: 5px;
 }
 
-.caret {
-  border-color: transparent !important;
-}
-
 .select-wrapper span.caret {
   margin-top: 5px;
+  text-decoration: none;    
+  border-color: transparent !important;
 }
 
 

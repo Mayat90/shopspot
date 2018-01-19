@@ -5,7 +5,6 @@
   background: $lightblue;
 }
 
-
 #setting-open, #infos-open {
   color: black;
 }
@@ -69,12 +68,6 @@
   background: linear-gradient(to right, #d26e38, #d3a039);
 }
 
-.innercaption {
-  font-size: 1em;
-  font-weight: 400;
-  color: white;
-  text-align:center;
-}
 
 #setting-current {
   width: 100%;
@@ -95,4 +88,30 @@ a:hover, a:focus {
 
 input[type=range] + .thumb {
   background: $blue !important;
+}
+
+@media screen and (max-width:1000px)
+{
+  .indexcontent {
+    flex-direction: column;
+    margin: 0;
+    padding: 5px;
+  }
+  .indexmap {
+    order: 1;
+    width: 100%;
+    position: static;
+  }
+
+  .indexcards {
+    order: 2;
+    width: 100%;
+  }
+
+  #formnewrequest {
+    margin-top: 10px;
+  }
+
+  #map {
+  }
 }
