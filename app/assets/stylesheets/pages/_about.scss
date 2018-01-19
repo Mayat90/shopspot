@@ -1,6 +1,6 @@
 #abcontent {
   width:900px;
-  height: calc(100vh - 175px);
+  min-height: calc(100vh - 175px);
   margin: auto;
 }
 
@@ -75,6 +75,6 @@
 
   #abcontent {
     width: 100%;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 70px);
   }
 }
