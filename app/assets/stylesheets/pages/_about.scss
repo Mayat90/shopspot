@@ -1,73 +1,80 @@
-#about-us h1 {
-    margin-top: 0;
-    padding: 75px;
-    font-size: 3rem;
-    text-align: center;
+#abcontent {
+  width:900px;
+  height: calc(100vh - 175px);
+  margin: auto;
+}
+
+#abtitle h1 {
+  text-align: center;
+  font-size: 3rem;
+  padding: 55px;
+}
+
+#abcards {
+  display: flex;
+  justify-content: space-between;
+}
+
+#abexp {
+  padding-left:12px;
+  p {
+    font-size: 2rem;
+    text-align: left;
+    line-height: 150%;
   }
+}
 
 .abitem {
-  position:relative;
-  width:250px;
-  margin:20px auto;
-  cursor:pointer;
-  overflow:hidden;
   display: flex;
-  color: $lightblue;
+  flex-direction: column;
+  align-items: center;
+  height:360px;
+  background: $backcards;
+  margin: 20px;
+  padding: 10px;
   box-shadow: 2px 2px 2px 1px rgba(165, 165, 165, 0.1);
 }
 
+.abitem:hover {
+  box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.3);
+  transition: all .7s linear;
+}
+
 .abitem img {
-  width:250px;
-  height: 250px;
+  width:200px;
+  height: 200px;
 }
 
-.abitem .abinfo {
-  width:250px;
-  height:100%;
-  background:rgba(0, 0, 0, 0.8);
-  position:absolute;
-  top:0px;
-  top:-400px;
-  opacity:0;
-  transition:top .3s linear, opacity .3s linear;
-  -webkit-transition:top .3s linear, opacity .3s linear;
-}
-
-.abitem:hover .abinfo {
-  top:0px;
-  opacity:1;
-  transition:top .3s linear, opacity .3s linear;
-  -webkit-transition:top .3s linear, opacity .3s linear;
-}
 
 .abitem h2 {
-  font-size: 3rem;
-  margin:0;
-  padding:30px 0px 5px 0px;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 15px 5px 40px 5px;
   text-align:center;
-  color: $lightblue;
+  color: $blue;
 }
 
-.abitem p {
-  padding: 0px 18px;
-  text-align: center;
-  color: $lightblue;
+.ablinks {
+  display: flex;
+  justify-content: center;
+  .fa {
+    font-size: 2.5rem !important;
+    margin-left: 0.6rem;
+  }
+  .fa:hover {
+    color: $blue;
+    transition: all .5s linear;
+  }
 }
 
-.abitem .btn-primary {
-  width: 150px;
-  height: auto;
-  display: inline-block;
-  text-decoration: none;
-  padding: 5px;
-  margin-left: 20%;
-  margin-top:65px;
-  transition: background .2s linear;
-  -webkit-transition: background .2s linear;
-  opacity: 0.9;
-}
+@media screen and (max-width:1000px) {
+  #abcards {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.abitem .btn-primary:hover {
-  opacity: 1;
-  transition: background .2s linear;
+  #abcontent {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+  }
 }

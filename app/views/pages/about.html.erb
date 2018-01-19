@@ -1,41 +1,41 @@
 <%= render 'shared/navbar' %>
-<div id="about-us">
-  <div class="container">
-  <h1>About us</h1>
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-        <div class="abitem">
-          <%= image_tag "christophe.jpg", style: 'border-radius:3px;' %>
-          <div class="abinfo">
-            <h2>Christophe Gachet</h2>
-            <p>
-            </p>
-            <a href="#" target="_blank" class="btn btn-primary">Linkedin</a>     
-          </div><!-- info -->
+<div id="abcontent">
+  <div id="abtitle">
+    <h1>About</h1>
+  </div>
+  <div id="abexp">
+    <p>ShopSpot has been coded during a 9 weeks coding bootcamp at Le Wagon in Lyon. </br></br> Le Wagon's mission is to bring technical skills to creative people and teaches Ruby on Rails, Javascript, Html, CSS, JQuery and Bootstrap.</p>
+  </div>
+  <div id="abcards">
+    <div class="abitem">
+      <%= image_tag "christophe.jpg", style: 'border-radius:2px;' %>
+      <div class="abname">
+        <h2>Christophe</br> Gachet</h2>
+        <div class="ablinks">
+          <a href="https://github.com/crionline38"><i class="fa fa-github"></i></a>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-4">
-        <div class="abitem">
-          <%= image_tag("https://avatars1.githubusercontent.com/u/31513010?s=400&v=4", style: 'border-radius:3px;' )%>
-          <div class="abinfo">
-            <h2>Mattia Lamouroux</h2>
-            <p>
-            </p>
-            <a href="https://www.linkedin.com/in/mattia-lamouroux-641b931a/" class="btn btn-primary" target="_blank">Linkedin</a>     
-          </div><!-- info -->
+    </div>
+    <div class="abitem">  
+      <%= image_tag("https://avatars1.githubusercontent.com/u/31513010?s=400&v=4", style: 'border-radius:2px;' )%>
+      <div class="abname">
+        <h2>Mattia</br> Lamouroux</h2>
+        <div class="ablinks">
+          <a href="https://github.com/Mayat90"><i class="fa fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/mattia-lamouroux-641b931a/" target="_blank"><i class="fa fa-linkedin"></i></a>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-4">
-        <div class="abitem">
-          <%= image_tag("https://avatars1.githubusercontent.com/u/31669955?s=400&u=ad40104ec6c67eed593bf86ee20494d33d47c8f0&v=4", style: 'border-radius:3px;' )%>
-          <div class="abinfo">
-            <h2>Tiphanie Tourniaire</h2>
-            <p>
-            </p>
-            <a href="https://www.linkedin.com/in/tiphanie-tourniaire/" class="btn btn-primary" target="_blank">Linkedin</a>     
-          </div><!-- info -->
+    </div>
+    <div class="abitem">
+      <%= image_tag("https://avatars1.githubusercontent.com/u/31669955?s=400&u=ad40104ec6c67eed593bf86ee20494d33d47c8f0&v=4", style: 'border-radius:2px;' )%>
+      <div class="abname">
+        <h2>Tiphanie</br> Tourniaire</h2>
+        <div class="ablinks">
+          <a href="https://github.com/TiphanieTourniaire"><i class="fa fa-github" target="_blank"></i></a>
+          <a href="https://www.linkedin.com/in/tiphanie-tourniaire/" target="_blank"><i class="fa fa-linkedin"></i></a>
         </div>
       </div>
     </div>
   </div>
 </div>
+<%= render 'shared/footer' %>
