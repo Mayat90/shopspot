@@ -82,14 +82,15 @@ tbody {
 @media screen and (max-width:1000px)
 {
   .tables {
-  min-height: calc(100vh - 110px);
+  min-height: calc(100vh - 90px);
 } 
   .tabletitle {
-    margin: 15px 15px 0 15px;
+    margin: 5px 5px 0 5px;
   }
 
   .tablecontent {
-    margin: 0 15px 15px 15px;
+    margin: 0 5px 5px 5px;
+    padding: 10px;
   }
 
   #tohide {
