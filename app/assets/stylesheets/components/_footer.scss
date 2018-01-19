@@ -15,12 +15,18 @@
 .footer-links a {
   color: #555;
   text-decoration: none;
+  margin: 0 10px;
 }
 .footer-links a:hover {
   opacity: $blue;
 }
 .footer .fa-heart {
   color: $blue;
+}
+
+.footer-copyright {
+  text-align: right;
+  margin-right: 10px;
 }
 
 @media screen and (max-width:1000px)
