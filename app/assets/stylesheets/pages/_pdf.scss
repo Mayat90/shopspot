@@ -2,21 +2,23 @@
   #showmapframepdf {
     color: #555;
     background: #FAFAFA;
-    box-shadow: 2px 2px 2px 1px rgba(165, 165, 165, 0.1);
   }
+  
   #showstreetframepdf {
   vertical-align: center;
   color: #555;
   background: #FAFAFA;
-  box-shadow: 2px 2px 2px 1px rgba(165, 165, 165, 0.1);
   }
+  
   #showcontentpdf {
   display: flex;
   justify-content: space-between;
   margin: 0;
   background: white;
   page-break-inside: avoid;
+  box-shadow: none;
   }
+  
   #scframepdf {
   background: $backcards;
   margin: 10px 30px;
@@ -25,6 +27,29 @@
 
   #showleftpdf {
     width: 300px;
+  }
+
+  //======= PDF
+
+  #screstoppdf, #scresbottompdf {
+  display: flex;
+  }
+
+  #screstoppdf {
+    border-bottom: 1px solid #EEE;
+  }
+
+  #scresbottompdf {
+    padding-top: 10px;
+  }
+
+  #inseepdf {
+  font-weight: 300;
+}
+
+  #scpopcatchmentpdf, #sccomppdf, #inseepdf, #scpopcitypdf {
+  margin-bottom: 10px;
+  width: 50%;
   }
 }
 // }
