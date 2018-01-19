@@ -24,7 +24,8 @@ class Tiles
     @population_m2 = @population / data["surf"]
     @res65 = data["ind_age7"] / data["ind_r"] * 100 # 65 ans et + (% habitants)
     @res65_m2 = data["ind_age7"] / data["surf"] #65 ans et + (habitants / km&sup2;)
-    @res25 = (1-data["ind_age6"] / data["ind_r"])*100 # 25 ans et - (% habitants)
+
+    @res25 = (data["ind_age6"] / data["ind_r"])*100 # 25 ans et - (% habitants)
     @res25_m2 = (1-data["ind_age6"] / data["ind_r"])*data["ind_r"] / data["surf"] #25 ans et - (habitants / km&sup2;)
     @res15 = ((+data["ind_age1"])+ (+data["ind_age2"])+(+data["ind_age3"])+(+data["ind_age4"]))/(+data["ind_c"])*100 #15 ans et - (% habitants)
     @res15_m2 = ((+data["ind_age1"])+ (+data["ind_age2"])+(+data["ind_age3"])+(+data["ind_age4"]))/(+data["surf"]) #15 ans et - (habitants / km&sup2;)
