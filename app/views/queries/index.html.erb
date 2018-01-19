@@ -12,8 +12,6 @@
         @queries.each do |query|
         @letter =image_url("mapicons/letter_" + @letters[letter] + ".png")
         @market = image_url("mapicons/market.png")
-        p @market
-
         @query = query
         @competitors = JSON.parse(@query.competitors_json)%>
 

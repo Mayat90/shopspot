@@ -6,7 +6,6 @@ class QueriesController < ApplicationController
   def index
     @query = Query.new
     @letters = %w(a b c d e f g h i j k l m n o p q r s t u v w x y z)
-    p @letters
     @market=""
     @queries = []
     if session['address']
@@ -107,7 +106,6 @@ end
         if current_user.queries.count != -1
           @query.user = current_user
           @query.save
-          p "session save to db"
         end
           session_delete
       end
@@ -223,7 +221,6 @@ end
     end
 
     def load_session
-      p "loading session"
        query = Query.new
        query.address = session['address']
        query.activity = session['activity']
@@ -236,7 +233,6 @@ end
        my_hash = JSON.parse(session['analytics'])
        query.analytics = my_hash.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
        query.competitors_json = session['competitors']
-       p "session loaded"
        query
     end
 
