@@ -73,3 +73,20 @@
     font-weight: 600;
   }
 }
+
+@media screen and (max-width:1000px)
+{
+  #scframe {
+    margin: 10px;
+      }
+
+  #showcard {
+    background: unset !important;
+    webkit-box-shadow: unset !important;
+    box-shadow: unset !important;
+  }
+
+  #linktopdf {
+    bottom: 55px;
+  }
+  }

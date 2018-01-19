@@ -20,13 +20,11 @@
   data-icon = '<%= @letter %>'
   data-icon-market ='<%= @market %>'
 
-  <% p @competitors %>
-  >
   <div class="rccontent">
     <div class="rctitle">
       <div class="myflex">
         <%= image_tag(@letter) %>
-        <h3 class="mygrow marg"><%= @query.activity %></h3>
+        <h3 class="mygrow marg"><%= @query.activity.humanize %></h3>
         <% @query.pertinence_grade.times do %>
           <%= image_tag('star_yellow.png', height: '12') %>
         <% end %>

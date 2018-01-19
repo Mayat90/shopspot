@@ -49,7 +49,6 @@
   flex-direction: column;
   // align-items: center;
   justify-content: center;
-  height: 80vh;
   padding: 20vh;
   h3 {
     color: #FAFAFA;
@@ -61,7 +60,6 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 80vh;
 }
 
 
@@ -109,35 +107,35 @@
     transition: 0.3s;
 }
 
-@media screen and (max-width:1000px)
-{
+@media screen and (max-width:1000px) {
 
-#homepage-top {
-  h1 {
-    font-size: 3.2rem;
+  #homepage-top {
+    h1 {
+      font-size: 3.2rem;
+    }
   }
-}
 
-#homepage-middle {
-  flex-direction: column;
-  h3 {
-    font-weight: 400;
-    font-size: 2.5rem;
+  #homepage-middle {
+    flex-direction: column;
+    h3 {
+      font-weight: 400;
+      font-size: 2.5rem;
+    }
   }
-}
 
-#homepage-bottom {
-  h1 {
+  #homepage-bottom {
+    h1 {
+    }
   }
-}
 
 
-#exp-cards {
-  flex-direction: column;
-  justify-content: space-around;
-}
+  #exp-cards {
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
 
-#homepage-expl, #homepage-form {
-  max-height: 100vh;
+  #homepage-expl, #homepage-form {
+    max-height: 100vh;
   }
 }
