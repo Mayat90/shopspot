@@ -1,27 +1,21 @@
 <%= render 'shared/navbar' %>
-
-
 <div class="indexcontent">
   <div class="indexcards">
     <div id="formnewrequest">
       <a href="#" data-toggle="modal" data-target="#myModal">Compare with new address</a><br/>
-      <p style="color: #555; font-size: 0.8em;">Or right click on the map</p>
+      <p id="rightclick" style="color: #555; font-size: 0.8em;">Or right click on the map</p>
     </div>
-
       <% letter = 0
         @queries.each do |query|
         @letter =image_url("mapicons/letter_" + @letters[letter] + ".png")
         @market = image_url("mapicons/market.png")
         @query = query
         @competitors = JSON.parse(@query.competitors_json)%>
-
         <%= render 'shared/result_card' %>
-
         <% letter += 1
         end %>
   </div>
   <div class="indexmap">
-
     <div style="position: relative;">
       <div class="myflex map-controls">
           <div style="width: 30%;">

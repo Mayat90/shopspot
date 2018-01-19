@@ -1,23 +1,25 @@
 <%= render 'shared/navbar' %>
-<div class="container" style="background:#FDFDFD; line-height:200%; margin-top:30px;">
-  <div>
-    <h1>Worst Competitors</h1>
-    <p>Here are your worst competitors. Get your phone and buy a shop !</p>
-    <p><%= link_to 'back', :back %></p>
+<div class="tables">
+  <div class="tabletitle">
+    <h4>Worst Competitors</h4>
+    <h5>Here are your worst competitors. Get your phone and buy a shop !</h5>
+    <div class="tableback">
+  <p><i class="fa fa-undo" aria-hidden="true"></i><%= link_to 'Back', :back %></p>
+  </div>
   </div>
 
-  <div>
+  <div class="tablecontent">
     <table class=".table table-sm table-hover">
       <thead>
-        <th>#</th>
+        <th id="tohide"></th>
         <th>Name</th>
         <th>Address</th>
         <th>Phone Number</th>
         <th>Rating</th>
       </thead>
     <% x = 0 %>
-    <% @competitors.each do |competitor| %>
       <tbody>
+        <% @competitors.each do |competitor| %>
         <tr>
           <% x = x + 1 %>
           <th scope="row"><%= x %></th>
@@ -26,8 +28,9 @@
           <td><%= competitor.phone_number %></td>
           <td><%= competitor.rating %></td>
         </tr>
+        <% end  %>
       </tbody>
-    <% end  %>
     </table>
   </div>
 </div>
+<%= render 'shared/footer' %>
