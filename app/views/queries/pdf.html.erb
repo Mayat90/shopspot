@@ -16,7 +16,7 @@
           <div id="sstitle">
             <h3>Your search</h3>
           </div>
-          <p style="margin-top: 20px";> <i class="fa fa-users" aria-hidden="true"></i> Activity : <strong><%= @query.activity %></strong> </p>
+          <p style="margin-top: 20px";> <i class="fa fa-users" aria-hidden="true"></i> Activity : <strong><%= @query.activity.humanize %></strong> </p>
           <p> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Radius search : <strong><%= @query.radius_search %> m</strong>  </p>
           <p style="margin-bottom:40px;"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Catchment area : <strong><%= @query.radius_catchment_area %>m</strong></p>
           <div class="backtohome">
@@ -122,6 +122,3 @@
   </div>
 </div>
 </body>
-
-
-
