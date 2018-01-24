@@ -25,21 +25,23 @@
       <div class="myflex">
         <%= image_tag(@letter) %>
         <h3 class="mygrow marg"><%= @query.activity.humanize %></h3>
-        <% @query.pertinence_grade.times do %>
-          <%= image_tag('star_yellow.png', height: '12') %>
-        <% end %>
-      <div id="icons" class="marg">
-        <div id="icon<%= @query.id %>" style="display:flex; align-items: right">
-          <i class="fa fa-eye" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
-          <i class="fa fa-eye-slash infohide" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
-          <%= link_to "" , query_path(@query),class: "fa fa-trash-o",
-          method: :delete,
-          data: { confirm: "Are you sure?" } %>
+        <div class="rateicons">
+          <% @query.pertinence_grade.times do %>
+            <%= image_tag('star_yellow.png', height: '12') %>
+          <% end %>
+        <div id="icons" class="marg">
+          <div id="icon<%= @query.id %>" style="display:flex; align-items: right">
+            <i class="fa fa-eye" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
+            <i class="fa fa-eye-slash infohide" style="color:#307A94;" aria-hidden="true" data-id="<%= @query.id %>"></i>
+            <%= link_to "" , query_path(@query),class: "fa fa-trash-o",
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+          </div>
         </div>
       </div>
 
       </div>
-      <%= @query.address %>
+      <div id="queryaddress"><%= @query.address %></div>
     </div>
     <div class="rcresults">
       <div class="rcpop">

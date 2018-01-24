@@ -30,6 +30,7 @@
   line-height: 120%;
   border-bottom: 1px solid #EEE;
   padding-bottom: 10px;
+  margin: 10px;
   h3 {
     margin-top: 10px;
     margin-bottom: 5px;
@@ -59,6 +60,12 @@
   left: 190px;
 }
 
+.rateicons {
+  display: flex;
+  position: absolute;
+  right: 5px;
+}
+
 
 
 @media screen and (max-width:1000px)
@@ -71,8 +78,8 @@
 @media screen and (min-width:1000px) and (max-width:1500px){
 
   .rccontent {
-    line-height: 80% !important;
-    padding: 8px !important;
+    line-height: 75% !important;
+    padding: 7px !important;
   }
 
   .rctitle, .rcresults, .rclinks {
@@ -80,11 +87,16 @@
     font-size: 1.6rem !important;
     }
     h3 {
-      margin-top: 20px;
+      margin-top: 15px;
+      margin-bottom: 10px;
     }
   }
 
   .fa {
     font-size: 1.9rem !important;
+  }
+
+  #queryaddress {
+    font-size: 1.6rem !important;
   }
 }
